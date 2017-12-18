@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/yoeripasmans/politiedatavis/issues"
   },
-  "homepage": "https://github.com/yoeripasmans/politiedatavis#readme"
+  "homepage": "https://github.com/yoeripasmans/politiedatavis#readme",
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  }
 }
