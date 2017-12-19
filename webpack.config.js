@@ -1,8 +1,8 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   // Project javascript file.
@@ -18,7 +18,6 @@ module.exports = {
     port: 3000,
     compress: true,
     contentBase: 'dist/',
-    stats: 'errors-only',
   },
 
   module: {
@@ -54,7 +53,13 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'bundle.css',
       allChunks: true,
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, 'data'),
+        to: path.resolve(__dirname, 'dist') + '/data'
+      }
+    ])
   ],
 
 
