@@ -9446,8 +9446,6 @@ __webpack_require__(463);
 var square = d3.selectAll("rect");
 square.style("fill", "orange");
 
-var yoyo123 = 'yo';
-
 /***/ }),
 /* 172 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {

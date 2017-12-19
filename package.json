@@ -1,7 +1,7 @@
 {
   "name": "politiedatavis",
   "version": "1.0.0",
-  "description": "",
+  "description": "Datavisualization for the privacy violation of the police",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -5,19 +5,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  // Project javascript file.
   entry: "./src/index.js",
-  // Output. which is loaded in the index.html.
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
-  },
-
-  // Automatically reload the page when compilation is done from dist.
-  devServer: {
-    port: 3000,
-    compress: true,
-    contentBase: 'dist/',
+    filename: 'bundle.js',
   },
 
   module: {
@@ -53,14 +44,15 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'bundle.css',
       allChunks: true,
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, 'data'),
-        to: path.resolve(__dirname, 'dist') + '/data'
-      }
-    ])
+    })
+
   ],
 
+  // Automatically reload the page when compilation is done.
+  devServer: {
+    port: 3000,
+    compress: true,
+    contentBase: 'dist/',
+  },
 
 };
