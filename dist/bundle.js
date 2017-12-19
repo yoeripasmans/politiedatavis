@@ -70,6 +70,8 @@
 // app.js
 __webpack_require__(1);
 
+console.log('yo');
+
 
 /***/ }),
 /* 1 */
