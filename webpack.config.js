@@ -1,4 +1,8 @@
-var path = require('path');
+const path = require('path')
+const webpack = require('webpack')
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   // Project javascript file.
@@ -12,21 +16,46 @@ module.exports = {
   // Automatically reload the page when compilation is done from dist.
   devServer: {
     port: 3000,
+    compress: true,
     contentBase: 'dist/',
-    inline: true
+    stats: 'errors-only',
   },
-  // Add sass-loader to compile scss to css
+
   module: {
-    rules: [{
-      test: /\.scss$/,
-      use: [{
-        loader: "style-loader" // creates style nodes from JS strings
-      }, {
-        loader: "css-loader" // translates CSS into CommonJS
-      }, {
-        loader: "sass-loader" // compiles Sass to CSS
-      }]
-    }]
+    rules: [
+      // Add babel-loader to compile ES6 to ES5
+      {
+        test: /\.js$/,
+        exclude: [/node_modules/],
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'stage-0']
+          },
+        }],
+      },
+      // Add sass-loader to compile scss to css
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract([
+          'css-loader', 'sass-loader'
+        ]),
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
+      }
+    ]
   },
+
+  plugins: [
+    new ExtractTextPlugin({
+      filename: 'bundle.css',
+      allChunks: true,
+    })
+  ],
+
 
 };
