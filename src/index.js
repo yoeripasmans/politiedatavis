@@ -1,4 +1,4 @@
-// app.js
+// automaticly reloads the page
 require('./assets/styles/index.scss');
 
 import * as d3 from 'd3';
