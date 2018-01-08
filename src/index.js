@@ -8,7 +8,7 @@ var width = 1000,
 
 var check = 0;
 
-var svg = d3.select("#chart")
+var svg = d3.select("body")
     .append("svg")
     .attr("height", height)
     .attr("width", width)
