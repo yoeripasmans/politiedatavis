@@ -38,9 +38,9 @@ d3.tsv("data/data.tsv", function(error, data) {
 			if (d.status == "Normaal") {
 		        return "#19C5E5";
 		    } else if (d.status == "Aangepast") {
-		        return "#FFA101";
+		        return "#0e8196";
 		    } else if (d.status == "Verwijderd") {
-		        return "#FF5E5B";
+		        return "#416066";
 		    } else if (d.status == "Inactief") {
 		        return "#e2e2e2";
 		    }
