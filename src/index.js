@@ -37,7 +37,7 @@ d3.tsv("data/data.tsv", function(error, data) {
         .attr("r", function(d) {
             return circleSize(d.Grootte);
         })
-        .attr("fill", "red");
+        .attr("fill", "blue");
 
     // Run a simulation on every circle (node)
     simulation.nodes(data)
