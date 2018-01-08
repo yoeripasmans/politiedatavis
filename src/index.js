@@ -6,23 +6,18 @@ import * as d3 from 'd3';
 var width = 1000,
     height = 800;
 
-var check = 0;
-
 var svg = d3.select("body")
     .append("svg")
     .attr("height", height)
     .attr("width", width)
     .append("g")
 	.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
-// .attr("transform", "translate(0,0)");
 
-// Scales the numbers 1 and 35000 to 10 and 80 and everything in between.
-var circleSize = d3.scaleSqrt().domain([1, 9]).range([10, 50]);
-
-var yearsTogether = d3.forceX(0).strength(0.005);
+// Scales the numbers 1 and 9 to 10 and 50 and everything in between.
+var circleSize = d3.scaleSqrt().domain([1, 9]).range([8, 30]);
 
 var simulation = d3.forceSimulation()
-    .force("x", yearsTogether) // Puts all the circles in the horizontal center
+    .force("x", d3.forceX(0).strength(0.005)) // Puts all the circles in the horizontal center
     .force("y", d3.forceY(0).strength(0.005)) // Puts all the circles in the vertical center
     .force("collide", d3.forceCollide(function(d) {
         return circleSize(d.Grootte) + 3; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
