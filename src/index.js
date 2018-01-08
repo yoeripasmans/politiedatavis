@@ -8,7 +8,7 @@ var width = 1000,
 
 var check = 0;
 
-var svg = d3.select("#chart")
+var svg = d3.select("body")
     .append("svg")
     .attr("height", height)
     .attr("width", width)
@@ -19,19 +19,6 @@ var svg = d3.select("#chart")
 var circleSize = d3.scaleSqrt().domain([1, 9]).range([10, 50]);
 
 var yearsTogether = d3.forceX(width / 2).strength(0.05);
-var yearsSplit = d3.forceX(function(d) {
-    if (d.periode == 2012) {
-        return width * 0.16666666667;
-    } else if (d.periode == 2013) {
-        return width * 0.33333333334;
-    } else if (d.periode == 2014) {
-        return width * 0.50;
-    } else if (d.periode == 2015) {
-        return width * 0.66666666668;
-    } else if (d.periode == 2016) {
-        return width * 0.83333333335;
-    }
-}).strength(0.05);
 
 var simulation = d3.forceSimulation()
     .force("x", yearsTogether) // Puts all the circles in the horizontal center
@@ -65,23 +52,5 @@ d3.tsv("data/data.tsv", function(error, data) {
                 return d.y;
             });
     }
-
-    d3.select("body").on("click", function() {
-        if (check == 0) {
-            console.log("hoi");
-            simulation
-                .force("x", yearsSplit)
-                .alphaTarget(0.5)
-                .restart();
-            check = 1;
-        } else {
-            console.log("doei");
-            simulation
-                .force("x", yearsTogether)
-                .alphaTarget(0.5)
-                .restart();
-            check = 0;
-        }
-    });
 
 });
