@@ -1,11 +1,6 @@
 @import "partials/reset";
 $background: #fff;
-$background-svg: lightgrey;
 
 body {
 	background-color: $background;
-}
-
-svg {
-	background-color: $background-svg;
 }

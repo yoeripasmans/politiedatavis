@@ -14,13 +14,13 @@ var svg = d3.select("body")
 	.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
 
 // Scales the numbers 1 and 9 to 10 and 50 and everything in between.
-var circleSize = d3.scaleLinear().domain([1, 9]).range([8, 30]);
+var circleSize = d3.scaleLinear().domain([1, 9]).range([8, 36]);
 
 var simulation = d3.forceSimulation()
     .force("x", d3.forceX(0).strength(0.005)) // Puts all the circles in the horizontal center
     .force("y", d3.forceY(0).strength(0.005)) // Puts all the circles in the vertical center
     .force("collide", d3.forceCollide(function(d) {
-        return circleSize(d.schendingen) + 3; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
+        return circleSize(d.schendingen) + 2; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
     }));
 
 d3.tsv("data/data.tsv", function(error, data) {
@@ -36,13 +36,13 @@ d3.tsv("data/data.tsv", function(error, data) {
         // .attr("fill", "blue");
 		.attr("fill", function(d) {
 			if (d.status == "Normaal") {
-		        return "blue";
+		        return "#19C5E5";
 		    } else if (d.status == "Aangepast") {
-		        return "orange";
+		        return "#FFA101";
 		    } else if (d.status == "Verwijderd") {
-		        return "red";
-		    }else if (d.status == "Inactief") {
-		        return "grey";
+		        return "#FF5E5B";
+		    } else if (d.status == "Inactief") {
+		        return "#e2e2e2";
 		    }
 		})
 
