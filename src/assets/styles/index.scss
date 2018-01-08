@@ -2,5 +2,7 @@
 $background: #fff;
 
 body {
-	background-color: $background;
+  background-color: $background;
+  max-width: 930px;
+  margin: 0 auto;
 }

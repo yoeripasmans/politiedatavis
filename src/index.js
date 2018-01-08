@@ -3,7 +3,7 @@ require('./assets/styles/index.scss');
 
 import * as d3 from 'd3';
 
-var width = 1000,
+var width = 930,
     height = 800;
 
 var svg = d3.select("body")
