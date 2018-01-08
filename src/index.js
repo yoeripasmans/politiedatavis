@@ -11,7 +11,7 @@ var svg = d3.select("body")
     .attr("height", height)
     .attr("width", width)
     .append("g")
-	.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
 
 // Scales the numbers 1 and 9 to 10 and 50 and everything in between.
 var circleSize = d3.scaleLinear().domain([1, 9]).range([8, 36]);
@@ -34,17 +34,17 @@ d3.tsv("data/data.tsv", function(error, data) {
             return circleSize(d.schendingen);
         })
         // .attr("fill", "blue");
-		.attr("fill", function(d) {
-			if (d.status == "Normaal") {
-		        return "#FF5E5B";
-		    } else if (d.status == "Aangepast") {
-		        return "#FFA101";
-		    } else if (d.status == "Verwijderd") {
-		        return "#19C5E5";
-		    } else if (d.status == "Inactief") {
-		        return "#e2e2e2";
-		    }
-		})
+        .attr("fill", function(d) {
+            if (d.status == "Normaal") {
+                return "#ff694f";
+            } else if (d.status == "Aangepast") {
+                return "#ff9c06";
+            } else if (d.status == "Verwijderd") {
+                return "#ffcc34";
+            } else if (d.status == "Inactief") {
+                return "#e2e2e2";
+            }
+        });
 
 
     // Run a simulation on every circle (node)
