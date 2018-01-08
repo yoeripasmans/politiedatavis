@@ -36,11 +36,11 @@ d3.tsv("data/data.tsv", function(error, data) {
         // .attr("fill", "blue");
 		.attr("fill", function(d) {
 			if (d.status == "Normaal") {
-		        return "#416066";
+		        return "#19C5E5";
 		    } else if (d.status == "Aangepast") {
-		        return "#0e8196";
+		        return "#FFA101";
 		    } else if (d.status == "Verwijderd") {
-		        return "#19C5E5#416066";
+		        return "#FF5E5B";
 		    } else if (d.status == "Inactief") {
 		        return "#e2e2e2";
 		    }
