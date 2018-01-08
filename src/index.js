@@ -37,7 +37,7 @@ var simulation = d3.forceSimulation()
     .force("x", yearsTogether) // Puts all the circles in the horizontal center
     .force("y", d3.forceY(height / 2).strength(0.05)) // Puts all the circles in the vertical center
     .force("collide", d3.forceCollide(function(d) {
-        return circleSize(d.Grootte + 0.000001); // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
+        return circleSize(d.Grootte) + 3; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
     }));
 
 d3.tsv("data/data.tsv", function(error, data) {
