@@ -16,7 +16,7 @@ var svg = d3.select("#chart")
 // .attr("transform", "translate(0,0)");
 
 // Scales the numbers 1 and 35000 to 10 and 80 and everything in between.
-var circleSize = d3.scaleSqrt().domain([1, 9]).range([4, 10]);
+var circleSize = d3.scaleSqrt().domain([1, 9]).range([10, 50]);
 
 var yearsTogether = d3.forceX(width / 2).strength(0.05);
 var yearsSplit = d3.forceX(function(d) {
@@ -37,7 +37,7 @@ var simulation = d3.forceSimulation()
     .force("x", yearsTogether) // Puts all the circles in the horizontal center
     .force("y", d3.forceY(height / 2).strength(0.05)) // Puts all the circles in the vertical center
     .force("collide", d3.forceCollide(function(d) {
-        return circleSize(d.Grootte); // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
+        return circleSize(d.Grootte + 0.000001); // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
     }));
 
 d3.tsv("data/data.tsv", function(error, data) {
@@ -83,13 +83,5 @@ d3.tsv("data/data.tsv", function(error, data) {
             check = 0;
         }
     });
-
-    // svg.selectAll("circle")
-    // 	.transition()
-    // 	.delay(700)
-    // 	.duration(200)
-    // 	.attr("r", function(d) {
-    //         return circleSize(d.percentage);
-    //     });
 
 });
