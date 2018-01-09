@@ -31,8 +31,19 @@ d3.tsv("data/data.tsv", function(error, data) {
 			return circleSize(d.schendingen);
 		})
 		.on("click", function(d) {
+			//Index of clicked circle
 			var circleIndex = d.index;
-			if (d.status !== "Inactief") {
+
+			if (d.status !== "Inactief" && d.status !== "Verwijderd") {
+				//Change the size of the clicked circle
+				d3.select(this)
+					.transition()
+					.duration(1000)
+					.ease(d3.easeCubicOut)
+					.attr("r", function(d) {
+						return 10;
+					});
+				//Moves clicked circle to middle and moves all other circles away
 				simulation
 					.force("r", d3.forceRadial(function(d) {
 						if (d.index == circleIndex) {
@@ -61,11 +72,9 @@ d3.tsv("data/data.tsv", function(error, data) {
 	simulation.nodes(data)
 		.on('tick', movingIn) // Run movingIn on every "tick" of the clock
 		.on('end', function() {
-			console.log("HALLLO");
 		});
 
 	function movingIn() {
-		console.log("nu");
 		circles
 			.attr("cx", function(d) {
 				return d.x;
