@@ -31,18 +31,19 @@ d3.tsv("data/data.tsv", function(error, data) {
             return circleSize(d.schendingen);
         })
 		.on("click", function(d) {
-			console.log(d.index);
-			var thisIndex = d.index;
-			simulation
-				.force("r", d3.forceRadial(function(d) {
-					if (d.index == thisIndex && d.status !== "Inactief") {
-						return 0;
-					} else {
-						return 800;
-					}
-				}))
-				.alphaTarget(1)
-				.restart();
+			var circleIndex = d.index;
+			if (d.status !== "Inactief") {
+				simulation
+					.force("r", d3.forceRadial(function(d) {
+						if (d.index == circleIndex) {
+							return 0;
+						} else {
+							return 800;
+						}
+					}))
+					.alphaTarget(1)
+					.restart();
+			}
 		})
         .attr("fill", function(d) {
             if (d.status == "Normaal") {
@@ -58,15 +59,19 @@ d3.tsv("data/data.tsv", function(error, data) {
 
     // Run a simulation on every circle (node)
     simulation.nodes(data)
-        .on('tick', movingIn); // Run movingIn on every "tick" of the clock
+        .on('tick', movingIn) // Run movingIn on every "tick" of the clock
+		.on('end', function() {
+			console.log("HALLLO");
+		});
 
     function movingIn() {
+		console.log("nu");
         circles
             .attr("cx", function(d) {
-                return d.x;
+                return Math.round(d.x);
             })
             .attr("cy", function(d) {
-                return d.y;
+                return Math.round(d.y);
             });
     }
 
