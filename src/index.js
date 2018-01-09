@@ -4,7 +4,11 @@ require('./assets/styles/index.scss');
 import * as d3 from 'd3';
 
 var width = 930,
-	height = 800;
+	height = 800,
+	colorNormal = "#ff694f",
+	colorEdited = "#ff9c06",
+	colorRemoved = "#ffcc34",
+	colorInactive = "#e2e2e2";
 
 var svg = d3.select("body")
 	.append("svg")
@@ -43,7 +47,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					.attr("r", function(d) {
 						return 10;
 					});
-				//Moves clicked circle to middle and moves all other circles away
+				// Moves clicked circle to middle and moves all other circles away
 				simulation
 					.force("r", d3.forceRadial(function(d) {
 						if (d.index == circleIndex) {
@@ -58,13 +62,13 @@ d3.tsv("data/data.tsv", function(error, data) {
 		})
 		.attr("fill", function(d) {
 			if (d.status == "Normaal") {
-				return "#ff694f";
+				return colorNormal;
 			} else if (d.status == "Aangepast") {
-				return "#ff9c06";
+				return colorEdited;
 			} else if (d.status == "Verwijderd") {
-				return "#ffcc34";
+				return colorRemoved;
 			} else if (d.status == "Inactief") {
-				return "#e2e2e2";
+				return colorInactive;
 			}
 		});
 
