@@ -30,9 +30,6 @@ d3.tsv("data/data.tsv", function(error, data) {
         .attr("r", function(d) {
             return circleSize(d.schendingen);
         })
-		.on("click", function() {
-
-		})
         .attr("fill", function(d) {
             if (d.status == "Normaal") {
                 return "#ff694f";
