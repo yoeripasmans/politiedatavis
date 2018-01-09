@@ -95,43 +95,44 @@ d3.tsv("data/data.tsv", function(error, data) {
             } else {
                 //Shake animation
                 var horizontalPosition = Number(this.getAttribute("cx")),
-					shakeDuration = 100,
-					shakeDeviation = 4;
+					shakeDuration = 80,
+					shakeDeviation = 4,
+					shakeEasing = d3.easeCubicOut;
 
                 d3.select(this)
                     .transition()
 					.duration(shakeDuration)
-					.ease(d3.easeCubicOut)
+					.ease(shakeEasing)
                     .attr("cx", function(d) {
                         return horizontalPosition + shakeDeviation;
                     })
 					.transition()
 					.duration(shakeDuration)
-					.ease(d3.easeCubicOut)
+					.ease(shakeEasing)
                     .attr("cx", function(d) {
                         return horizontalPosition - shakeDeviation;
                     })
 					.transition()
 					.duration(shakeDuration)
-					.ease(d3.easeCubicOut)
+					.ease(shakeEasing)
                     .attr("cx", function(d) {
                         return horizontalPosition + shakeDeviation;
                     })
 					.transition()
 					.duration(shakeDuration)
-					.ease(d3.easeCubicOut)
+					.ease(shakeEasing)
                     .attr("cx", function(d) {
                         return horizontalPosition - shakeDeviation;
                     })
 					.transition()
 					.duration(shakeDuration)
-					.ease(d3.easeCubicOut)
+					.ease(shakeEasing)
                     .attr("cx", function(d) {
                         return horizontalPosition + shakeDeviation;
                     })
 					.transition()
 					.duration(shakeDuration)
-					.ease(d3.easeCubicOut)
+					.ease(shakeEasing)
                     .attr("cx", function(d) {
                         return horizontalPosition;
                     });
