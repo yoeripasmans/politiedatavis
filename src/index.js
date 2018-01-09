@@ -39,7 +39,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			var circleIndex = d.index;
 
 			if (d.status !== "Inactief" && d.status !== "Verwijderd") {
-<<<<<<< HEAD
+
 				//Change the size of the clicked circle
 				d3.select(this)
 					.transition()
@@ -48,11 +48,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					.attr("r", function(d) {
 						return 10;
 					});
-				// Moves clicked circle to middle and moves all other circles away
-=======
 
-				//Moves clicked circle to the middle and moves all other circles away
->>>>>>> 34adf1f88d091f1503d19efe550c431e8161ced7
 				simulation
 					.force("r", d3.forceRadial(function(d) {
 						if (d.index == circleIndex) {
