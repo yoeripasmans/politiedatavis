@@ -17,23 +17,33 @@ var svg = d3.select("body")
 var circleSize = d3.scaleLinear().domain([1, 9]).range([8, 36]);
 
 var simulation = d3.forceSimulation()
-    .force("x", d3.forceX(0).strength(0.005)) // Puts all the circles in the horizontal center
-    .force("y", d3.forceY(0).strength(0.005)) // Puts all the circles in the vertical center
+	// ===== Oud =====
+    // .force("x", d3.forceX(0).strength(0.005)) // Puts all the circles in the horizontal center
+    // .force("y", d3.forceY(0).strength(0.005)) // Puts all the circles in the vertical center
+	// ===== Nieuw =====
+	.force("r", d3.forceRadial(10).strength(0.002)) //This force makes sure every circle is in a radius of approximately 100px
+
     .force("collide", d3.forceCollide(function(d) {
         return circleSize(d.schendingen) + 2; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
     }));
+
+	// ===== Liep hier beetje te lopen met de cirkels van buitenaf komen =====
+
+	// setInterval(function() {
+	// 	console.log("hoi");
+	// 	simulation
+	// 		.force("r", d3.forceRadial(0).strength(0.02)) //This force makes sure every circle is in a radius of approximately 100px
+	// 		.restart();
+	// }, 3000);
 
 d3.tsv("data/data.tsv", function(error, data) {
     var circles = svg.selectAll(".bubble")
         .data(data)
         .enter().append("circle")
         .attr("class", "bubble")
-        // .attr("r", 0)
-
         .attr("r", function(d) {
             return circleSize(d.schendingen);
         })
-        // .attr("fill", "blue");
         .attr("fill", function(d) {
             if (d.status == "Normaal") {
                 return "#ff694f";
