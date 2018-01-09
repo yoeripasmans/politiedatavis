@@ -92,7 +92,52 @@ d3.tsv("data/data.tsv", function(error, data) {
                     .attr('x', (width / 2))
                     .attr('y', (height / 2));
 
-            } 
+            } else {
+                //Shake animation
+                var verticalPostion = Number(this.getAttribute("cy")),
+					shakeDuration = 100,
+					shakeDeviation = 4;
+
+                d3.select(this)
+                    .transition()
+					.duration(shakeDuration)
+					.ease(d3.easeCubicOut)
+                    .attr("cx", function(d) {
+                        return horizontalPosition + shakeDeviation;
+                    })
+					.transition()
+					.duration(shakeDuration)
+					.ease(d3.easeCubicOut)
+                    .attr("cx", function(d) {
+                        return horizontalPosition - shakeDeviation;
+                    })
+					.transition()
+					.duration(shakeDuration)
+					.ease(d3.easeCubicOut)
+                    .attr("cx", function(d) {
+                        return horizontalPosition + shakeDeviation;
+                    })
+					.transition()
+					.duration(shakeDuration)
+					.ease(d3.easeCubicOut)
+                    .attr("cx", function(d) {
+                        return horizontalPosition - shakeDeviation;
+                    })
+					.transition()
+					.duration(shakeDuration)
+					.ease(d3.easeCubicOut)
+                    .attr("cx", function(d) {
+                        return horizontalPosition + shakeDeviation;
+                    })
+					.transition()
+					.duration(shakeDuration)
+					.ease(d3.easeCubicOut)
+                    .attr("cx", function(d) {
+                        return horizontalPosition;
+                    });
+
+
+            }
         });
 
     //Run a simulation on every circle (node)
