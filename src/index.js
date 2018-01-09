@@ -34,7 +34,13 @@ d3.tsv("data/data.tsv", function(error, data) {
 			console.log(d.index);
 			var thisIndex = d.index;
 			simulation
-				.force("r", d3.forceRadial(function(d) { return d.index == thisIndex ? 0 : 800; }))
+				.force("r", d3.forceRadial(function(d) {
+					if (d.index == thisIndex && d.status !== "Inactief") {
+						return 0;
+					} else {
+						return 800;
+					}
+				}))
 				.alphaTarget(1)
 				.restart();
 		})
