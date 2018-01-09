@@ -11,30 +11,16 @@ var svg = d3.select("body")
     .attr("height", height)
     .attr("width", width)
     .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); // Place the <g> element in the middle
 
 // Scales the numbers 1 and 9 to 10 and 50 and everything in between.
 var circleSize = d3.scaleLinear().domain([1, 9]).range([8, 36]);
 
 var simulation = d3.forceSimulation()
-	// ===== Oud =====
-    // .force("x", d3.forceX(0).strength(0.005)) // Puts all the circles in the horizontal center
-    // .force("y", d3.forceY(0).strength(0.005)) // Puts all the circles in the vertical center
-	// ===== Nieuw =====
-	.force("r", d3.forceRadial(200).strength(0.02)) //This force makes sure every circle is in a radius of approximately 100px
-
+	.force("r", d3.forceRadial(700)) // This force makes sure every circle is in a radius of approximately 100px
     .force("collide", d3.forceCollide(function(d) {
         return circleSize(d.schendingen) + 2; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
     }));
-
-	// ===== Liep hier beetje te lopen met de cirkels van buitenaf komen =====
-
-	// setInterval(function() {
-	// 	console.log("hoi");
-	// 	simulation
-	// 		.force("r", d3.forceRadial(0).strength(0.02)) //This force makes sure every circle is in a radius of approximately 100px
-	// 		.restart();
-	// }, 3000);
 
 d3.tsv("data/data.tsv", function(error, data) {
     var circles = svg.selectAll(".bubble")
@@ -44,6 +30,10 @@ d3.tsv("data/data.tsv", function(error, data) {
         .attr("r", function(d) {
             return circleSize(d.schendingen);
         })
+		.on("click", function() {
+
+		})
+		.attr("visibility", "hidden")
         .attr("fill", function(d) {
             if (d.status == "Normaal") {
                 return "#ff694f";
@@ -56,6 +46,17 @@ d3.tsv("data/data.tsv", function(error, data) {
             }
         });
 
+	d3.select("body").on("click", function() {
+        console.log("hoi");
+		circles
+			.attr("visibility", "visible");
+		simulation
+			.force("x", d3.forceX(0).strength(0.01)) // Puts all the circles in the horizontal center
+			.force("y", d3.forceY(0).strength(0.01)) // Puts all the circles in the vertical center
+			.force("r", null) //This force makes sure every circle is in a radius of approximately 100px
+			.alphaTarget(0.5)
+			.restart();
+    });
 
     // Run a simulation on every circle (node)
     simulation.nodes(data)
