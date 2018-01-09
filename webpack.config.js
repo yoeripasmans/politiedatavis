@@ -39,7 +39,7 @@ module.exports = {
       }
     ]
   },
-
+  devtool: 'inline-source-map',
   plugins: [
     new ExtractTextPlugin({
       filename: 'bundle.css',
