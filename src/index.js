@@ -17,7 +17,7 @@ var svg = d3.select("body")
 var circleSize = d3.scaleLinear().domain([1, 9]).range([8, 36]);
 
 var simulation = d3.forceSimulation()
-	.force("r", d3.forceRadial(10).strength(0.002)) // This force makes sure every circle is in a radius of approximately 100px
+    .force("r", d3.forceRadial(10).strength(0.002)) // This force makes sure every circle is in a radius of approximately 100px
     .force("collide", d3.forceCollide(function(d) {
         return circleSize(d.schendingen) + 2; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
     }));
@@ -30,21 +30,21 @@ d3.tsv("data/data.tsv", function(error, data) {
         .attr("r", function(d) {
             return circleSize(d.schendingen);
         })
-		.on("click", function(d) {
-			var circleIndex = d.index;
-			if (d.status !== "Inactief") {
-				simulation
-					.force("r", d3.forceRadial(function(d) {
-						if (d.index == circleIndex) {
-							return 0;
-						} else {
-							return 800;
-						}
-					}))
-					.alphaTarget(1)
-					.restart();
-			}
-		})
+        .on("click", function(d) {
+            var circleIndex = d.index;
+            if (d.status !== "Inactief") {
+                simulation
+                    .force("r", d3.forceRadial(function(d) {
+                        if (d.index == circleIndex) {
+                            return 0;
+                        } else {
+                            return 400;
+                        }
+                    }))
+                    .alphaTarget(1)
+                    .restart();
+            }
+        })
         .attr("fill", function(d) {
             if (d.status == "Normaal") {
                 return "#ff694f";
@@ -60,18 +60,26 @@ d3.tsv("data/data.tsv", function(error, data) {
     // Run a simulation on every circle (node)
     simulation.nodes(data)
         .on('tick', movingIn) // Run movingIn on every "tick" of the clock
-		.on('end', function() {
-			console.log("HALLLO");
-		});
+        .on('end', function() {
+            console.log("HALLLO");
+        });
 
     function movingIn() {
-		console.log("nu");
+        console.log("nu");
         circles
             .attr("cx", function(d) {
-                return Math.round(d.x);
+                if (isNaN(d.x)) {
+                    return 0;
+                } else {
+					return d.x;
+				}
             })
             .attr("cy", function(d) {
-                return Math.round(d.y);
+				if (isNaN(d.y)) {
+                    return 0;
+                } else {
+					return d.y;
+				}
             });
     }
 
