@@ -19,7 +19,7 @@ var circleSize = d3.scaleLinear().domain([1, 9]).range([8, 36]);
 var simulation = d3.forceSimulation()
 	.force("r", d3.forceRadial(700)) // This force makes sure every circle is in a radius of approximately 100px
     .force("collide", d3.forceCollide(function(d) {
-        return circleSize(d.schendingen) + 2; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
+        return circleSize(d.schendingen) + 2; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circlee
     }).strength(2));
 
 d3.tsv("data/data.tsv", function(error, data) {
