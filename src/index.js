@@ -21,7 +21,7 @@ var simulation = d3.forceSimulation()
     // .force("x", d3.forceX(0).strength(0.005)) // Puts all the circles in the horizontal center
     // .force("y", d3.forceY(0).strength(0.005)) // Puts all the circles in the vertical center
 	// ===== Nieuw =====
-	.force("r", d3.forceRadial(10).strength(0.002)) //This force makes sure every circle is in a radius of approximately 100px
+	.force("r", d3.forceRadial(200).strength(0.02)) //This force makes sure every circle is in a radius of approximately 100px
 
     .force("collide", d3.forceCollide(function(d) {
         return circleSize(d.schendingen) + 2; // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
