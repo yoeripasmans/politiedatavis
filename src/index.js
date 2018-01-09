@@ -94,7 +94,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 
             } else {
                 //Shake animation
-                var verticalPostion = Number(this.getAttribute("cy")),
+                var horizontalPosition = Number(this.getAttribute("cx")),
 					shakeDuration = 100,
 					shakeDeviation = 4;
 
