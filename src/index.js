@@ -31,33 +31,12 @@ d3.tsv("data/data.tsv", function(error, data) {
             return circleSize(d.schendingen);
         })
 		.on("click", function(d) {
-			// console.log(d.index);
+			console.log(d.index);
+			var thisIndex = d.index;
 			simulation
-				.force("r", d3.forceRadial(function(d) { return d.status == "Normaal" ? 0 : 800; }))
-				.alphaTarget()
+				.force("r", d3.forceRadial(function(d) { return d.index == thisIndex ? 0 : 800; }))
+				.alphaTarget(1)
 				.restart();
-
-			// simulation
-            //     .force("r", d3.forceRadial(function(d) {
-			// 		for (var i = 0; i < data.length; i++) {
-			// 		    if (data[i].index == d.index) {
-			// 				console.log("hey");
-			// 		        return 800;
-			// 		    }
-			// 		}
-			// 	}))
-			// 	.alphaTarget()
-			// 	.restart();
-            //
-			// console.log(d.index);
-			// for (var i = 0; i < data.length; i++) {
-			// 	if (data[i].index == d.index) {
-			// 		console.log("hoi");
-			// 	}
-			// 	else {
-			// 		console.log("doei");
-			// 	}
-			// }
 		})
         .attr("fill", function(d) {
             if (d.status == "Normaal") {
