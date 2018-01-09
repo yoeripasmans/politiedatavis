@@ -41,7 +41,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 							return 800;
 						}
 					}))
-					.alphaTarget(1)
+					.alpha(1)
 					.restart();
 			}
 		})
