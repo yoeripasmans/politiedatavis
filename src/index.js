@@ -17,7 +17,7 @@ var svg = d3.select("body")
 	.append("g")
 	.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); // Place the <g> element in the middle
 
-// Scales the numbers 1 and 9 to 10 and 50 and everything in between.
+// Scales the numbers of the data from 1 to 9 and in the svg from 10 to 50.
 var circleSize = d3.scaleLinear().domain([1, 9]).range([8, 36]);
 
 var simulation = d3.forceSimulation()
@@ -39,6 +39,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			var circleIndex = d.index;
 
 			if (d.status !== "Inactief" && d.status !== "Verwijderd") {
+<<<<<<< HEAD
 				//Change the size of the clicked circle
 				d3.select(this)
 					.transition()
@@ -48,6 +49,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 						return 10;
 					});
 				// Moves clicked circle to middle and moves all other circles away
+=======
+
+				//Moves clicked circle to the middle and moves all other circles away
+>>>>>>> 34adf1f88d091f1503d19efe550c431e8161ced7
 				simulation
 					.force("r", d3.forceRadial(function(d) {
 						if (d.index == circleIndex) {
@@ -57,7 +62,28 @@ d3.tsv("data/data.tsv", function(error, data) {
 						}
 					}))
 					.alpha(0.5)
+
 					.restart();
+
+				//Change the size of the clicked circle
+				d3.select(this)
+					.transition()
+					.duration(1000)
+					.ease(d3.easeCubicOut)
+					.attr("r", function(d) {
+						return 10;
+					});
+
+				//Insert timeline
+				d3.select("svg").insert('rect', 'g')
+					.attr('y', (height * 2))
+					.transition()
+					.duration(1000)
+					.attr("width", 3)
+					.attr("height", height)
+					.attr('x', (width / 2))
+					.attr('y', (height / 2));
+
 			}
 		})
 		.attr("fill", function(d) {
@@ -75,8 +101,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 	// Run a simulation on every circle (node)
 	simulation.nodes(data)
 		.on('tick', movingIn) // Run movingIn on every "tick" of the clock
-		.on('end', function() {
-		});
+		.on('end', function() {});
 
 	function movingIn() {
 		circles
