@@ -36,21 +36,13 @@ d3.tsv("data/data.tsv", function(error, data) {
 		.entries(data);
 
     data.forEach(function(d) {
-			for (var i = 0; i < d.values.length; i++) {
+		d.totaleSchendingen = 0;
 
-				d.titel = d.values[i].titel;
-
-				// if (d.values.lenght > 1) {
-				// 	for (var i = 0; i < d.values.length; i++) {
-				// 		d.values[i].totaleSchendingen
-				// 	}
-				// }
-				console.log(d.values[i].totaleSchendingen);
-				d.totaleSchendingen += d.values[i].totaleSchendingen;
-
-			}
-
-		});
+		for (var i = 0; i < d.values.length; i++) {
+			d.titel = d.values[i].titel;
+			d.totaleSchendingen += Number(d.values[i].totaleSchendingen);
+		}
+	});
 
 	console.log(data);
 
