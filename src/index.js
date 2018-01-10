@@ -18,10 +18,10 @@ var svg = d3.select("body")
 	.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
 
 //Scales the numbers of the data 1-9 to 8-36 and everything inbetween
-var circleSize = d3.scaleLinear().domain([0, 5]).range([8, 36]);
+var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]);
 
 var simulation = d3.forceSimulation()
-	.force("r", d3.forceRadial(10).strength(0.002)) //This force makes sure every circle is in a radius
+	.force("r", d3.forceRadial(10).strength(0.005)) //This force makes sure every circle is in a radius
 	.force("collide", d3.forceCollide(function(d) {
 		return circleSize(d.totaleSchendingen) + 2; //Ensures the circles don't go on top of each other, this force is different for each circle
 	}));
@@ -31,16 +31,22 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 	data = d3.nest()
 		.key(function(d) {
-			return d.videoID;
+			return d.videoID; //Adds the dataset into objects in arrays
 		})
-		.entries(data);
+		.entries(data)
+		.map(function(d) {
+			return {
+				fragmenten: d.values //Change the name from 'values' to 'fragmenten'
+			};
+		});
 
-    data.forEach(function(d) {
+    data.forEach(function(d) { //Adds a 'totaleSchedingen' property to the video object
 		d.totaleSchendingen = 0;
 
-		for (var i = 0; i < d.values.length; i++) {
-			d.titel = d.values[i].titel;
-			d.totaleSchendingen += Number(d.values[i].totaleSchendingen);
+		for (var i = 0; i < d.fragmenten.length; i++) {
+			d.status = d.fragmenten[i].status;
+			d.titel = d.fragmenten[i].titel;
+			d.totaleSchendingen += Number(d.fragmenten[i].totaleSchendingen);
 		}
 	});
 
