@@ -38,8 +38,16 @@ d3.tsv("data/data.tsv", function(error, data) {
     data.forEach(function(d) {
 			for (var i = 0; i < d.values.length; i++) {
 
-				console.log(d.values[i].titel);
+				d.titel = d.values[i].titel;
+
+				// if (d.values.lenght > 1) {
+				// 	for (var i = 0; i < d.values.length; i++) {
+				// 		d.values[i].totaleSchendingen
+				// 	}
+				// }
 				console.log(d.values[i].totaleSchendingen);
+				d.totaleSchendingen += d.values[i].totaleSchendingen;
+
 			}
 
 		});
