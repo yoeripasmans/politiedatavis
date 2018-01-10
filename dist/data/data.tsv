@@ -1,150 +1,150 @@
-schendingen	status
-3	Normaal
-3	Normaal
-2	Normaal
-4	Normaal
-5	Normaal
-2	Normaal
-4	Normaal
-4	Normaal
-4	Aangepast
-3	Normaal
-4	Normaal
-4	Normaal
-6	Normaal
-5	Normaal
-3	Normaal
-4	Normaal
-4	Normaal
-7	Normaal
-4	Normaal
-5	Verwijderd
-6	Verwijderd
-3	Normaal
-3	Normaal
-5	Normaal
-5	Normaal
-2	Normaal
-3	Normaal
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
-1	Inactief
+videoID	account	url	titel	indicent	categorie	lengte	datum	locatieHerleidbaar	betrokkenenHerleidbaar	overigHerleidbaar	totaleSchendingen	betrokken	status
+1	Politievlogger Jan-Willem	https://youtu.be/98j5X6wtlTc?t=5m12s	Belofte maakt schuld	Klachten onderhoud tuin	Overig	0:00:39	7-6-2016	1	0	0	2	Verdachte	Normaal
+2	Politievlogger Jan-Willem	https://youtu.be/ll2mFFGi4DM?t=1m14s	Politie dagdienst op de motor	Vrouw gaf geen gehoor	Medisch	0:01:18	13-6-2016	1	0	0	2	Slachtoffer	Normaal
+3	Politievlogger Jan-Willem	https://youtu.be/XdhoqP0fbqs?t=4m42s	Politie deel 2 scooter controle,	Geluidsoverlast	Overlast	0:01:06	26-6-2016	0	0	0	1	Verdachte	Normaal
+4	Politievlogger Jan-Willem	https://youtu.be/AXdbbqk-Pvw?t=10m37s	Noodhulpdienst zaterdagmiddag	Moeder dreigt met mes	Geweld	0:03:01	10-7-2016	1	0	0	2	Beide	Normaal
+4	Politievlogger Jan-Willem	https://youtu.be/AXdbbqk-Pvw?t=12m53s	Noodhulpdienst zaterdagmiddag	Dronken man	Overlast	0:04:42	10-7-2016	0	1	0	2	Verdachte	Normaal
+5	Politievlogger Jan-Willem	https://youtu.be/wjgohPDxK2o?t=12m54s	Politie Utrecht, dienst in de binnenstad	Overlast op straat - ruzie	Overlast	0:01:47	30-10-2016	1	1	1	4	Verdachte	Normaal
+6	Politievlogger Jan-Willem	https://youtu.be/OqveglzFyyk?t=2m9s	Vrouw onwel in de woning & aanhouding verdachten inbraak	Vrouw onwel	Medisch	0:03:09	5-2-2017	0	0	0	1	Slachtoffer	Normaal
+7	Politievlogger Jan-Willem	https://youtu.be/gu1Etp-u0Ng?t=3m44s	Politie aanhouding vernieling	Vernieling	Overlast	0:02:28	19-2-2017	1	1	0	3	Verdachte	Normaal
+8	Politievlogger Jan-Willem	https://youtu.be/dMreJqwiXwI?t=9m28s	Dienst samen met de politiestudent👮	Ruzie in woning	Geweld	0:02:33	26-3-2017	1	1	0	3	Verdachte	Normaal
+9	Politievlogger Jan-Willem	https://youtu.be/5G-gQ94p7FQ?t=3m6s	Dylan Peys mee met politievlogger Jan-Willem	Aanhouding diefstal	Overig	0:03:01	30-4-2017	1	1	0	3	Verdachte	Aangepast
+10	Politievlogger Jan-Willem	https://youtu.be/Ty9uuwhjIHs?t=8m53s	Melding man met een vuurwapen	Vrouw onwel	Medisch	0:01:08	20-8-2016	1	0	0	2	Slachtoffer	Normaal
+11	Politievlogger Tess	https://youtu.be/sJlI1QRfouU?t=1m58s	Noodhulp met Mark in de Bijlmermeer Politievlogger Tess	Huiselijk geweld	Geweld	0:00:56	19-5-2017	0	1	1	3	Beide	Normaal
+12	Politievlogger Jan-Willem	https://youtu.be/Tmqw_jVcjxQ?t=13m10s	Feyenoord finale, FiFa melding, en RTL Live	Overlast	Overlast	0:02:45	21-5-2017	1	0	1	3	Verdachte	Normaal
+13	Politievlogger Jan-Willem	https://youtu.be/IFvaNxxH5is?t=2m	Nachtdienst Politie, laserpen, drugs, wapen en diverse meldingen	Geluidsoverlast	Overlast	0:01:10	4-6-2017	1	1	0	3	Verdachte	Normaal
+13	Politievlogger Jan-Willem	https://youtu.be/IFvaNxxH5is?t=3m10s	Nachtdienst Politie, laserpen, drugs, wapen en diverse meldingen	Bekeuring foutparkeren	Verkeer	0:01:02	4-6-2017	1	0	1	3	Verdachte	Normaal
+14	Politievlogger Tess	https://youtu.be/RdIAGam_EaA?t=3m24s	Noodhulp dienst met een bedreiging, diefstal en verward persoon	Verlaten voertuig	Verkeer	0:01:25	10-6-2017	0	0	1	2	Verdachte	Normaal
+14	Politievlogger Tess	https://youtu.be/RdIAGam_EaA?t=5m42s	Noodhulp dienst met een bedreiging, diefstal en verward persoon	Conflict klant en winkelier	Overlast	0:01:54	10-6-2017	1	1	0	3	Beide	Normaal
+15	Politievlogger Tess	https://youtu.be/x4tzFZ3ChDw?t=59s	Aanhouding van een persoon op een dak	Geluidsoverlast	Overlast	0:03:00	24-6-2017	0	0	0	1	Verdachte	Normaal
+15	Politievlogger Tess	https://youtu.be/x4tzFZ3ChDw?t=3m17s	Aanhouding van een persoon op een dak	Verward persoon op dak	Medisch	0:02:03	24-6-2017	1	0	0	2	Slachtoffer	Normaal
+16	Politievlogger Jan-Willem	https://youtu.be/G66bnY2sCYU?t=2m19s	Politievlogger op bezoek bij het basisteam Lekpoort (Houten / Nieuwegein)	Rijden zonder rijbewijs	Verkeer	0:01:59	25-6-2017	0	1	1	3	Verdachte	Normaal
+17	Politievlogger Jan-Willem	https://youtu.be/flRNsp4LG54?t=5m29s	Politie Utrecht, HETERDAAD AUTO-INBRAAK	Vonnis rechtbank bezorgen	Overig	0:00:44	16-7-2017	1	0	0	2	Slachtoffer	Normaal
+17	Politievlogger Jan-Willem	https://youtu.be/flRNsp4LG54?t=4m20s	Politie Utrecht, HETERDAAD AUTO-INBRAAK	Scooter opgevoerd	Verkeerd	0:01:09	16-7-2017	1	0	0	2	Verdachte	Normaal
+18	Politievlogger Tess	https://youtu.be/Y589b2zWgpI?t=2m33s	Auto-Inbraak heterdaad!	Huiselijk geweld	Geweld	0:03:15	22-7-2017	1	1	0	3	Beide	Normaal
+18	Politievlogger Tess	https://youtu.be/Y589b2zWgpI?t=5m47s	Auto-Inbraak heterdaad!	Bedreiging	Geweld	0:01:32	22-7-2017	0	0	1	2	Beide	Normaal
+18	Politievlogger Tess	https://youtu.be/Y589b2zWgpI?t=7m18s	Auto-Inbraak heterdaad!	Conflict huisgenoten	Overlast	0:01:33	22-7-2017	1	1	0	3	Beide	Normaal
+19	Politievlogger Jan-Willem	https://youtu.be/LZhlMC_DO6w?t=1m23s	Aanhouding politie na achtervolging. Nachtdienst	Bedreiging	Geweld	0:02:05	23-7-2017	1	0	0	2	Beide	Normaal
+19	Politievlogger Jan-Willem	https://youtu.be/LZhlMC_DO6w?t=4m7s	Aanhouding politie na achtervolging. Nachtdienst	Gewonde vrouw (mogelijk zelfmoord) in woning	Medisch	0:01:22	23-7-2017	1	0	0	2	Slachtoffer	Normaal
+19	Politievlogger Jan-Willem	https://youtu.be/LZhlMC_DO6w?t=7m2s	Aanhouding politie na achtervolging. Nachtdienst	Geluidsoverlast	Overlast	0:02:21	23-7-2017	0	0	0	1	Verdachte	Normaal
+20	Politievlogger Jan-Willem	https://youtu.be/faDUWcWbDXo?t=7m49s	Nieuwe motor, overlast door drank, ruzie op de snelweg	Dronken man	Overlast	0:08:29	27-8-2017	1	1	1	4	Verdachte	Verwijderd
+21	Politievlogger Jan-Willem	https://youtu.be/PMCE7JUcmdI?t=10m39s	Hulpverlening of strafrecht? Welke keuzes zou jij maken?	Vechtpartij in woning	Geweld	0:01:53	3-9-2017	1	0	0	2	Beide	Verwijderd
+21	Politievlogger Jan-Willem	https://youtu.be/PMCE7JUcmdI?t=12m33s	Hulpverlening of strafrecht? Welke keuzes zou jij maken?	Geluidsoverlast	Overlast	0:06:08	3-9-2017	1	1	0	3	Verdachte	Verwijderd
+21	Politievlogger Jan-Willem	https://youtu.be/PMCE7JUcmdI?t=20m12s	Hulpverlening of strafrecht? Welke keuzes zou jij maken?	Bedreiging	Geweld	0:03:09	3-9-2017	0	1	0	2	Beide	Verwijderd
+22	Politievlogger Jan-Willem	https://youtu.be/w6MAmDsDTLA?t=3m19s	Aanhouding door politie tijdens de nachtdienst	Geluidsoverlast	Overlast	0:01:11	10-9-2017	0	1	0	2	Verdachte	Normaal
+23	Politievlogger Jan-Willem	https://youtu.be/8TZ5_nHUPhw?t=39s	Verdachte STRAATROOF aangehouden. Inzet BOEFPROOF.	Geluidsoverlast	Overlast	0:04:01	17-9-2017	0	1	0	2	Verdachte	Normaal
+24	Politievlogger Jan-Willem	https://youtu.be/roNtmd8pI-o?t=9m22s	Assistentie collega's handhaving	Geschreeuw	Overlast	0:01:32	29-10-2017	1	0	0	2	Verdachte	Normaal
+24	Politievlogger Jan-Willem	https://youtu.be/roNtmd8pI-o?t=10m53s	Assistentie collega's handhaving	Ex in de achtertuin	Overlast	0:02:45	29-10-2017	1	1	0	3	Beide	Normaal
+25	Politievlogger Jan-Willem	https://youtu.be/4ZstbffJWm8?t=6m9s	Croco Jill een dienst mee met de politie	Hangjongeren	Overlast	0:02:21	19-11-2017	0	0	1	2	Verdachte	Normaal
+25	Politievlogger Jan-Willem	https://youtu.be/4ZstbffJWm8?t=11m32s	Croco Jill een dienst mee met de politie	Ruzie in woning	Geweld	0:01:06	19-11-2017	1	1	0	3	Beide	Normaal
+26	Politievlogger Jan-Willem	https://youtu.be/FWDMyU-zk34?t=4m23s	Nachtdienst 1e & 2e kerstnacht	Inbraak	Overig	0:01:53	1-1-2017	0	0	0	1	Slachtoffer	Normaal
+27	Politievlogger Jan-Willem 	https://youtu.be/gq2zZPsPQ7o?t=4m34s	Horecadienst deel 2	Jongeren die op straat drank drinken	Overlast	0:01:00	21-04-2017	0	1	0	2	Verdachte	Normaal
+28													Inactief
+29													Inactief
+30													Inactief
+31													Inactief
+32													Inactief
+33													Inactief
+34													Inactief
+35													Inactief
+36													Inactief
+37													Inactief
+38													Inactief
+39													Inactief
+40													Inactief
+41													Inactief
+42													Inactief
+43													Inactief
+44													Inactief
+45													Inactief
+46													Inactief
+47													Inactief
+48													Inactief
+49													Inactief
+50													Inactief
+51													Inactief
+52													Inactief
+53													Inactief
+54													Inactief
+55													Inactief
+56													Inactief
+57													Inactief
+58													Inactief
+59													Inactief
+60													Inactief
+61													Inactief
+62													Inactief
+63													Inactief
+64													Inactief
+65													Inactief
+66													Inactief
+67													Inactief
+68													Inactief
+69													Inactief
+70													Inactief
+71													Inactief
+72													Inactief
+73													Inactief
+74													Inactief
+75													Inactief
+76													Inactief
+77													Inactief
+78													Inactief
+79													Inactief
+80													Inactief
+81													Inactief
+82													Inactief
+83													Inactief
+84													Inactief
+85													Inactief
+86													Inactief
+87													Inactief
+88													Inactief
+89													Inactief
+90													Inactief
+91													Inactief
+92													Inactief
+93													Inactief
+94													Inactief
+95													Inactief
+96													Inactief
+97													Inactief
+98													Inactief
+99													Inactief
+100													Inactief
+101													Inactief
+102													Inactief
+103													Inactief
+104													Inactief
+105													Inactief
+106													Inactief
+107													Inactief
+108													Inactief
+109													Inactief
+110													Inactief
+111													Inactief
+112													Inactief
+113													Inactief
+114													Inactief
+115													Inactief
+116													Inactief
+117													Inactief
+118													Inactief
+119													Inactief
+120													Inactief
+121													Inactief
+122													Inactief
+123													Inactief
+124													Inactief
+125													Inactief
+126													Inactief
+127													Inactief
+128													Inactief
+129													Inactief
+130													Inactief
+131													Inactief
+132													Inactief
+133													Inactief
+134													Inactief
+135													Inactief
+136													Inactief
