@@ -12,7 +12,8 @@ var colorEdited = "#ff9c06";
 var colorRemoved = "#ffcc34";
 var colorInactive = "#e2e2e2";
 var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]); //Scales between two number ranges
-var circlePosition = d3.scaleLinear().domain([0, 75]).range([0, -100]); //Scales between two number ranges
+var circleTimelineDeviation = 12;
+var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2400]).range([0, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
 
 var svg = d3.select("body")
     .append("svg")
@@ -221,15 +222,10 @@ d3.tsv("data/data.tsv", function(error, data) {
     }
 
     function scroll(_this) {
-        console.log(window.pageYOffset); //Output the current scroll position
-
-        if (window.pageYOffset > 0 && window.pageYOffset < 75) {
-            d3.select(_this)
-				.attr("fill", "blue")
-                .attr("cx", function(d) {
-					console.log("DEZE " + circlePosition(window.pageYOffset));
-                    return circlePosition(window.pageYOffset);
-                });
+        if (window.pageYOffset >= 0 && window.pageYOffset <= 2400) {
+			var circleWiggle = (width/2)-circleTimelinePosition(window.pageYOffset);
+            d3.select("g")
+				.attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
         }
     }
 
