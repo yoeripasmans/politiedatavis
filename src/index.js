@@ -28,7 +28,6 @@ var simulation = d3.forceSimulation()
 
 d3.tsv("data/data.tsv", function(error, data) {
 
-
 	data = d3.nest()
 		.key(function(d) {
 			return d.videoID; //Adds the dataset into objects in arrays
@@ -50,8 +49,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}
 	});
 
-	console.log(data);
-
 	var circles = svg.selectAll(".bubble")
 		.data(data)
 		.enter().append("circle")
@@ -71,6 +68,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 			}
 		})
 		.on("click", function(d) {
+			bubbleClickEvent(d);
+		});
+
+		function bubbleClickEvent(d){
 			//Index of clicked circle
 			var circleIndex = d.index;
 
@@ -78,6 +79,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 				//Change the size of the clicked circle
 				d3.select(this)
+					.on('click', null)
 					.transition()
 					.duration(1000)
 					.ease(d3.easeCubicOut)
@@ -109,11 +111,39 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 				//Insert timeline
 				d3.select("body").insert('div', 'svg')
+					.data(data)
 					.attr('class', 'line')
 					.transition()
 					.delay(450)
 					.duration(1000)
-					.style("height", height + "px");
+					.style("height", function(d) {
+						return (d.totaleSchendingen * 300) + "px";
+					});
+
+				//Insert backbutton
+				d3.select("body").insert('button', 'svg')
+					.text('Terug')
+					.attr('class', 'back-button')
+					.on('click', function(d) {
+
+						d3.selectAll(".bubble")
+							.transition()
+							.duration(1000)
+							.ease(d3.easeCubicOut)
+							.attr("r", function(d) {
+								return circleSize(d.totaleSchendingen);
+							});
+
+						d3.select(".line").remove();
+						simulation
+							.force("r", d3.forceRadial(function(d) {
+								return 0;
+							}))
+							.alpha(0.25)
+							.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+							.restart();
+
+					});
 
 			} else {
 				//Shake animation
@@ -160,7 +190,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 						return horizontalPosition;
 					});
 			}
-		});
+		}
 
 	//Run a simulation on every circle (node)
 	simulation.nodes(data)

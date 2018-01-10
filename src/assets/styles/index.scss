@@ -11,11 +11,16 @@ body {
   margin: 50vh auto;
 }
 
+.back-button {
+  position: fixed;
+  left: 5em;
+  top: 5em;
+}
+
 svg {
   display: block;
   position: fixed;
   margin: auto;
-  /* Will not center vertically and won't work in IE6/7. */
   left: 0;
   right: 0;
   top: 0;
