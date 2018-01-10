@@ -3,10 +3,21 @@ $background: #fff;
 
 body {
   background-color: $background;
-  max-width: 930px;
-  margin: 0 auto;
+}
+
+.line {
+  width: 3px;
+  background-color: black;
+  margin: 50vh auto;
 }
 
 svg {
-	background-color: #fbfbfb;
+  display: block;
+  position: fixed;
+  margin: auto;
+  /* Will not center vertically and won't work in IE6/7. */
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }

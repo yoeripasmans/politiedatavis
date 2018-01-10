@@ -40,7 +40,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			};
 		});
 
-    data.forEach(function(d) { //Adds a 'totaleSchedingen' property to the video object
+	data.forEach(function(d) { //Adds a 'totaleSchedingen' property to the video object
 		d.totaleSchendingen = 0;
 
 		for (var i = 0; i < d.fragmenten.length; i++) {
@@ -108,14 +108,12 @@ d3.tsv("data/data.tsv", function(error, data) {
 					});
 
 				//Insert timeline
-				d3.select("svg").insert('rect', 'g')
-					.attr('y', (height * 2))
+				d3.select("body").insert('div', 'svg')
+					.attr('class', 'line')
 					.transition()
+					.delay(450)
 					.duration(1000)
-					.attr("width", 2)
-					.attr("height", height)
-					.attr('x', (width / 2))
-					.attr('y', (height / 2));
+					.style("height", height + "px");
 
 			} else {
 				//Shake animation
