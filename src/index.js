@@ -8,8 +8,7 @@ var width = 930,
   colorNormal = "#ff694f",
   colorEdited = "#ff9c06",
   colorRemoved = "#ffcc34",
-  colorInactive = "#e2e2e2",
-  running = false;
+  colorInactive = "#e2e2e2";
 
 var svg = d3.select("body")
   .append("svg")
@@ -94,10 +93,6 @@ d3.tsv("data/data.tsv", function(error, data) {
           .attr('y', (height / 2));
 
       } else {
-
-        if (running == false) {
-          running = true;
-          console.log(running);
           //Shake animation
           var horizontalPosition = Number(this.getAttribute("cx")),
             shakeDuration = 80,
@@ -141,19 +136,13 @@ d3.tsv("data/data.tsv", function(error, data) {
             .attr("cx", function(d) {
               return horizontalPosition;
             });
-
-          running = false;
-        } else {
-          console.log("werkt niet");
         }
-      }
     });
 
   //Run a simulation on every circle (node)
   simulation.nodes(data)
     .on('tick', movingIn) //Run movingIn on every "tick" of the clock
     .on('end', function() {
-      console.log("test");
     });
 
   function movingIn() {
