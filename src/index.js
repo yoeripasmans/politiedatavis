@@ -68,18 +68,21 @@ d3.tsv("data/data.tsv", function(error, data) {
 			}
 		})
 		.on("click", function(d) {
-			bubbleClickEvent(d);
+			bubbleClickEvent(this, d);
 		});
 
-		function bubbleClickEvent(d){
+		function bubbleClickEvent(_this, d){
+
 			//Index of clicked circle
 			var circleIndex = d.index;
 
 			if (d.status !== "Inactief" && d.status !== "Verwijderd") {
 
 				//Change the size of the clicked circle
-				d3.select(this)
-					.on('click', null)
+				d3.select(_this)
+					.on('click', function(d) {
+						console.log("Geen fuck");
+					})
 					.transition()
 					.duration(1000)
 					.ease(d3.easeCubicOut)
@@ -101,7 +104,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					.restart();
 
 				//Change the size of the clicked circle
-				d3.select(this)
+				d3.select(_this)
 					.transition()
 					.duration(1000)
 					.ease(d3.easeCubicOut)
@@ -132,9 +135,13 @@ d3.tsv("data/data.tsv", function(error, data) {
 							.ease(d3.easeCubicOut)
 							.attr("r", function(d) {
 								return circleSize(d.totaleSchendingen);
+							})
+							.on("click", function(d) {
+								bubbleClickEvent(this, d);
 							});
 
 						d3.select(".line").remove();
+
 						simulation
 							.force("r", d3.forceRadial(function(d) {
 								return 0;
