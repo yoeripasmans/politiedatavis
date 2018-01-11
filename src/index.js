@@ -100,7 +100,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		if (d.status !== "Inactief" && d.status !== "Verwijderd") {
 
-			//Trigger the scroll function so the cirlce moves back and forth
+			//Trigger the scroll function so the circle moves back and forth
 			document.querySelector('body').onscroll = function() {
 				scroll(_this);
 			};
