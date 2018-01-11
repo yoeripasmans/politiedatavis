@@ -221,40 +221,48 @@ d3.tsv("data/data.tsv", function(error, data) {
 			});
 	}
 
-	function scroll(_this) {
-		if (window.pageYOffset >= 0 && window.pageYOffset <= 2400) {
-			var circleWiggle = (width / 2) - circleTimelinePosition(window.pageYOffset);
-			d3.select("g")
-				.attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
-		}
-    if (window.pageYOffset >= 0) {
-			d3.select(_this)
-				.transition()
-				.duration(1000)
-				.ease(d3.easeCubicOut)
-				.attr("r", function(d) {
-					return 10;
-				});
-		}
-		if (window.pageYOffset >= 300) {
-			d3.select(_this)
-				.transition()
-				.duration(1000)
-				.ease(d3.easeCubicOut)
-				.attr("r", function(d) {
-					return 20;
-				});
-		}
-		if (window.pageYOffset >= 600) {
-			d3.select(_this)
-				.transition()
-				.duration(1000)
-				.ease(d3.easeCubicOut)
-				.attr("r", function(d) {
-					return 30;
-				});
-		}
+	function scroll(_this, d) {
+        if (window.pageYOffset >= 0 && window.pageYOffset <= 2400) {
+            var circleWiggle = (width / 2) - circleTimelinePosition(window.pageYOffset);
+            d3.select("g")
+                .attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
+        }
 
-	}
+		console.log(circleSize(d.totaleSchendingen));
+
+        if (window.pageYOffset >= 0) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function(d) {
+					console.log(circleSize(d.totaleSchendingen));
+					console.log(d.totaleSchendingen - 8);
+					console.log("dit " + circleSize(d.totaleSchendingen) / 0);
+                    return circleSize(d.totaleSchendingen) / d.totaleSchendingen;
+                });
+        }
+
+        if (window.pageYOffset >= 300) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function(d) {
+                    return circleSize(d.totaleSchendingen) / d.totaleSchendingen - 1;
+    			});
+        }
+
+        if (window.pageYOffset >= 600) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function(d) {
+                    return circleSize(d.totaleSchendingen) / (d.totaleSchendingen - 2);
+                });
+        }
+
+    }
 
 });
