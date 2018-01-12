@@ -112,7 +112,7 @@ d3.tsv("data/data.tsv", function(error, data) {
                 .duration(1000)
                 .ease(d3.easeCubicOut)
                 .attr("r", function(d) {
-                    return circleSize(0);
+                    return 10;
                 });
 
             //Place the clicked circle in the middle and hide the rest
@@ -144,11 +144,6 @@ d3.tsv("data/data.tsv", function(error, data) {
                 .text('Terug')
                 .attr('class', 'back-button')
                 .on('click', function(d) {
-
-					//Removes the function on scroll
-		            document.querySelector('body').onscroll = function() {
-		                console.log("doet niets");
-		            };
 
                     d3.selectAll(".bubble")
                         .on("click", function(d) {
@@ -227,41 +222,91 @@ d3.tsv("data/data.tsv", function(error, data) {
     }
 
     function scroll(_this, d) {
-
-		console.log("scroll " + window.pageYOffset);
-
+		
         if (window.pageYOffset >= 0 && window.pageYOffset <= 2400) {
             var circleWiggle = (width / 2) - circleTimelinePosition(window.pageYOffset);
             d3.select("g")
                 .attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
         }
+        if (window.pageYOffset >= 0) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function() {
+                    return circleSize(1);
+                });
+        }
 
-        d3.select(_this)
-            .transition()
-            .duration(200)
-            .ease(d3.easeCubicIn)
-            .attr("r", function() {
-				if (window.pageYOffset >= 0 && window.pageYOffset < 300) {
-                	return circleSize(0);
-				} else if (window.pageYOffset >= 300 && window.pageYOffset < 600) {
-					return circleSize(1);
-				} else if (window.pageYOffset >= 600 && window.pageYOffset < 900) {
-					return circleSize(2);
-				} else if (window.pageYOffset >= 900 && window.pageYOffset < 1200) {
-					return circleSize(3);
-				} else if (window.pageYOffset >= 1200 && window.pageYOffset < 1500) {
-					return circleSize(4);
-				} else if (window.pageYOffset >= 1500 && window.pageYOffset < 1800) {
-					return circleSize(5);
-				} else if (window.pageYOffset >= 1800 && window.pageYOffset < 2100) {
-					return circleSize(6);
-				} else if (window.pageYOffset >= 2100 && window.pageYOffset < 2400) {
-					return circleSize(7);
-				} else if (window.pageYOffset >= 2400) {
-					return circleSize(8);
-				}
-            });
+        if (window.pageYOffset >= 300) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function() {
+                    return circleSize(2);
+                });
+        }
 
+        if (window.pageYOffset >= 600) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function() {
+                    return circleSize(3);
+                });
+        }
+
+        if (window.pageYOffset >= 900) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function() {
+                    return circleSize(4);
+                });
+        }
+
+        if (window.pageYOffset >= 1200) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function() {
+                    return circleSize(5);
+                });
+        }
+
+        if (window.pageYOffset >= 1500) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function() {
+                    return circleSize(6);
+                });
+        }
+
+        if (window.pageYOffset >= 1800) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function() {
+                    return circleSize(7);
+                });
+        }
+
+        if (window.pageYOffset >= 2100) {
+            d3.select(_this)
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function() {
+                    return circleSize(8);
+                });
+        }
     }
 
 });
