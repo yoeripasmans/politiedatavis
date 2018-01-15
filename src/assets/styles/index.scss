@@ -11,6 +11,7 @@ body {
 	background-size: auto 600px;
 	background-position: center top;
 	margin: 50vh auto;
+	padding-top: 300px;
 }
 
 .back-button {
@@ -46,9 +47,12 @@ svg {
 }
 
 .event {
+	position: relative;
 	height: 20px;
 	width: 20px;
 	margin: 0 auto 280px auto;
 	border-radius: 50px;
 	background-color: orange;
 }
+
+.event-1 {}
