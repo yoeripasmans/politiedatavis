@@ -134,7 +134,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 						return 1000;
 					}
 				}))
-				.alpha(0.3)
+				.alpha(0.4)
 				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 				.restart();
 
