@@ -131,10 +131,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 					if (d.index == circleIndex) {
 						return 0;
 					} else {
-						return 800;
+						return 1000;
 					}
 				}))
-				.alpha(0.5)
+				.alpha(0.3)
 				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 				.restart();
 
@@ -273,7 +273,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 	}
 
 	function addEventCircle(d) {
-		console.log(d);
 		svg.selectAll(".bubble-event")
 			.data(d.fragmenten)
 			.enter().append("circle")
