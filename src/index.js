@@ -14,6 +14,15 @@ var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]); //Scales betwee
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2400]).range([0, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
 
+function createDiv(total) {
+	for (var i = 0; i < total; i++) {
+	var div = document.createElement("div");
+	div.setAttribute("class", "event event-" + (i + 1));
+
+	document.querySelector(".line").appendChild(div);
+	}
+}
+
 onResize();
 d3.select(window).on('resize', onResize);
 
@@ -148,6 +157,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.style("height", function(d) {
 					return (circleTotaleSchendingen * 300) + "px";
 				});
+
+			createDiv(circleTotaleSchendingen);
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
