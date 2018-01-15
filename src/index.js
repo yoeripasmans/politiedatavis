@@ -14,16 +14,7 @@ var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]); //Scales betwee
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2400]).range([0, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
 
-function createDiv(total) {
-	for (var i = 0; i < total; i++) {
-	var div = document.createElement("div");
-	div.setAttribute("class", "event event-" + (i + 1));
 
-	document.querySelector(".line").appendChild(div);
-	}
-}
-
-onResize();
 d3.select(window).on('resize', onResize);
 
 function onResize() {
@@ -143,7 +134,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 						return 1000;
 					}
 				}))
-				.alpha(0.3)
+				.alpha(0.35)
 				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 				.restart();
 
@@ -158,7 +149,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 					return (circleTotaleSchendingen * 300) + "px";
 				});
 
-			createDiv(circleTotaleSchendingen);
+			//Adds events to timeline
+			createEvent(circleTotaleSchendingen);
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
@@ -192,8 +184,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 						.restart();
 
 				});
-
-			addEventCircle(d);
 
 		} else {
 			shakeAnimation(_this);
@@ -283,13 +273,13 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 	}
 
-	function addEventCircle(d) {
-		svg.selectAll(".bubble-event")
-			.data(d.fragmenten)
-			.enter().append("circle")
-			.attr("class", "bubble-event")
-			.attr("fill", "blue");
+	function createEvent(total) {
+		for (var i = 0; i < total; i++) {
+			var div = document.createElement("div");
+			div.setAttribute("class", "event event-" + (i + 1));
 
+			document.querySelector(".line").appendChild(div);
+		}
 	}
 
 
