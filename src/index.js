@@ -239,7 +239,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 	function scroll(_this, d) {
 
 		if (window.pageYOffset >= 0 && window.pageYOffset <= 2400) {
-			var circleWiggle = (width / 2) - circleTimelinePosition(window.pageYOffset);
+			var circleWiggle = (window.innerWidth / 2) - circleTimelinePosition(window.pageYOffset);
 			d3.select("g")
 				.attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
 		}
