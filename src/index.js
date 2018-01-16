@@ -10,38 +10,27 @@ var colorNormal = "#ff694f";
 var colorEdited = "#ff9c06";
 var colorRemoved = "#ffcc34";
 var colorInactive = "#e2e2e2";
+var responsiveCheck;
+var circleClickedCheck = false;
 var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]); //Scales between two number ranges
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2550, 2850, 3150, 3450, 3750, 4050, 4350, 4650, 4950, 5100]).range([0, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
 
-onResize();
 d3.select(window).on('resize', onResize);
-
-function onResize() {
-	d3.select("svg")
-		.attr("width", window.innerWidth);
-
-	d3.select("g")
-		.attr("transform", "translate(" + window.innerWidth / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
-
-	var events = document.querySelectorAll(".line__event");
-	for (var i = 0; i < events.length; i++) {
-		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;";
-	}
-}
 
 var svg = d3.select(".svg-container")
 	.append("svg")
 	.attr("height", height)
 	.attr("width", window.innerWidth)
-	.append("g")
-	.attr("transform", "translate(" + window.innerWidth / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
+	.append("g");
 
 var simulation = d3.forceSimulation()
 	.force("r", d3.forceRadial(10).strength(0.005)) //This force makes sure every circle is in a radius
 	.force("collide", d3.forceCollide(function(d) {
 		return circleSize(d.totaleSchendingen) + 2; //Ensures the circles don't go on top of each other, this force is different for each circle
 	}));
+
+onResize();
 
 /* __________ LOADING DATA __________ */
 
@@ -112,6 +101,14 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 	function circleClickEvent(_this, d) {
 
+		circleClickedCheck = true;
+
+		if (window.innerWidth < 500 && circleClickedCheck == true) {
+			responsiveCheck = 5;
+		} else {
+			responsiveCheck = 2;
+		}
+
 		var circleIndex = d.index; //Index of clicked circle
 		var circleTotaleEvents = d.totaleEvents; //Save the totaleSchendingen to another varible for later use
 
@@ -150,7 +147,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.data(data)
 				.attr('class', 'line')
 				.transition()
-				.delay(450)
+				.delay(850)
 				.duration(1000)
 				.style("height", function(d) {
 					return (circleTotaleEvents * 300) + "px";
@@ -163,6 +160,14 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.text('Terug')
 				.attr('class', 'back-button')
 				.on('click', function(d) {
+
+					circleClickedCheck = false;
+
+					if (window.innerWidth < 500 && circleClickedCheck == true) {
+						responsiveCheck = 5;
+					} else {
+						responsiveCheck = 2;
+					}
 
 					//Removes the function on scroll
 					document.querySelector('body').onscroll = function() {};
@@ -189,7 +194,24 @@ d3.tsv("data/data.tsv", function(error, data) {
 						.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 						.restart();
 
+					d3.select("g")
+						.transition()
+						.duration(1000)
+						.ease(d3.easeCubicOut)
+						.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+
 				});
+
+			//Position the timeline accordingly
+			d3.select("g")
+				.transition()
+				.duration(1000)
+				.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+
+			if (responsiveCheck == 5) {
+				d3.select(".svg-container")
+					.style("width", "40%");
+			}
 
 		} else {
 			shakeAnimation(_this);
@@ -248,7 +270,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 		console.log(window.pageYOffset);
 
 		if (window.pageYOffset >= 0 && window.pageYOffset <= 5100) {
-			var circleWiggle = (window.innerWidth / 2) + circleTimelinePosition(window.pageYOffset);
+			var circleWiggle;
+			circleWiggle = (window.innerWidth / responsiveCheck) + circleTimelinePosition(window.pageYOffset);
 			d3.select("g")
 				.attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
 		}
@@ -296,12 +319,12 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 			selectedSchending++;
 
-			if (schendingenIndex[selectedSchending] == undefined || schendingenIndex[5] !== undefined) {
+			if (schendingenIndex[selectedSchending] == undefined ) {
 				selectedFragment++;
 				selectedSchending = 0;
 			}
 
-			eventDiv.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;"; //Style the eventDiv
+			eventDiv.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / responsiveCheck - 10)+ "px;"; //Style the eventDiv
 			document.querySelector(".line").appendChild(eventDiv); //Add the eventDiv's to .line
 		}
 
@@ -314,3 +337,31 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}
 	}
 });
+
+function onResize() {
+
+	if (window.innerWidth < 500 && circleClickedCheck == true) {
+		responsiveCheck = 5;
+	} else {
+		responsiveCheck = 2;
+	}
+
+	if (responsiveCheck == 5) {
+		d3.select(".svg-container")
+			.style("width", "40%");
+	} else {
+		d3.select(".svg-container")
+			.style("width", "100%");
+	}
+
+	d3.select("svg")
+		.attr("width", window.innerWidth);
+
+	d3.select("g")
+		.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+
+	var events = document.querySelectorAll(".line__event");
+	for (var i = 0; i < events.length; i++) {
+		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / responsiveCheck - 10)+ "px;";
+	}
+}
