@@ -42,7 +42,8 @@ svg {
 		border-radius: 50px;
 		border: 1px solid #E3E3E3;
 		background-color: #fff;
-		transition: transform 1s;
+		transition: transform 0.5s;
+		transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: 23px;
