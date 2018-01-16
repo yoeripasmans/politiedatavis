@@ -12,7 +12,7 @@ var colorRemoved = "#ffcc34";
 var colorInactive = "#e2e2e2";
 var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]); //Scales between two number ranges
 var circleTimelineDeviation = 12;
-var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2400]).range([0, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
+var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2550, 2850, 3150, 3450, 3750, ]).range([0, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
 
 onResize();
 d3.select(window).on('resize', onResize);
@@ -242,6 +242,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 	}
 
 	function scroll(_this, d) {
+
+		console.log(window.pageYOffset);
 
 		if (window.pageYOffset >= 0 && window.pageYOffset <= 2400) {
 			var circleWiggle = (window.innerWidth / 2) - circleTimelinePosition(window.pageYOffset);
