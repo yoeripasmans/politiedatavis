@@ -2,11 +2,60 @@
 $background: #fff;
 
 body {
-  background-color: $background;
-  max-width: 930px;
-  margin: 0 auto;
+	background-color: $background;
+}
+
+.line {
+	width: 40px;
+	background-image: url("../images/timeline.svg");
+	background-size: auto 600px;
+	background-position: center top;
+	margin: 50vh auto;
+}
+
+.back-button {
+	position: fixed;
+	left: 5em;
+	top: 5em;
+	z-index: 999;
 }
 
 svg {
-	background-color: #fbfbfb;
+	display: block;
+	position: fixed;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.svg-container {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	vertical-align: top;
+	overflow: hidden;
+}
+
+.svg-content {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.line {
+	&__event {
+		position: absolute;
+		height: 20px;
+		width: 20px;
+		border-radius: 50px;
+		background-color: orange;
+		transition: width 2s, height 2s;
+
+		&--hidden {
+			width: 0px;
+			height: 0px;
+		}
+	}
 }
