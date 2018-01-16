@@ -14,17 +14,6 @@ var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]); //Scales betwee
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2400]).range([0, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
 
-// create div elements on the timeline at the event points
-function createDiv(totalEvents) {
-	for (var i = 0; i < totalEvents; i++) {
-	var div = document.createElement("div");
-	div.setAttribute("class", "event event-" + (i + 1));
-	div.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;";
-
-	document.querySelector(".line").appendChild(div);
-	}
-}
-
 onResize();
 d3.select(window).on('resize', onResize);
 
@@ -34,6 +23,11 @@ function onResize() {
 
 	d3.select("g")
 		.attr("transform", "translate(" + window.innerWidth / 2 + "," + height / 2 + ")"); //Place the <g> element in the middle
+
+	var events = document.querySelectorAll(".line__event");
+	for (var i = 0; i < events.length; i++) {
+		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;";
+	}
 }
 
 var svg = d3.select(".svg-container")
@@ -160,7 +154,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					return (circleTotaleSchendingen * 300) + "px";
 				});
 
-			createDiv(circleTotaleSchendingen);
+			createEvents(circleTotaleSchendingen);
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
@@ -194,8 +188,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 						.restart();
 
 				});
-
-			addEventCircle(d);
 
 		} else {
 			shakeAnimation(_this);
@@ -282,17 +274,20 @@ d3.tsv("data/data.tsv", function(error, data) {
 					return circleSize(8);
 				}
 			});
-
 	}
 
-	function addEventCircle(d) {
-		svg.selectAll(".bubble-event")
-			.data(d.fragmenten)
-			.enter().append("circle")
-			.attr("class", "bubble-event")
-			.attr("fill", "blue");
+	// create div elements on the timeline at the event points
+	function createEvents(totalEvents) {
+		for (var i = 0; i < totalEvents; i++) {
+		var el = document.createElement("div");
+		el.setAttribute("class", "line__event--hidden line__event line__event--" + (i + 1));
+		el.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;"; // add css to position div
+		document.querySelector(".line").appendChild(el);
+		}
 
+		var events = document.querySelectorAll(".line__event");
+		for (i = 0; i < events.length; i++) {
+			events[i].classList.toggle("line__event--hidden");
+		}
 	}
-
-
 });
