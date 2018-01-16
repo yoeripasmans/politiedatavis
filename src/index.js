@@ -113,7 +113,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 	function circleClickEvent(_this, d) {
 
 		var circleIndex = d.index; //Index of clicked circle
-		var circleTotaleEvents = d.totaleSchendingen; //Save the totaleSchendingen to another varible for later use
+		var circleTotaleEvents = d.totaleEvents; //Save the totaleSchendingen to another varible for later use
 
 		if (d.status !== "Inactief" && d.status !== "Verwijderd") {
 
@@ -283,14 +283,26 @@ d3.tsv("data/data.tsv", function(error, data) {
 	// create div elements on the timeline at the event points
 	function createEvents(circleTotaleEvents, d) {
 
-		var schendingenArray = ["eersteSchendingCategorie", "tweedeSchendingCategorie"];
-		console.log(d.fragmenten[0].schendingenArray[i]);
+		var selectedFragment = 0;
+		var selectedSchending = 0;
 
 		for (var i = 0; i < circleTotaleEvents; i++) {
-			var el = document.createElement("div");
-			el.setAttribute("class", "line__event line__event--hidden line__event--" + (i + 1) + " line__event--" + d.fragmenten[0].schendingenArray[i]);
-			el.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;"; // add css to position div
-			document.querySelector(".line").appendChild(el);
+			//An array to loop through all the 'schendingen'
+			var schendingenIndex = [d.fragmenten[selectedFragment].eersteSchendingCategorie, d.fragmenten[selectedFragment].tweedeSchendingCategorie, d.fragmenten[selectedFragment].derdeSchendingCategorie, d.fragmenten[selectedFragment].vierdeSchendingCategorie, d.fragmenten[selectedFragment].vijfdeSchendingCategorie, d.fragmenten[selectedFragment].zesdeSchendingCategorie];
+
+			var eventDiv = document.createElement("div"); //Create a div for the events
+
+			eventDiv.setAttribute("class", "line__event line__event--hidden line__event--" + (i + 1) + " line__event--" + schendingenIndex[selectedSchending]);
+
+			selectedSchending++;
+
+			if (schendingenIndex[selectedSchending] == undefined || schendingenIndex[5] !== undefined) {
+				selectedFragment++;
+				selectedSchending = 0;
+			}
+
+			eventDiv.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;"; //Style the eventDiv
+			document.querySelector(".line").appendChild(eventDiv); //Add the eventDiv's to .line
 		}
 
 		setTimeout(function() {triggerEventAnimation();}, 1000);
