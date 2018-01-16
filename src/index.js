@@ -12,6 +12,7 @@ var colorRemoved = "#ffcc34";
 var colorInactive = "#e2e2e2";
 var responsiveCheck;
 var circleClickedCheck = false;
+var popupCheck = false;
 var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]); //Scales between two number ranges
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2550, 2850, 3150, 3450, 3750, 4050, 4350, 4650, 4950, 5100]).range([0, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
@@ -274,6 +275,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
 		}
 
+		if (window.pageYOffset >= 300 && popupCheck == false) {
+			return createPopup(_this, d);
+		}
+
 		d3.select(_this)
 			.transition()
 			.duration(200)
@@ -333,6 +338,12 @@ d3.tsv("data/data.tsv", function(error, data) {
 				events[i].classList.toggle("line__event--hidden");
 			}
 		}
+	}
+
+	function createPopup(_this,d) {
+		popupCheck = true;
+		console.log('yo');
+
 	}
 });
 
