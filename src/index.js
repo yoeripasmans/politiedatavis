@@ -254,7 +254,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			.duration(200)
 			.ease(d3.easeCubicOut)
 			.attr("r", function() {
-				if (window.pageYOffset >= 0 && window.pageYOffset < 300) {
+				if (window.pageYOffset < 300) {
 					return circleSize(0);
 				} else if (window.pageYOffset >= 300 && window.pageYOffset < 600) {
 					return circleSize(1);
