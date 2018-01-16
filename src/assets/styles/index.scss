@@ -1,9 +1,4 @@
 @import "partials/reset";
-$background: #fff;
-
-body {
-	background-color: $background;
-}
 
 .line {
 	width: 40px;
@@ -34,29 +29,50 @@ svg {
 	display: inline-block;
 	position: relative;
 	width: 100%;
-	vertical-align: top;
 	overflow: hidden;
 }
 
-.svg-content {
-	display: inline-block;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
 .line {
 	&__event {
 		position: absolute;
-		height: 20px;
-		width: 20px;
+		height: 40px;
+		width: 40px;
 		transform-origin: center;
 		transform: scale(1);
 		border-radius: 50px;
-		background-color: orange;
+		border: 1px solid #E3E3E3;
+		background-color: #fff;
 		transition: transform 1s;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 23px;
 
 		&--hidden {
 			transform: scale(0);
+		}
+
+		&--straatnaam {
+			background-image: url("../images/straatnaam.svg");
+		}
+
+		&--omgeving {
+			background-image: url("../images/omgeving.svg");
+		}
+
+		&--overig {
+			background-image: url("../images/overig.svg");
+		}
+
+		&--slachtoffer {
+			background-image: url("../images/slachtoffer.svg");
+		}
+
+		&--verdachte {
+			background-image: url("../images/verdachte.svg");
+		}
+
+		&--huisnummer {
+			background-image: url("../images/huisnummer.svg");
 		}
 	}
 }

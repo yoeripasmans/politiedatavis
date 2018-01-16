@@ -26,7 +26,7 @@ function onResize() {
 
 	var events = document.querySelectorAll(".line__event");
 	for (var i = 0; i < events.length; i++) {
-		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;";
+		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / 2 - 20)+ "px;";
 	}
 }
 
@@ -245,8 +245,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 	function scroll(_this, d) {
 
-		console.log(window.pageYOffset);
-
 		if (window.pageYOffset >= 0 && window.pageYOffset <= 5100) {
 			var circleWiggle = (window.innerWidth / 2) + circleTimelinePosition(window.pageYOffset);
 			d3.select("g")
@@ -296,12 +294,12 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 			selectedSchending++;
 
-			if (schendingenIndex[selectedSchending] == undefined || schendingenIndex[5] !== undefined) {
+			if (schendingenIndex[selectedSchending] == undefined) {
 				selectedFragment++;
 				selectedSchending = 0;
 			}
 
-			eventDiv.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;"; //Style the eventDiv
+			eventDiv.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / 2 - 20)+ "px;"; //Style the eventDiv
 			document.querySelector(".line").appendChild(eventDiv); //Add the eventDiv's to .line
 		}
 
