@@ -285,9 +285,12 @@ d3.tsv("data/data.tsv", function(error, data) {
 		document.querySelector(".line").appendChild(el);
 		}
 
-		var events = document.querySelectorAll(".line__event");
-		for (i = 0; i < events.length; i++) {
-			events[i].classList.toggle("line__event--hidden");
+		setTimeout(function() {triggerEventAnimation();}, 1000);
+		function triggerEventAnimation (){
+			var events = document.querySelectorAll(".line__event");
+			for (i = 0; i < events.length; i++) {
+				events[i].classList.toggle("line__event--hidden");
+			}
 		}
 	}
 });
