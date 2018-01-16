@@ -60,11 +60,13 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 	data.forEach(function(d) { //Adds a 'totaleSchendingen' property to the video object
 		d.totaleSchendingen = 0;
+		d.totaleEvents = 0;
 
 		for (var i = 0; i < d.fragmenten.length; i++) {
 			d.status = d.fragmenten[i].status;
 			d.titel = d.fragmenten[i].titel;
 			d.totaleSchendingen += Number(d.fragmenten[i].totaleSchendingen);
+			d.totaleEvents += Number(d.fragmenten[i].totaleEvents);
 		}
 	});
 
@@ -111,7 +113,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 	function circleClickEvent(_this, d) {
 
 		var circleIndex = d.index; //Index of clicked circle
-		var circleTotaleSchendingen = d.totaleSchendingen; //Save the totaleSchendingen to another varible for later use
+		var circleTotaleEvents = d.totaleSchendingen; //Save the totaleSchendingen to another varible for later use
 
 		if (d.status !== "Inactief" && d.status !== "Verwijderd") {
 
@@ -151,10 +153,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.delay(450)
 				.duration(1000)
 				.style("height", function(d) {
-					return (circleTotaleSchendingen * 300) + "px";
+					return (circleTotaleEvents * 300) + "px";
 				});
 
-			createEvents(circleTotaleSchendingen);
+			createEvents(circleTotaleEvents, d);
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
@@ -279,12 +281,16 @@ d3.tsv("data/data.tsv", function(error, data) {
 	}
 
 	// create div elements on the timeline at the event points
-	function createEvents(totalEvents) {
-		for (var i = 0; i < totalEvents; i++) {
-		var el = document.createElement("div");
-		el.setAttribute("class", "line__event--hidden line__event line__event--" + (i + 1));
-		el.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;"; // add css to position div
-		document.querySelector(".line").appendChild(el);
+	function createEvents(circleTotaleEvents, d) {
+
+		var schendingenArray = ["eersteSchendingCategorie", "tweedeSchendingCategorie"];
+		console.log(d.fragmenten[0].schendingenArray[i]);
+
+		for (var i = 0; i < circleTotaleEvents; i++) {
+			var el = document.createElement("div");
+			el.setAttribute("class", "line__event line__event--hidden line__event--" + (i + 1) + " line__event--" + d.fragmenten[0].schendingenArray[i]);
+			el.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 10)) + "px; left:" + (window.innerWidth / 2 - 10)+ "px;"; // add css to position div
+			document.querySelector(".line").appendChild(el);
 		}
 
 		setTimeout(function() {triggerEventAnimation();}, 1000);
