@@ -1,0 +1,7 @@
+
+@font-face {
+    font-family:"Relative-Bold";
+    src:url("Relative-Bold.woff2") format("woff2"),url("Relative-Bold.woff") format("woff"),url("Relative-Bold.otf") format("opentype");
+    font-style:normal;font-weight:400;
+}
+        

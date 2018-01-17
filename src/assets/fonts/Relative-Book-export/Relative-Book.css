@@ -1,0 +1,7 @@
+
+@font-face {
+    font-family:"Relative-Book";
+    src:url("Relative-Book.woff2") format("woff2"),url("Relative-Book.woff") format("woff"),url("Relative-Book.otf") format("opentype");
+    font-style:normal;font-weight:400;
+}
+        
