@@ -276,7 +276,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}
 
 		if (window.pageYOffset >= 300 && popupCheck == false) {
-			return createPopup(_this, d);
+			return createEventPopup(_this, d);
 		}
 
 		d3.select(_this)
@@ -318,7 +318,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 			var eventDiv = document.createElement("div"); //Create a div for the events
 
-			eventDiv.setAttribute("class", "line__event line__event--hidden line__event--" + (i + 1) + " line__event--" + schendingenIndex[selectedSchending]);
+			eventDiv.setAttribute("class", "line__event line__event--hidden line__event--" + schendingenIndex[selectedSchending]);
 
 			selectedSchending++;
 
@@ -340,8 +340,11 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}
 	}
 
-	function createPopup(_this,d) {
+	function createEventPopup(_this,d) {
 		popupCheck = true;
+		var popup = document.createElement("p"); //Create a div for the events'
+		document.querySelector(".line__event").appendChild(popup); //Add the eventDiv's to .line
+		popup.innerHTML = "yo";
 		console.log('yo');
 
 	}
