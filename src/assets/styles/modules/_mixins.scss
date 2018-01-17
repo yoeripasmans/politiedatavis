@@ -14,3 +14,12 @@
 	-moz-border-radius: $radius;
 	border-radius: $radius;
 }
+
+@font-face {
+	font-family: "Relative Bold";
+	src: url("..../fonts/Relative-Bold.eot?") format("eot"),
+		 url("..../fonts/Relative-Bold.woff2") format("woff2"),
+		 url("..../fonts/Relative-Bold.woff") format("woff"),
+		 url("..../fonts/Relative-Bold.ttf") format("truetype"),
+		 url("..../fonts/Relative-Bold.otf") format("opentype");
+}
