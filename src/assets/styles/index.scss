@@ -52,19 +52,6 @@ svg {
 		background-repeat: no-repeat;
 		background-size: 23px;
 
-		& p {
-			width: 250px;
-			height: 100px;
-			padding: 1.5em;
-			border: 1px solid $border-color;
-			margin-left: 80px;
-			@include border-radius(5px);
-			@include box-shadow(0px,4px,10px,$shadow-color);
-			position: absolute;
-			top: -55px;
-			line-height: 1.3em;
-		}
-
 		&--hidden {
 			transform: scale(0);
 		}
@@ -92,5 +79,26 @@ svg {
 		&--huis {
 			background-image: url("../images/huis.svg");
 		}
+	}
+}
+
+.popup {
+	width: 250px;
+	height: 100px;
+	padding: 1.5em;
+	border: 1px solid $border-color;
+	margin-left: 80px;
+	@include border-radius(5px);
+	@include box-shadow(0px,4px,10px,$shadow-color);
+	position: absolute;
+	top: -55px;
+	line-height: 1.3em;
+
+	&--hidden {
+		opacity: 0;
+	}
+
+	&--first {
+		top: 360px;
 	}
 }
