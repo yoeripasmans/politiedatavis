@@ -143,6 +143,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 				.restart();
 
+			createVideoTitle(_this, d);
+
 			//Insert timeline
 			d3.select(".svg-container").insert('div', 'svg')
 				.data(data)
@@ -304,6 +306,31 @@ d3.tsv("data/data.tsv", function(error, data) {
 					return circleSize(8);
 				}
 			});
+	}
+
+	function createVideoTitle(_this, d) {
+
+		console.log(d);
+		var titleDiv = document.createElement("div");
+		titleDiv.setAttribute("class", "header");
+
+
+		var videoTitle = document.createElement("h1");
+		var titleTextNode = document.createTextNode(d.titel);
+		videoTitle.setAttribute("class", "header__title");
+		videoTitle.appendChild(titleTextNode);
+
+		var vloggerName = document.createElement("p");
+		var vloggerTextNode = document.createTextNode(d.fragmenten[0].account);
+		vloggerName.setAttribute("class", "header__vlogger");
+		vloggerName.appendChild(vloggerTextNode);
+
+		titleDiv.appendChild(videoTitle);
+		titleDiv.appendChild(vloggerName);
+
+		var parentContainer = document.querySelector(".svg-container");
+
+		parentContainer.insertBefore(titleDiv, parentContainer.firstChild);
 	}
 
 	// create div elements on the timeline at the event points
