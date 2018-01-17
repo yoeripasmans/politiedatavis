@@ -344,7 +344,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 		popupCheck = true;
 		var popup = document.createElement("p"); //Create a div for the events'
 		document.querySelector(".line__event").appendChild(popup); //Add the eventDiv's to .line
-		popup.innerHTML = "yo";
+		popup.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
 		console.log('yo');
 
 	}
