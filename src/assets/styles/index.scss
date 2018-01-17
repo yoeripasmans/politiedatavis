@@ -64,17 +64,17 @@ svg {
 	&__vlogger--tess::before {
 		content: "";
 		display: inline-block;
-		width: 25px;
-		height: 25px;
+		width: 20px;
+		height: 20px;
 		background: url("../images/tess.svg");
 		margin-right: 0.618em;
 	}
 	&__vlogger--janwillem::before {
 		content: "";
 		display: inline-block;
-		width: 25px;
-		height: 25px;
-		vertical-align: -25%;
+		width: 20px;
+		height: 20px;
+		vertical-align: -20%;
 		background: url("../images/janwillem.svg");
 		margin-right: 0.618em;
 	}
