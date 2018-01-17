@@ -4,10 +4,12 @@
 
 .line {
 	width: 40px;
+	height: 0;
 	background-image: url("../images/timeline.svg");
 	background-size: auto 600px;
 	background-position: center top;
 	margin: 50vh auto;
+	background-repeat: repeat-y;
 }
 
 .back-button {
@@ -33,72 +35,86 @@ svg {
 	width: 100%;
 }
 
-.line {
-	&__event {
-		position: absolute;
-		height: 40px;
-		width: 40px;
-		transform-origin: center;
-		transform: scale(1);
-		border-radius: 50px;
-		border: 1px solid $border-color;
-		@include box-shadow(0px,4px,10px,$shadow-color);
-		background-color: #fff;
-		transition-delay: 1s;
-		transition: transform 0.5s;
-		transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: 23px;
-
-		&--hidden {
-			transform: scale(0);
-		}
-
-		&--straat {
-			background-image: url("../images/straat.svg");
-		}
-
-		&--plaats {
-			background-image: url("../images/omgeving.svg");
-		}
-
-		&--overig {
-			background-image: url("../images/overig.svg");
-		}
-
-		&--slachtoffer {
-			background-image: url("../images/slachtoffer.svg");
-		}
-
-		&--verdachte {
-			background-image: url("../images/verdachte.svg");
-		}
-
-		&--huis {
-			background-image: url("../images/huis.svg");
-		}
-	}
+.event-container {
+	position: absolute;
+	width: 100%;
+	max-width: 450px;
+	background-color: blue;
 }
 
 .popup {
-	width: 250px;
-	height: auto;
-	transform: translateY(-50%);
-	padding: 1.5em;
-	border: 1px solid $border-color;
-	margin-left: 80px;
-	@include border-radius(5px);
-	@include box-shadow(0px,4px,10px,$shadow-color);
-	position: absolute;
-	margin-top: 21px;
-	line-height: 1.3em;
+
+	&__description {
+		float: left;
+		height: auto;
+		/* transform: translateY(-50%); */
+		padding: 20px;
+		box-sizing: border-box;
+		border: 1px solid $border-color;
+		@include border-radius(5px);
+		@include box-shadow(0px,4px,10px,$shadow-color);
+		/* position: relative; */
+		line-height: 1.3em;
+
+		&--explanation {
+
+		}
+
+		&--hidden {
+			opacity: 0;
+		}
+	}
 
 	&--hidden {
 		opacity: 0;
 	}
+}
 
-	&--first {
+.circle {
+	height: 40px;
+	width: 40px;
+	transform-origin: center;
+	transform: scale(1);
+	border-radius: 50px;
+	border: 1px solid $border-color;
+	@include box-shadow(0px,4px,10px,$shadow-color);
+	background-color: #fff;
+	transition-delay: 1s;
+	transition: transform 0.5s;
+	transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 23px;
 
+	&--hidden {
+		transform: scale(0);
+	}
+
+	&--straat {
+		background-image: url("../images/straat.svg");
+		background-position: center 9px;
+	}
+
+	&--plaats {
+		background-image: url("../images/omgeving.svg");
+	}
+
+	&--overig {
+		background-image: url("../images/overig.svg");
+		background-position: center 8px;
+	}
+
+	&--slachtoffer {
+		background-image: url("../images/slachtoffer.svg");
+		background-position: center 7px;
+	}
+
+	&--verdachte {
+		background-image: url("../images/verdachte.svg");
+		background-position: center 7px;
+	}
+
+	&--huis {
+		background-image: url("../images/huis.svg");
 	}
 }

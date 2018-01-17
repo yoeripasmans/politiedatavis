@@ -301,12 +301,12 @@ d3.tsv("data/data.tsv", function(error, data) {
 				}
 			});
 
-		var popup = document.querySelectorAll('.popup');
+		var popup = document.querySelectorAll('.popup__description');
 
 		if (window.pageYOffset > 0) {
-			document.querySelector('.popup--first').classList.add("popup--hidden");
+			document.querySelector('.popup__description--explanation').classList.add("popup__description--hidden");
 		} else {
-			document.querySelector('.popup--first').classList.remove("popup--hidden");
+			document.querySelector('.popup__description--explanation').classList.remove("popup__description--hidden");
 		}
 
 		if (window.pageYOffset >= 300) {
@@ -384,12 +384,18 @@ d3.tsv("data/data.tsv", function(error, data) {
 			var tijdIndex = [d.fragmenten[selectedFragment].eersteSchendingTijd, d.fragmenten[selectedFragment].tweedeSchendingTijd, d.fragmenten[selectedFragment].derdeSchendingTijd, d.fragmenten[selectedFragment].vierdeSchendingTijd, d.fragmenten[selectedFragment].vijfdeSchendingTijd, d.fragmenten[selectedFragment].zesdeSchendingTijd];
 			var screenshotIndex = [d.fragmenten[selectedFragment].eersteSchendingScreenshot, d.fragmenten[selectedFragment].tweedeSchendingScreenshot, d.fragmenten[selectedFragment].derdeSchendingScreenshot, d.fragmenten[selectedFragment].vierdeSchendingScreenshot, d.fragmenten[selectedFragment].vijfdeSchendingScreenshot, d.fragmenten[selectedFragment].zesdeSchendingScreenshot];
 
+			var eventContainer = document.createElement("div"); //Create a container for the events
+			var popup = document.createElement("div"); //Create a container for the events description
 			var eventDiv = document.createElement("div"); //Create a div for the events
+			eventContainer.classList.add("event-container");
+			popup.classList.add("popup");
+			eventContainer.appendChild(eventDiv);
+			eventContainer.appendChild(popup);
 
-			eventDiv.setAttribute("class", "line__event line__event--hidden line__event--" + categorieIndex[selectedSchending]);
-			eventDiv.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
-			eventDiv.setAttribute("tijd", tijdIndex[selectedSchending]);
-			eventDiv.setAttribute("screenshot", screenshotIndex[selectedSchending]);
+			eventDiv.setAttribute("class", "circle circle--hidden circle--" + categorieIndex[selectedSchending]);
+			eventContainer.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
+			eventContainer.setAttribute("tijd", tijdIndex[selectedSchending]);
+			eventContainer.setAttribute("screenshot", screenshotIndex[selectedSchending]);
 
 			selectedSchending++;
 
@@ -398,8 +404,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 				selectedSchending = 0;
 			}
 
-			eventDiv.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
-			document.querySelector(".line").appendChild(eventDiv); //Add the eventDiv's to .line
+			eventContainer.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
+			document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
 		}
 
 		setTimeout(function() {
@@ -407,9 +413,9 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}, 1000);
 
 		function triggerEventAnimation() {
-			var events = document.querySelectorAll(".line__event");
+			var events = document.querySelectorAll(".circle");
 			for (i = 0; i < events.length; i++) {
-				events[i].classList.toggle("line__event--hidden");
+				events[i].classList.toggle("circle--hidden");
 			}
 		}
 	}
@@ -418,14 +424,16 @@ d3.tsv("data/data.tsv", function(error, data) {
 		var firstPopup = document.createElement("p");
 		document.querySelector('.line').appendChild(firstPopup);
 		firstPopup.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
-		firstPopup.classList.add("popup", "popup--first");
+		firstPopup.classList.add("popup__description", "popup__description--explanation");
 		//Adds popup for all events
-		var events = document.querySelectorAll(".line__event");
+		var eventsContainers = document.querySelectorAll(".event-container");
+		var popups = document.querySelectorAll(".popup");
 		for (var i = 0; i < circleTotaleEvents; i++) {
 			var popup = document.createElement("p"); //Create a div for the events'
-			events[i].appendChild(popup); //Add the eventDiv's to .line
-			popup.innerHTML = popup.parentNode.getAttribute("beschrijving");
-			popup.classList.add("popup", "popup--hidden");
+			eventsContainers[i].appendChild(popups[i]);
+			popups[i].appendChild(popup); //Add the eventDiv's to .line
+			popup.innerHTML = popup.parentNode.parentNode.getAttribute("beschrijving");
+			popup.classList.add("popup__description", "popup--hidden");
 		}
 
 	}
@@ -453,7 +461,7 @@ function onResize() {
 	d3.select("g")
 		.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
 
-	var events = document.querySelectorAll(".line__event");
+	var events = document.querySelectorAll(".event-container");
 	for (var i = 0; i < events.length; i++) {
 		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;";
 	}
