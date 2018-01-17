@@ -303,43 +303,70 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var popup = document.querySelectorAll('.popup');
 
-		for (var i = 0; i < popup.length; i++) {
+		if (window.pageYOffset > 0) {
+			document.querySelector('.popup--first').classList.add("popup--hidden");
+		} else {
+			document.querySelector('.popup--first').classList.remove("popup--hidden");
+		}
 
-			if (window.pageYOffset >= 300 && window.pageYOffset < 600) {
-				popup[0].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < 300) {
-				popup[0].classList.add("popup--hidden");
-			}
-			if (window.pageYOffset >= 600 && window.pageYOffset < 900) {
-				popup[1].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < 600) {
-				popup[1].classList.add("popup--hidden");
-			}
-			if (window.pageYOffset >= 900 && window.pageYOffset < 1200) {
-				popup[2].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < 900) {
-				popup[2].classList.add("popup--hidden");
-			}
-			if (window.pageYOffset >= 1200 && window.pageYOffset < 1500) {
-				popup[3].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < 1200) {
-				popup[3].classList.add("popup--hidden");
-			}
-			if (window.pageYOffset >= 1500 && window.pageYOffset < 1800) {
-				popup[4].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < 1500) {
-				popup[4].classList.add("popup--hidden");
-			}
-			if (window.pageYOffset >= 1800 && window.pageYOffset < 2100) {
-				popup[5].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < 1800) {
-				popup[5].classList.add("popup--hidden");
-			}
-			if (window.pageYOffset >= 2100 && window.pageYOffset < 2400) {
-				popup[6].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < 1800) {
-				popup[6].classList.add("popup--hidden");
-			}
+		if (window.pageYOffset >= 300) {
+			popup[0].classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 300) {
+			popup[0].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 600) {
+			popup[1].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 300 && window.pageYOffset < 600) {
+			popup[1].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 900) {
+			popup[2].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 600 && window.pageYOffset < 900) {
+			popup[2].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 1200) {
+			popup[3].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200) {
+			popup[3].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 1500) {
+			popup[4].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500) {
+			popup[4].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 1800) {
+			popup[4].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800) {
+			popup[4].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 2100) {
+			popup[4].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100) {
+			popup[4].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 2400) {
+			popup[4].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400) {
+			popup[4].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 2700) {
+			popup[4].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700) {
+			popup[4].classList.add("popup--hidden");
+		}
+
+		if (window.pageYOffset >= 3000) {
+			popup[4].classList.remove("popup--hidden");
+		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000) {
+			popup[4].classList.add("popup--hidden");
 		}
 
 	}
