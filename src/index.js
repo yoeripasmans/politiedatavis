@@ -314,15 +314,21 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		for (var i = 0; i < circleTotaleEvents; i++) {
 			//An array to loop through all the 'schendingen'
-			var schendingenIndex = [d.fragmenten[selectedFragment].eersteSchendingCategorie, d.fragmenten[selectedFragment].tweedeSchendingCategorie, d.fragmenten[selectedFragment].derdeSchendingCategorie, d.fragmenten[selectedFragment].vierdeSchendingCategorie, d.fragmenten[selectedFragment].vijfdeSchendingCategorie, d.fragmenten[selectedFragment].zesdeSchendingCategorie];
+			var categorieIndex = [d.fragmenten[selectedFragment].eersteSchendingCategorie, d.fragmenten[selectedFragment].tweedeSchendingCategorie, d.fragmenten[selectedFragment].derdeSchendingCategorie, d.fragmenten[selectedFragment].vierdeSchendingCategorie, d.fragmenten[selectedFragment].vijfdeSchendingCategorie, d.fragmenten[selectedFragment].zesdeSchendingCategorie];
+			var beschrijvingIndex = [d.fragmenten[selectedFragment].eersteSchendingBeschrijving, d.fragmenten[selectedFragment].tweedeSchendingBeschrijving, d.fragmenten[selectedFragment].derdeSchendingBeschrijving, d.fragmenten[selectedFragment].vierdeSchendingBeschrijving, d.fragmenten[selectedFragment].vijfdeSchendingBeschrijving, d.fragmenten[selectedFragment].zesdeSchendingBeschrijving];
+			var tijdIndex = [d.fragmenten[selectedFragment].eersteSchendingTijd, d.fragmenten[selectedFragment].tweedeSchendingTijd, d.fragmenten[selectedFragment].derdeSchendingTijd, d.fragmenten[selectedFragment].vierdeSchendingTijd, d.fragmenten[selectedFragment].vijfdeSchendingTijd, d.fragmenten[selectedFragment].zesdeSchendingTijd];
+			var screenshotIndex = [d.fragmenten[selectedFragment].eersteSchendingScreenshot, d.fragmenten[selectedFragment].tweedeSchendingScreenshot, d.fragmenten[selectedFragment].derdeSchendingScreenshot, d.fragmenten[selectedFragment].vierdeSchendingScreenshot, d.fragmenten[selectedFragment].vijfdeSchendingScreenshot, d.fragmenten[selectedFragment].zesdeSchendingScreenshot];
 
 			var eventDiv = document.createElement("div"); //Create a div for the events
 
-			eventDiv.setAttribute("class", "line__event line__event--hidden line__event--" + schendingenIndex[selectedSchending]);
+			eventDiv.setAttribute("class", "line__event line__event--hidden line__event--" + categorieIndex[selectedSchending]);
+			eventDiv.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
+			eventDiv.setAttribute("tijd", tijdIndex[selectedSchending]);
+			eventDiv.setAttribute("screenshot", screenshotIndex[selectedSchending]);
 
 			selectedSchending++;
 
-			if (schendingenIndex[selectedSchending] == undefined ) {
+			if (categorieIndex[selectedSchending] == undefined ) {
 				selectedFragment++;
 				selectedSchending = 0;
 			}
@@ -345,7 +351,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 		var popup = document.createElement("p"); //Create a div for the events'
 		document.querySelector(".line__event").appendChild(popup); //Add the eventDiv's to .line
 		popup.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
-		console.log('yo');
 
 	}
 });
