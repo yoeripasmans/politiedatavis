@@ -30,6 +30,12 @@ var simulation = d3.forceSimulation()
 		return circleSize(d.totaleSchendingen) + 2; //Ensures the circles don't go on top of each other, this force is different for each circle
 	}));
 
+// Prep the tooltip bits, initial display is hidden
+//Append tool-tip to conainter
+var tooltip = d3.select(".svg-container")
+	.append("div")
+	.attr("class", "tool-tip");
+
 onResize();
 
 /* __________ LOADING DATA __________ */
@@ -77,6 +83,23 @@ d3.tsv("data/data.tsv", function(error, data) {
 				return colorInactive;
 			}
 		})
+		.attr("cursor", function(d) {
+			if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+				return "pointer";
+			} else if (d.status == "Inactief") {
+				return "default";
+			}
+		})
+		.on("mouseover", function(d) {
+			tooltip.style("visibility", "visible");
+			tooltip.text(d.titel);
+		})
+		.on("mousemove", function(d) {
+			return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+		})
+		.on("mouseout", function(d) {
+			tooltip.style("visibility", "hidden");
+		})
 		.on("click", function(d) {
 			circleClickEvent(this, d);
 		});
@@ -119,15 +142,21 @@ d3.tsv("data/data.tsv", function(error, data) {
 				scroll(_this);
 			};
 
+			tooltip.style("visibility", "hidden");
+
 			//Change the size of the clicked circle
 			d3.select(_this)
 				.on('click', null)
+				.on('mouseover', null)
+				.on('mouseout', null)
+				.on('mousemove', null)
 				.transition()
 				.duration(1000)
 				.ease(d3.easeCubicOut)
 				.attr("r", function(d) {
 					return circleSize(0);
-				});
+				})
+				.attr("cursor", "default");
 
 			//Place the clicked circle in the middle and hide the rest
 			simulation
@@ -177,6 +206,23 @@ d3.tsv("data/data.tsv", function(error, data) {
 					d3.selectAll(".bubble")
 						.on("click", function(d) {
 							circleClickEvent(this, d);
+						})
+						.on("mouseover", function(d) {
+							tooltip.style("visibility", "visible");
+							tooltip.text(d.titel);
+						})
+						.on("mousemove", function(d) {
+							return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+						})
+						.on("mouseout", function(d) {
+							tooltip.style("visibility", "hidden");
+						})
+						.attr("cursor", function(d) {
+							if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+								return "pointer";
+							} else if (d.status == "Inactief") {
+								return "default";
+							}
 						})
 						.transition()
 						.duration(1000)
@@ -338,7 +384,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			popup[3].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1500  && popup.length > 4) {
+		if (window.pageYOffset >= 1500 && popup.length > 4) {
 			popup[4].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500 && popup.length > 4) {
 			popup[4].classList.add("popup--hidden");
@@ -394,11 +440,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 		var vloggerName = document.createElement("p");
 		var vloggerTextNode = document.createTextNode(d.fragmenten[0].account);
 
-		if (d.fragmenten[0].account =='Politievlogger Jan-Willem') {
-		vloggerName.classList.add("header__vlogger", "header__vlogger--janwillem");
-		}
-		else {
-		vloggerName.classList.add("header__vlogger", "header__vlogger--tess");
+		if (d.fragmenten[0].account == 'Politievlogger Jan-Willem') {
+			vloggerName.classList.add("header__vlogger", "header__vlogger--janwillem");
+		} else {
+			vloggerName.classList.add("header__vlogger", "header__vlogger--tess");
 		}
 
 		vloggerName.appendChild(vloggerTextNode);

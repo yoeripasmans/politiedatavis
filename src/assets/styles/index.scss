@@ -7,6 +7,18 @@ body {
 	font-size: 18px;
 }
 
+.tool-tip {
+	position: absolute;
+	z-index: 10;
+	color: #fff;
+	padding: 8px;
+	background-color: #000;
+	background-color: rgba(0, 0, 0, 0.75);
+	border-radius: 6px;
+	font-size: 15px;
+	visibility: hidden;
+}
+
 .line {
 	width: 40px;
 	height: 0;
