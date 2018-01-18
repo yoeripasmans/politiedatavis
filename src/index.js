@@ -379,26 +379,26 @@ d3.tsv("data/data.tsv", function(error, data) {
 	function createVideoTitle(_this, d) {
 
 		var headerDiv = document.createElement("div");
-		headerDiv.setAttribute("class", "header");
+		headerDiv.classList.add("header");
 
 		var videoTitle = document.createElement("h1");
 		var videoTitleTextNode = document.createTextNode(d.titel);
-		videoTitle.setAttribute("class", "header__title");
+		videoTitle.classList.add("header__title");
 		videoTitle.appendChild(videoTitleTextNode);
 
 		var titlePar = document.createElement("p");
 		var titleParTextNode = document.createTextNode("Video titel:");
-		titlePar.setAttribute("class", "header__title-p");
+		titlePar.classList.add("header__title-p");
 		titlePar.appendChild(titleParTextNode);
 
 		var vloggerName = document.createElement("p");
 		var vloggerTextNode = document.createTextNode(d.fragmenten[0].account);
 
 		if (d.fragmenten[0].account =='Politievlogger Jan-Willem') {
-		vloggerName.setAttribute("class", "header__vlogger header__vlogger--janwillem");
+		vloggerName.classList.add("header__vlogger", "header__vlogger--janwillem");
 		}
 		else {
-		vloggerName.setAttribute("class", "header__vlogger header__vlogger--tess");
+		vloggerName.classList.add("header__vlogger", "header__vlogger--tess");
 		}
 
 		vloggerName.appendChild(vloggerTextNode);
@@ -456,7 +456,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			eventContainer.appendChild(circle);
 			eventContainer.appendChild(popup);
 
-			circle.setAttribute("class", "circle circle--hidden circle--" + categorieIndex[selectedSchending]);
+			circle.classList.add("circle", "circle--hidden", "circle--" + categorieIndex[selectedSchending]);
 			eventContainer.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
 			eventContainer.setAttribute("tijd", tijdIndex[selectedSchending]);
 			eventContainer.setAttribute("screenshot", screenshotIndex[selectedSchending]);
