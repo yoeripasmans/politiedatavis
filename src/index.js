@@ -302,8 +302,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var popup = document.querySelectorAll('.popup');
 
-		console.log(popup);
-
 		if (window.pageYOffset > 0) {
 			document.querySelector('.popup__description--explanation').classList.add("popup__description--hidden");
 		} else {
@@ -380,14 +378,14 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var firstDescription = document.createElement("p");
 		firstDescription.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
-		firstDescription.classList.add("popup__description", "popup__description--explanation");
+		firstDescription.classList.add("popup__description--explanation");
 
 		var eventContainer = document.createElement("div"); //Create a container for the events
 		var popup = document.createElement("div"); //Create a container for the events description
 		var circle = document.createElement("div"); //Create a div for the events
 		eventContainer.classList.add("event-container--explanation");
-		popup.classList.add("popup-explanation");
-		circle.classList.add("circle", "circle--explanation");
+		popup.classList.add("popup--explanation");
+		circle.classList.add("circle", "circle--hidden", "circle--explanation");
 		eventContainer.appendChild(circle);
 		popup.appendChild(firstDescription);
 		eventContainer.appendChild(popup);
@@ -408,7 +406,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			var popup = document.createElement("div"); //Create a container for the events description
 			var circle = document.createElement("div"); //Create a div for the events
 			eventContainer.classList.add("event-container");
-			popup.classList.add("popup");
+			popup.classList.add("popup", "popup--hidden");
 			eventContainer.appendChild(circle);
 			eventContainer.appendChild(popup);
 
@@ -444,7 +442,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			eventsContainers[i].appendChild(description[i]);
 			description[i].appendChild(popup); //Add the eventDiv's to .line
 			popup.innerHTML = popup.parentNode.parentNode.getAttribute("beschrijving");
-			popup.classList.add("popup__description", "popup--hidden");
+			popup.classList.add("popup__description");
 		}
 
 	} //End createEvent function
