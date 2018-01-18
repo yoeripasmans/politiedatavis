@@ -305,6 +305,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var popup = document.querySelectorAll('.popup');
 
+		console.log(window.pageYOffset);
+
 		if (window.pageYOffset > 10) {
 			document.querySelector('.popup--explanation').classList.add("popup--hidden");
 		} else {
@@ -321,54 +323,91 @@ d3.tsv("data/data.tsv", function(error, data) {
 			popup[1].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 300 && window.pageYOffset < 600 && popup.length > 1) {
 			popup[1].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 290 && popup.length == 0) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 290 && popup.length == 0) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
 		}
 
 		if (window.pageYOffset >= 900 && popup.length > 2) {
 			popup[2].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 600 && window.pageYOffset < 900 && popup.length > 2) {
 			popup[2].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 590 && popup.length == 1) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 590 && popup.length == 1) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 		if (window.pageYOffset >= 1200 && popup.length > 3) {
 			popup[3].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200 && popup.length > 3) {
 			popup[3].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 890 && popup.length == 2) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 890 && popup.length == 2) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 		if (window.pageYOffset >= 1500  && popup.length > 4) {
 			popup[4].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500 && popup.length > 4) {
 			popup[4].classList.add("popup--hidden");
+			document.querySelector('.popup--end').classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 1190 && popup.length == 3) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 1190 && popup.length == 3) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 		if (window.pageYOffset >= 1800 && popup.length > 5) {
 			popup[4].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800 && popup.length > 5) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 1490 && popup.length == 4) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 1490 && popup.length == 4) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 		if (window.pageYOffset >= 2100 && popup.length > 6) {
 			popup[4].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100 && popup.length > 6) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 1790 && popup.length == 5) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 1790 && popup.length == 5) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 		if (window.pageYOffset >= 2400 && popup.length > 7) {
 			popup[4].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400 && popup.length > 7) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 2090 && popup.length == 6) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 2090 && popup.length == 6) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 		if (window.pageYOffset >= 2700 && popup.length > 8) {
 			popup[4].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700 && popup.length > 8) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 2390 && popup.length == 7) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 2390 && popup.length == 7) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 		if (window.pageYOffset >= 3000 && popup.length > 9) {
 			popup[4].classList.remove("popup--hidden");
 		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000 && popup.length > 9) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 2690 && popup.length == 8) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 2690 && popup.length == 8) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 	}
@@ -399,7 +438,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}
 
 		vloggerName.appendChild(vloggerTextNode);
-
 		headerDiv.appendChild(titlePar);
 		headerDiv.appendChild(videoTitle);
 		headerDiv.appendChild(vloggerName);
@@ -424,15 +462,15 @@ d3.tsv("data/data.tsv", function(error, data) {
 		var popupExplanation = document.createElement("div"); //Create a container for the events description
 		popupExplanation.classList.add("popup--explanation");
 
-		var firstDescription = document.createElement("p");
-		firstDescription.innerHTML = "Scroll door de tijdlijn om het verloop van de video te bekijken.";
-		firstDescription.classList.add("popup__description--explanation");
+		var descriptionExplanation = document.createElement("p");
+		descriptionExplanation.innerHTML = "Scroll door de tijdlijn om het verloop van de video te bekijken.";
+		descriptionExplanation.classList.add("popup__description--explanation");
 
 		//All the appends
 		document.querySelector(".line").appendChild(eventContainerExplanation);
 		eventContainerExplanation.appendChild(circleExplanation);
 		eventContainerExplanation.appendChild(popupExplanation);
-		popupExplanation.appendChild(firstDescription);
+		popupExplanation.appendChild(descriptionExplanation);
 
 		for (var i = 0; i < circleTotaleEvents; i++) {
 
@@ -469,15 +507,28 @@ d3.tsv("data/data.tsv", function(error, data) {
 			document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
 		} //End loop
 
-		//Animate the event circles in
-		setTimeout(function() {
-			var events = document.querySelectorAll(".circle");
-			for (i = 0; i < events.length; i++) {
-				events[i].classList.toggle("circle--hidden");
-			}
-		}, 1000);
+		var eventContainerEnd = document.createElement("div"); //Create a container for the events
+		eventContainerEnd.classList.add("event-container--end");
 
-		//Adds popup for all events
+		var circleEnd = document.createElement("div"); //Create a div for the events
+		circleEnd.classList.add("circle", "circle--hidden", "circle--end");
+
+		var popupEnd = document.createElement("div"); //Create a container for the events description
+		popupEnd.classList.add("popup--end", "popup--hidden");
+
+		var EndDescription = document.createElement("p");
+		EndDescription.innerHTML = "The end.";
+		EndDescription.classList.add("popup__description--end");
+
+		eventContainerEnd.style.top = (circleTotaleEvents * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
+
+		//All the appends
+		document.querySelector(".line").appendChild(eventContainerEnd);
+		eventContainerEnd.appendChild(circleEnd);
+		eventContainerEnd.appendChild(popupEnd);
+		popupEnd.appendChild(EndDescription);
+
+		//Adds descriptions for all events
 		var eventsContainers = document.querySelectorAll(".event-container");
 		var descriptions = document.querySelectorAll(".popup");
 		for (i = 0; i < circleTotaleEvents; i++) {
@@ -487,6 +538,14 @@ d3.tsv("data/data.tsv", function(error, data) {
 			description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
 			description.classList.add("popup__description");
 		}
+
+		//Animate the event circles in
+		setTimeout(function() {
+			var events = document.querySelectorAll(".circle");
+			for (i = 0; i < events.length; i++) {
+				events[i].classList.toggle("circle--hidden");
+			}
+		}, 1000);
 
 	} //End createEvent function
 
@@ -516,6 +575,11 @@ function onResize() {
 		.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
 
 	var events = document.querySelectorAll(".event-container");
+	if (events.length > 0) {
+		document.querySelector(".event-container--end").style.top = (events.length * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
+
+	}
+
 	for (var i = 0; i < events.length; i++) {
 		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;";
 	}
