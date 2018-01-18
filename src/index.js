@@ -302,69 +302,72 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var popup = document.querySelectorAll('.popup');
 
-		if (window.pageYOffset > 0) {
-			document.querySelector('.popup__description--explanation').classList.add("popup__description--hidden");
+		console.log(window.pageYOffset);
+		console.log(popup);
+
+		if (window.pageYOffset > 10) {
+			document.querySelector('.popup--explanation').classList.add("popup--hidden");
 		} else {
-			document.querySelector('.popup__description--explanation').classList.remove("popup__description--hidden");
+			document.querySelector('.popup--explanation').classList.remove("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 300) {
+		if (window.pageYOffset >= 300 && popup.length > 0) {
 			popup[0].classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 300) {
+		} else if (window.pageYOffset < 300 && popup.length > 0) {
 			popup[0].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 600) {
+		if (window.pageYOffset >= 600 && popup.length > 1) {
 			popup[1].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 300 && window.pageYOffset < 600) {
+		} else if (window.pageYOffset > 300 && window.pageYOffset < 600 && popup.length > 1) {
 			popup[1].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 900) {
+		if (window.pageYOffset >= 900 && popup.length > 2) {
 			popup[2].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 600 && window.pageYOffset < 900) {
+		} else if (window.pageYOffset > 600 && window.pageYOffset < 900 && popup.length > 2) {
 			popup[2].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1200) {
+		if (window.pageYOffset >= 1200 && popup.length > 3) {
 			popup[3].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200) {
+		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200 && popup.length > 3) {
 			popup[3].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1500) {
+		if (window.pageYOffset >= 1500  && popup.length > 4) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500) {
+		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500 && popup.length > 4) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1800) {
+		if (window.pageYOffset >= 1800 && popup.length > 5) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800) {
+		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800 && popup.length > 5) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2100) {
+		if (window.pageYOffset >= 2100 && popup.length > 6) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100) {
+		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100 && popup.length > 6) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2400) {
+		if (window.pageYOffset >= 2400 && popup.length > 7) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400) {
+		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400 && popup.length > 7) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2700) {
+		if (window.pageYOffset >= 2700 && popup.length > 8) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700) {
+		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700 && popup.length > 8) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 3000) {
+		if (window.pageYOffset >= 3000 && popup.length > 9) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000) {
+		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000 && popup.length > 9) {
 			popup[4].classList.add("popup--hidden");
 		}
 
@@ -376,20 +379,24 @@ d3.tsv("data/data.tsv", function(error, data) {
 		var selectedFragment = 0;
 		var selectedSchending = 0;
 
+		var eventContainerExplanation = document.createElement("div"); //Create a container for the events
+		eventContainerExplanation.classList.add("event-container--explanation");
+
+		var circleExplanation = document.createElement("div"); //Create a div for the events
+		circleExplanation.classList.add("circle", "circle--hidden", "circle--explanation");
+
+		var popupExplanation = document.createElement("div"); //Create a container for the events description
+		popupExplanation.classList.add("popup--explanation");
+
 		var firstDescription = document.createElement("p");
 		firstDescription.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
 		firstDescription.classList.add("popup__description--explanation");
 
-		var eventContainer = document.createElement("div"); //Create a container for the events
-		var popup = document.createElement("div"); //Create a container for the events description
-		var circle = document.createElement("div"); //Create a div for the events
-		eventContainer.classList.add("event-container--explanation");
-		popup.classList.add("popup--explanation");
-		circle.classList.add("circle", "circle--hidden", "circle--explanation");
-		eventContainer.appendChild(circle);
-		popup.appendChild(firstDescription);
-		eventContainer.appendChild(popup);
-		document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
+		//All the appends
+		document.querySelector(".line").appendChild(eventContainerExplanation);
+		eventContainerExplanation.appendChild(circleExplanation);
+		eventContainerExplanation.appendChild(popupExplanation);
+		popupExplanation.appendChild(firstDescription);
 
 		for (var i = 0; i < circleTotaleEvents; i++) {
 
@@ -436,13 +443,13 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		//Adds popup for all events
 		var eventsContainers = document.querySelectorAll(".event-container");
-		var description = document.querySelectorAll(".popup");
-		for (var i = 0; i < circleTotaleEvents; i++) {
-			var popup = document.createElement("p"); //Create a div for the events'
-			eventsContainers[i].appendChild(description[i]);
-			description[i].appendChild(popup); //Add the eventDiv's to .line
-			popup.innerHTML = popup.parentNode.parentNode.getAttribute("beschrijving");
-			popup.classList.add("popup__description");
+		var descriptions = document.querySelectorAll(".popup");
+		for (i = 0; i < circleTotaleEvents; i++) {
+			var description = document.createElement("p"); //Create a div for the events'
+			eventsContainers[i].appendChild(descriptions[i]);
+			descriptions[i].appendChild(description); //Add the eventDiv's to .line
+			description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
+			description.classList.add("popup__description");
 		}
 
 	} //End createEvent function
