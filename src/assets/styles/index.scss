@@ -83,8 +83,15 @@ svg {
 	}
 }
 
-.line {
-	&__event {
+.event-container {
+	position: absolute;
+	max-width: 350px;
+	display: flex;
+	padding-right: 30px;
+	/* background-color: red; */
+	box-sizing: border-box;
+
+	&--explanation {
 		position: absolute;
 		max-width: 350px;
 		display: flex;
