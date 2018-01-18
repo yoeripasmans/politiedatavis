@@ -2,6 +2,11 @@
 @import "modules/colors";
 @import "modules/mixins";
 
+body {
+	font-family: "Tissa Pro Regular";
+	font-size: 18px;
+}
+
 .line {
 	width: 40px;
 	height: 0;
