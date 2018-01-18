@@ -405,8 +405,9 @@ d3.tsv("data/data.tsv", function(error, data) {
 		headerDiv.appendChild(videoTitle);
 		headerDiv.appendChild(vloggerName);
 
-		var parentContainer = document.querySelector(".svg-container");
-		parentContainer.insertBefore(headerDiv, parentContainer.firstChild);
+		var selectSvg = document.querySelector(".svg-container");
+
+		document.body.insertBefore(headerDiv, selectSvg);
 	}
 
 	// create div elements on the timeline at the event points
