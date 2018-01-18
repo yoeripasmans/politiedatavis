@@ -142,6 +142,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 				.restart();
 
+			createVideoTitle(_this, d);
+
 			//Insert timeline
 			d3.select(".svg-container").insert('div', 'svg')
 				.data(data)
@@ -185,6 +187,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 					d3.select(".line").remove(); //Remove timeline
 					d3.select(".back-button").remove(); //Remove backbutton
+					d3.select(".header").remove(); // remove header
 
 					simulation
 						.force("r", d3.forceRadial(function(d) {
@@ -368,6 +371,42 @@ d3.tsv("data/data.tsv", function(error, data) {
 			popup[4].classList.add("popup--hidden");
 		}
 
+	}
+
+	function createVideoTitle(_this, d) {
+
+		var headerDiv = document.createElement("div");
+		headerDiv.setAttribute("class", "header");
+
+		var videoTitle = document.createElement("h1");
+		var videoTitleTextNode = document.createTextNode(d.titel);
+		videoTitle.setAttribute("class", "header__title");
+		videoTitle.appendChild(videoTitleTextNode);
+
+		var titlePar = document.createElement("p");
+		var titleParTextNode = document.createTextNode("Video titel:");
+		titlePar.setAttribute("class", "header__title-p");
+		titlePar.appendChild(titleParTextNode);
+
+		var vloggerName = document.createElement("p");
+		var vloggerTextNode = document.createTextNode(d.fragmenten[0].account);
+
+		if (d.fragmenten[0].account =='Politievlogger Jan-Willem') {
+		vloggerName.setAttribute("class", "header__vlogger header__vlogger--janwillem");
+		}
+		else {
+		vloggerName.setAttribute("class", "header__vlogger header__vlogger--tess");
+		}
+
+		vloggerName.appendChild(vloggerTextNode);
+
+		headerDiv.appendChild(titlePar);
+		headerDiv.appendChild(videoTitle);
+		headerDiv.appendChild(vloggerName);
+
+		var selectSvg = document.querySelector(".svg-container");
+
+		document.body.insertBefore(headerDiv, selectSvg);
 	}
 
 	// create div elements on the timeline at the event points

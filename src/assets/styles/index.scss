@@ -2,6 +2,11 @@
 @import "modules/colors";
 @import "modules/mixins";
 
+body {
+	font-family: "Tissa Pro Regular";
+	font-size: 18px;
+}
+
 .line {
 	width: 40px;
 	height: 0;
@@ -33,6 +38,65 @@ svg {
 	display: inline-block;
 	position: relative;
 	width: 100%;
+}
+
+.header {
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	transform: translate(-40%, -50%);
+	@media (max-width: 1000px) {
+		width: 70vw;
+		transform: translate(-45%, -50%);
+	}
+	@media (max-width: 700px) {
+		width: 90vw;
+		transform: translate(-50%, -50%);
+	}
+
+	&__title-p {
+		display: block;
+		font-family: "Tissa Pro Regular";
+		font-size: 1em;
+		margin-bottom: 0.618em;
+		color: $text-color-lightgrey;
+	}
+
+	&__title {
+		display: block;
+		font-family: "Relative Medium";
+		font-size: 3em;
+		@media (max-width: 700px) {
+			font-size: 2em;
+		}
+	}
+
+	&__vlogger {
+		display: block;
+		font-family: "Tissa Pro Regular";
+		font-size: 1.2em;
+		margin-top: 1em;
+		color: $text-color-lightgrey;
+	}
+
+	&__vlogger--tess::before {
+		content: "";
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background: url("../images/tess.svg");
+		margin-right: 0.618em;
+	}
+
+	&__vlogger--janwillem::before {
+		content: "";
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		vertical-align: -20%;
+		background: url("../images/janwillem.svg");
+		margin-right: 0.618em;
+	}
 }
 
 .event-container {
@@ -101,6 +165,15 @@ svg {
 		transform: translateY(-50%) scale(0);
 		transition: transform 0.2s;
 		transition-timing-function: linear;
+	}
+}
+@media screen and (max-width: 499px) {
+	.event-container {
+		width: 200%;
+
+		&--explanation {
+			width: 200%;
+		}
 	}
 }
 
