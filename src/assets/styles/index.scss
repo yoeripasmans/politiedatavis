@@ -40,7 +40,6 @@ svg {
 	max-width: 350px;
 	display: flex;
 	padding-right: 30px;
-	/* background-color: red; */
 	box-sizing: border-box;
 
 	&--explanation {
@@ -50,6 +49,16 @@ svg {
 		padding-right: 30px;
 		box-sizing: border-box;
 	}
+}
+
+@media screen and (max-width: 499px) {
+    .event-container {
+        width: 200%;
+
+		&--explanation {
+			width: 200%;
+		}
+    }
 }
 
 .popup {
@@ -93,16 +102,6 @@ svg {
 		transition: transform 0.2s;
 		transition-timing-function: linear;
 	}
-}
-
-@media screen and (max-width: 499px) {
-    .event-container {
-        width: 200%;
-
-		&--explanation {
-			width: 200%;
-		}
-    }
 }
 
 .circle {

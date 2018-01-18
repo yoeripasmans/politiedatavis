@@ -302,9 +302,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var popup = document.querySelectorAll('.popup');
 
-		console.log(window.pageYOffset);
-		console.log(popup);
-
 		if (window.pageYOffset > 10) {
 			document.querySelector('.popup--explanation').classList.add("popup--hidden");
 		} else {
@@ -389,7 +386,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 		popupExplanation.classList.add("popup--explanation");
 
 		var firstDescription = document.createElement("p");
-		firstDescription.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
+		firstDescription.innerHTML = "Scroll door de tijdlijn om het verloop van de video te bekijken.";
 		firstDescription.classList.add("popup__description--explanation");
 
 		//All the appends
