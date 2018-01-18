@@ -152,11 +152,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.delay(850)
 				.duration(1000)
 				.style("height", function(d) {
-					return (circleTotaleEvents * 300) + "px";
+					return (circleTotaleEvents * 300) + 300 + "px";
 				});
 
 			createEvent(circleTotaleEvents, d);
-			createEventPopup(circleTotaleEvents, d);
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
@@ -306,69 +305,72 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var popup = document.querySelectorAll('.popup');
 
-		if (window.pageYOffset > 0) {
-			document.querySelector('.popup--first').classList.add("popup--hidden");
+		console.log(window.pageYOffset);
+		console.log(popup);
+
+		if (window.pageYOffset > 10) {
+			document.querySelector('.popup--explanation').classList.add("popup--hidden");
 		} else {
-			document.querySelector('.popup--first').classList.remove("popup--hidden");
+			document.querySelector('.popup--explanation').classList.remove("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 300) {
+		if (window.pageYOffset >= 300 && popup.length > 0) {
 			popup[0].classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 300) {
+		} else if (window.pageYOffset < 300 && popup.length > 0) {
 			popup[0].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 600) {
+		if (window.pageYOffset >= 600 && popup.length > 1) {
 			popup[1].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 300 && window.pageYOffset < 600) {
+		} else if (window.pageYOffset > 300 && window.pageYOffset < 600 && popup.length > 1) {
 			popup[1].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 900) {
+		if (window.pageYOffset >= 900 && popup.length > 2) {
 			popup[2].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 600 && window.pageYOffset < 900) {
+		} else if (window.pageYOffset > 600 && window.pageYOffset < 900 && popup.length > 2) {
 			popup[2].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1200) {
+		if (window.pageYOffset >= 1200 && popup.length > 3) {
 			popup[3].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200) {
+		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200 && popup.length > 3) {
 			popup[3].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1500) {
+		if (window.pageYOffset >= 1500  && popup.length > 4) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500) {
+		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500 && popup.length > 4) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1800) {
+		if (window.pageYOffset >= 1800 && popup.length > 5) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800) {
+		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800 && popup.length > 5) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2100) {
+		if (window.pageYOffset >= 2100 && popup.length > 6) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100) {
+		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100 && popup.length > 6) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2400) {
+		if (window.pageYOffset >= 2400 && popup.length > 7) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400) {
+		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400 && popup.length > 7) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2700) {
+		if (window.pageYOffset >= 2700 && popup.length > 8) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700) {
+		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700 && popup.length > 8) {
 			popup[4].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 3000) {
+		if (window.pageYOffset >= 3000 && popup.length > 9) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000) {
+		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000 && popup.length > 9) {
 			popup[4].classList.add("popup--hidden");
 		}
 
@@ -415,19 +417,48 @@ d3.tsv("data/data.tsv", function(error, data) {
 		var selectedFragment = 0;
 		var selectedSchending = 0;
 
+		var eventContainerExplanation = document.createElement("div"); //Create a container for the events
+		eventContainerExplanation.classList.add("event-container--explanation");
+
+		var circleExplanation = document.createElement("div"); //Create a div for the events
+		circleExplanation.classList.add("circle", "circle--hidden", "circle--explanation");
+
+		var popupExplanation = document.createElement("div"); //Create a container for the events description
+		popupExplanation.classList.add("popup--explanation");
+
+		var firstDescription = document.createElement("p");
+		firstDescription.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
+		firstDescription.classList.add("popup__description--explanation");
+
+		//All the appends
+		document.querySelector(".line").appendChild(eventContainerExplanation);
+		eventContainerExplanation.appendChild(circleExplanation);
+		eventContainerExplanation.appendChild(popupExplanation);
+		popupExplanation.appendChild(firstDescription);
+
 		for (var i = 0; i < circleTotaleEvents; i++) {
+
 			//An array to loop through all the 'schendingen'
 			var categorieIndex = [d.fragmenten[selectedFragment].eersteSchendingCategorie, d.fragmenten[selectedFragment].tweedeSchendingCategorie, d.fragmenten[selectedFragment].derdeSchendingCategorie, d.fragmenten[selectedFragment].vierdeSchendingCategorie, d.fragmenten[selectedFragment].vijfdeSchendingCategorie, d.fragmenten[selectedFragment].zesdeSchendingCategorie];
+
 			var beschrijvingIndex = [d.fragmenten[selectedFragment].eersteSchendingBeschrijving, d.fragmenten[selectedFragment].tweedeSchendingBeschrijving, d.fragmenten[selectedFragment].derdeSchendingBeschrijving, d.fragmenten[selectedFragment].vierdeSchendingBeschrijving, d.fragmenten[selectedFragment].vijfdeSchendingBeschrijving, d.fragmenten[selectedFragment].zesdeSchendingBeschrijving];
+
 			var tijdIndex = [d.fragmenten[selectedFragment].eersteSchendingTijd, d.fragmenten[selectedFragment].tweedeSchendingTijd, d.fragmenten[selectedFragment].derdeSchendingTijd, d.fragmenten[selectedFragment].vierdeSchendingTijd, d.fragmenten[selectedFragment].vijfdeSchendingTijd, d.fragmenten[selectedFragment].zesdeSchendingTijd];
+
 			var screenshotIndex = [d.fragmenten[selectedFragment].eersteSchendingScreenshot, d.fragmenten[selectedFragment].tweedeSchendingScreenshot, d.fragmenten[selectedFragment].derdeSchendingScreenshot, d.fragmenten[selectedFragment].vierdeSchendingScreenshot, d.fragmenten[selectedFragment].vijfdeSchendingScreenshot, d.fragmenten[selectedFragment].zesdeSchendingScreenshot];
 
-			var eventDiv = document.createElement("div"); //Create a div for the events
+			var eventContainer = document.createElement("div"); //Create a container for the events
+			var popup = document.createElement("div"); //Create a container for the events description
+			var circle = document.createElement("div"); //Create a div for the events
+			eventContainer.classList.add("event-container");
+			popup.classList.add("popup", "popup--hidden");
+			eventContainer.appendChild(circle);
+			eventContainer.appendChild(popup);
 
-			eventDiv.setAttribute("class", "line__event line__event--hidden line__event--" + categorieIndex[selectedSchending]);
-			eventDiv.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
-			eventDiv.setAttribute("tijd", tijdIndex[selectedSchending]);
-			eventDiv.setAttribute("screenshot", screenshotIndex[selectedSchending]);
+			circle.setAttribute("class", "circle circle--hidden circle--" + categorieIndex[selectedSchending]);
+			eventContainer.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
+			eventContainer.setAttribute("tijd", tijdIndex[selectedSchending]);
+			eventContainer.setAttribute("screenshot", screenshotIndex[selectedSchending]);
 
 			selectedSchending++;
 
@@ -436,37 +467,32 @@ d3.tsv("data/data.tsv", function(error, data) {
 				selectedSchending = 0;
 			}
 
-			eventDiv.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
-			document.querySelector(".line").appendChild(eventDiv); //Add the eventDiv's to .line
-		}
+			eventContainer.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
+			document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
+		} //End loop
 
+		//Animate the event circles in
 		setTimeout(function() {
-			triggerEventAnimation();
+			var events = document.querySelectorAll(".circle");
+			for (i = 0; i < events.length; i++) {
+				events[i].classList.toggle("circle--hidden");
+			}
 		}, 1000);
 
-		function triggerEventAnimation() {
-			var events = document.querySelectorAll(".line__event");
-			for (i = 0; i < events.length; i++) {
-				events[i].classList.toggle("line__event--hidden");
-			}
-		}
-	}
-
-	function createEventPopup(circleTotaleEvents, d) {
-		var firstPopup = document.createElement("p");
-		document.querySelector('.line').appendChild(firstPopup);
-		firstPopup.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
-		firstPopup.classList.add("popup", "popup--first");
 		//Adds popup for all events
-		var events = document.querySelectorAll(".line__event");
-		for (var i = 0; i < circleTotaleEvents; i++) {
-			var popup = document.createElement("p"); //Create a div for the events'
-			events[i].appendChild(popup); //Add the eventDiv's to .line
-			popup.innerHTML = popup.parentNode.getAttribute("beschrijving");
-			popup.classList.add("popup", "popup--hidden");
+		var eventsContainers = document.querySelectorAll(".event-container");
+		var descriptions = document.querySelectorAll(".popup");
+		for (i = 0; i < circleTotaleEvents; i++) {
+			var description = document.createElement("p"); //Create a div for the events'
+			eventsContainers[i].appendChild(descriptions[i]);
+			descriptions[i].appendChild(description); //Add the eventDiv's to .line
+			description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
+			description.classList.add("popup__description");
 		}
 
-	}
+	} //End createEvent function
+
+
 });
 
 function onResize() {
@@ -491,7 +517,7 @@ function onResize() {
 	d3.select("g")
 		.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
 
-	var events = document.querySelectorAll(".line__event");
+	var events = document.querySelectorAll(".event-container");
 	for (var i = 0; i < events.length; i++) {
 		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;";
 	}
