@@ -150,11 +150,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.delay(850)
 				.duration(1000)
 				.style("height", function(d) {
-					return (circleTotaleEvents * 300) + "px";
+					return (circleTotaleEvents * 300) + 300 + "px";
 				});
 
 			createEvent(circleTotaleEvents, d);
-			createEventPopup(circleTotaleEvents, d);
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
@@ -301,7 +300,9 @@ d3.tsv("data/data.tsv", function(error, data) {
 				}
 			});
 
-		var popup = document.querySelectorAll('.popup__description');
+		var popup = document.querySelectorAll('.popup');
+
+		console.log(popup);
 
 		if (window.pageYOffset > 0) {
 			document.querySelector('.popup__description--explanation').classList.add("popup__description--hidden");
@@ -377,22 +378,41 @@ d3.tsv("data/data.tsv", function(error, data) {
 		var selectedFragment = 0;
 		var selectedSchending = 0;
 
+		var firstDescription = document.createElement("p");
+		firstDescription.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
+		firstDescription.classList.add("popup__description", "popup__description--explanation");
+
+		var eventContainer = document.createElement("div"); //Create a container for the events
+		var popup = document.createElement("div"); //Create a container for the events description
+		var circle = document.createElement("div"); //Create a div for the events
+		eventContainer.classList.add("event-container--explanation");
+		popup.classList.add("popup-explanation");
+		circle.classList.add("circle", "circle--explanation");
+		eventContainer.appendChild(circle);
+		popup.appendChild(firstDescription);
+		eventContainer.appendChild(popup);
+		document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
+
 		for (var i = 0; i < circleTotaleEvents; i++) {
+
 			//An array to loop through all the 'schendingen'
 			var categorieIndex = [d.fragmenten[selectedFragment].eersteSchendingCategorie, d.fragmenten[selectedFragment].tweedeSchendingCategorie, d.fragmenten[selectedFragment].derdeSchendingCategorie, d.fragmenten[selectedFragment].vierdeSchendingCategorie, d.fragmenten[selectedFragment].vijfdeSchendingCategorie, d.fragmenten[selectedFragment].zesdeSchendingCategorie];
+
 			var beschrijvingIndex = [d.fragmenten[selectedFragment].eersteSchendingBeschrijving, d.fragmenten[selectedFragment].tweedeSchendingBeschrijving, d.fragmenten[selectedFragment].derdeSchendingBeschrijving, d.fragmenten[selectedFragment].vierdeSchendingBeschrijving, d.fragmenten[selectedFragment].vijfdeSchendingBeschrijving, d.fragmenten[selectedFragment].zesdeSchendingBeschrijving];
+
 			var tijdIndex = [d.fragmenten[selectedFragment].eersteSchendingTijd, d.fragmenten[selectedFragment].tweedeSchendingTijd, d.fragmenten[selectedFragment].derdeSchendingTijd, d.fragmenten[selectedFragment].vierdeSchendingTijd, d.fragmenten[selectedFragment].vijfdeSchendingTijd, d.fragmenten[selectedFragment].zesdeSchendingTijd];
+
 			var screenshotIndex = [d.fragmenten[selectedFragment].eersteSchendingScreenshot, d.fragmenten[selectedFragment].tweedeSchendingScreenshot, d.fragmenten[selectedFragment].derdeSchendingScreenshot, d.fragmenten[selectedFragment].vierdeSchendingScreenshot, d.fragmenten[selectedFragment].vijfdeSchendingScreenshot, d.fragmenten[selectedFragment].zesdeSchendingScreenshot];
 
 			var eventContainer = document.createElement("div"); //Create a container for the events
 			var popup = document.createElement("div"); //Create a container for the events description
-			var eventDiv = document.createElement("div"); //Create a div for the events
+			var circle = document.createElement("div"); //Create a div for the events
 			eventContainer.classList.add("event-container");
 			popup.classList.add("popup");
-			eventContainer.appendChild(eventDiv);
+			eventContainer.appendChild(circle);
 			eventContainer.appendChild(popup);
 
-			eventDiv.setAttribute("class", "circle circle--hidden circle--" + categorieIndex[selectedSchending]);
+			circle.setAttribute("class", "circle circle--hidden circle--" + categorieIndex[selectedSchending]);
 			eventContainer.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
 			eventContainer.setAttribute("tijd", tijdIndex[selectedSchending]);
 			eventContainer.setAttribute("screenshot", screenshotIndex[selectedSchending]);
@@ -406,37 +426,30 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 			eventContainer.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
 			document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
-		}
+		} //End loop
 
+		//Animate the event circles in
 		setTimeout(function() {
-			triggerEventAnimation();
-		}, 1000);
-
-		function triggerEventAnimation() {
 			var events = document.querySelectorAll(".circle");
 			for (i = 0; i < events.length; i++) {
 				events[i].classList.toggle("circle--hidden");
 			}
-		}
-	}
+		}, 1000);
 
-	function createEventPopup(circleTotaleEvents, d) {
-		var firstPopup = document.createElement("p");
-		document.querySelector('.line').appendChild(firstPopup);
-		firstPopup.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
-		firstPopup.classList.add("popup__description", "popup__description--explanation");
 		//Adds popup for all events
 		var eventsContainers = document.querySelectorAll(".event-container");
-		var popups = document.querySelectorAll(".popup");
+		var description = document.querySelectorAll(".popup");
 		for (var i = 0; i < circleTotaleEvents; i++) {
 			var popup = document.createElement("p"); //Create a div for the events'
-			eventsContainers[i].appendChild(popups[i]);
-			popups[i].appendChild(popup); //Add the eventDiv's to .line
+			eventsContainers[i].appendChild(description[i]);
+			description[i].appendChild(popup); //Add the eventDiv's to .line
 			popup.innerHTML = popup.parentNode.parentNode.getAttribute("beschrijving");
 			popup.classList.add("popup__description", "popup--hidden");
 		}
 
-	}
+	} //End createEvent function
+
+
 });
 
 function onResize() {
