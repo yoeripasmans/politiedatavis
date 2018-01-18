@@ -167,15 +167,6 @@ svg {
 		transition-timing-function: linear;
 	}
 }
-@media screen and (max-width: 499px) {
-	.event-container {
-		width: 200%;
-
-		&--explanation {
-			width: 200%;
-		}
-	}
-}
 
 .circle {
 	flex-shrink: 0;
