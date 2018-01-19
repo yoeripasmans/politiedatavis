@@ -120,7 +120,7 @@ svg {
 	display: flex;
 	padding-right: 30px;
 	box-sizing: border-box;
-	background: red;
+	z-index: 999;
 
 	&--explanation {
 		@extend .event-container;
@@ -153,36 +153,6 @@ svg {
     transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
 }
 
-%description {
-	flex-shrink: 1;
-	height: auto;
-	padding: 20px;
-	border: 1px solid $border-color;
-	@include border-radius(5px);
-	@include box-shadow(0px,4px,10px,$shadow-color);
-	line-height: 1.3em;
-	font-size: 1em;
-	color: $text-color-lightgrey;
-	font-family: "Tissa Pro Regular";
-	background-color: white;
-}
-
-%description-arrow {
-	left: 0%;
-	top: 50%;
-	margin-left: -10px;
-	margin-top: -9px;
-	content: " ";
-	height: 20px;
-	width: 20px;
-	position: absolute;
-	transform: rotate(45deg);
-	border-left: solid 1px $border-color;
-	border-bottom: solid 1px $border-color;
-	border-bottom-left-radius: 5px;
-	background-color: white;
-}
-
 .popup {
 	@extend %popup;
 	margin-top: 20px;
@@ -201,23 +171,35 @@ svg {
 		background-color: white;
 
 		//Adds an arrow to the description box
-		&:before {
-			@extend %description-arrow;
+		&::before {
+			left: 0%;
+			top: 50%;
+			margin-left: -10px;
+			margin-top: -9px;
+			content: " ";
+			height: 20px;
+			width: 20px;
+			position: absolute;
+			transform: rotate(45deg);
+			border-left: solid 1px $border-color;
+			border-bottom: solid 1px $border-color;
+			border-bottom-left-radius: 5px;
+			background-color: white;
 		}
 
 		&--explanation {
-			@extend %description;
+			@extend .popup__description;
 
-			&:before {
-				@extend %description-arrow;
+			&::before {
+				@extend .popup__description:before;
 			}
 		}
 
 		&--end {
-			@extend %description;
+			@extend .popup__description;
 
 			&:before {
-				@extend %description-arrow;
+				@extend .popup__description:before;
 			}
 		}
 	}
