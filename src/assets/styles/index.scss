@@ -2,9 +2,7 @@
 @import "modules/colors";
 @import "modules/mixins";
 
-body {
-
-}
+body {}
 
 .tool-tip {
 	position: absolute;
@@ -56,12 +54,10 @@ svg {
 	top: 200px;
 	left: 50%;
 	transform: translate(-40%, -50%);
-
 	@media (max-width: 1000px) {
 		width: 70vw;
 		transform: translate(-45%, -50%);
 	}
-
 	@media (max-width: 700px) {
 		width: 90vw;
 		transform: translate(-50%, -50%);
@@ -111,9 +107,7 @@ svg {
 		margin-right: 0.618em;
 	}
 }
-
 /* __________ EVENT __________ */
-
 .event-container {
 	position: absolute;
 	max-width: 350px;
@@ -129,10 +123,9 @@ svg {
 		@extend .event-container;
 	}
 }
-
 @media screen and (max-width: 499px) {
-    .event-container {
-        width: 200%;
+	.event-container {
+		width: 200%;
 
 		&--explanation {
 			width: 200%;
@@ -141,21 +134,32 @@ svg {
 		&--end {
 			width: 200%;
 		}
-    }
+	}
 }
 
 %popup {
 	margin-left: 40px;
-    transform: translateY(-50%) scale(1);
-    transform-origin: left center;
-    transition: transform 0.3s;
-    transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
+	transform: translateY(-50%) scale(1);
+	transform-origin: left center;
+	transition: transform 0.3s;
+	transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
 	z-index: 999;
 }
 
 .popup {
 	@extend %popup;
 	margin-top: 20px;
+
+	&__image {
+		background-color: rgba(0,0,0,0.8);
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		position: fixed;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
 
 	&__description {
 		flex-shrink: 1;
@@ -169,10 +173,9 @@ svg {
 		color: $text-color-lightgrey;
 		font-family: "Tissa Pro Regular";
 		background-color: white;
-
 		//Adds an arrow to the description box
 		&::before {
-			left: 0%;
+			left: 0;
 			top: 50%;
 			margin-left: -10px;
 			margin-top: -9px;
