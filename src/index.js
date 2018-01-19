@@ -144,19 +144,35 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 			tooltip.style("visibility", "hidden");
 
-			//Change the size of the clicked circle
-			d3.select(_this)
+			d3.selectAll(".bubble")
 				.on('click', null)
 				.on('mouseover', null)
 				.on('mouseout', null)
 				.on('mousemove', null)
+				.attr("cursor", "default")
+				.transition()
+				.duration(300)
+				.attr("fill", "transparent");
+
+			//Change the size of the clicked circle
+			d3.select(_this)
+				.attr("fill", function(d) {
+					if (d.status == "Normaal") {
+						return colorNormal;
+					} else if (d.status == "Aangepast") {
+						return colorEdited;
+					} else if (d.status == "Verwijderd") {
+						return colorRemoved;
+					} else if (d.status == "Inactief") {
+						return colorInactive;
+					}
+				})
 				.transition()
 				.duration(1000)
 				.ease(d3.easeCubicOut)
 				.attr("r", function(d) {
 					return circleSize(0);
-				})
-				.attr("cursor", "default");
+				});
 
 			//Place the clicked circle in the middle and hide the rest
 			simulation
@@ -164,7 +180,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					if (d.index == circleIndex) {
 						return 0;
 					} else {
-						return 1000;
+						return 400;
 					}
 				}))
 				.alpha(0.4)
@@ -227,6 +243,17 @@ d3.tsv("data/data.tsv", function(error, data) {
 						.transition()
 						.duration(1000)
 						.ease(d3.easeCubicOut)
+						.attr("fill", function(d) {
+							if (d.status == "Normaal") {
+								return colorNormal;
+							} else if (d.status == "Aangepast") {
+								return colorEdited;
+							} else if (d.status == "Verwijderd") {
+								return colorRemoved;
+							} else if (d.status == "Inactief") {
+								return colorInactive;
+							}
+						})
 						.attr("r", function(d) {
 							return circleSize(d.totaleSchendingen);
 						});
@@ -611,7 +638,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}, 1000);
 
 	} //End createEvent function
-
 
 });
 
