@@ -120,7 +120,6 @@ svg {
 	display: flex;
 	padding-right: 30px;
 	box-sizing: border-box;
-	z-index: 999;
 
 	&--explanation {
 		@extend .event-container;
@@ -151,6 +150,7 @@ svg {
     transform-origin: left center;
     transition: transform 0.3s;
     transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
+	z-index: 999;
 }
 
 .popup {
