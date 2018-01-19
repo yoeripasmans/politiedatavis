@@ -529,12 +529,15 @@ d3.tsv("data/data.tsv", function(error, data) {
 			var screenshotIndex = [d.fragmenten[selectedFragment].eersteSchendingScreenshot, d.fragmenten[selectedFragment].tweedeSchendingScreenshot, d.fragmenten[selectedFragment].derdeSchendingScreenshot, d.fragmenten[selectedFragment].vierdeSchendingScreenshot, d.fragmenten[selectedFragment].vijfdeSchendingScreenshot, d.fragmenten[selectedFragment].zesdeSchendingScreenshot];
 
 			var eventContainer = document.createElement("div"); //Create a container for the events
+
 			var popup = document.createElement("div"); //Create a container for the events description
+
 			var circle = document.createElement("div"); //Create a div for the events
 			eventContainer.classList.add("event-container");
 			popup.classList.add("popup", "popup--hidden");
 			eventContainer.appendChild(circle);
 			eventContainer.appendChild(popup);
+
 
 			circle.classList.add("circle", "circle--hidden", "circle--" + categorieIndex[selectedSchending]);
 			eventContainer.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
@@ -575,13 +578,28 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		//Adds descriptions for all events
 		var eventsContainers = document.querySelectorAll(".event-container");
+		var popups = document.querySelectorAll(".popup");
 		var descriptions = document.querySelectorAll(".popup");
 		for (i = 0; i < circleTotaleEvents; i++) {
-			var description = document.createElement("p"); //Create a div for the events'
+			//Create a div for the events'
+			var description = document.createElement("p");
 			eventsContainers[i].appendChild(descriptions[i]);
-			descriptions[i].appendChild(description); //Add the eventDiv's to .line
+			descriptions[i].appendChild(description);
 			description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
 			description.classList.add("popup__description");
+
+			//Adds image button
+			if(eventsContainers[i].getAttribute("screenshot") !== "undefined"){
+			var imgButton = document.createElement("button");
+			popups[i].appendChild(imgButton);
+			imgButton.textContent = "Afbeelding bekijken";
+			imgButton.classList.add("popup__image-button");
+			imgButton.addEventListener('click', showImg);
+			}
+		}
+
+		function showImg(){
+			console.log('yo');
 		}
 
 		//Animate the event circles in
