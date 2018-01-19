@@ -592,18 +592,14 @@ d3.tsv("data/data.tsv", function(error, data) {
 			popups[i].appendChild(imgButton);
 			imgButton.textContent = "Afbeelding bekijken";
 			imgButton.classList.add("popup__image-button");
-			imgButton.addEventListener("click", function(){
-				createImg(this);
+			imgButton.addEventListener("click",() => () {
+				var img = document.createElement("div");
+				document.querySelector('body').appendChild(img);
+				img.classList.add("popup__image");
+				img.style.backgroundImage = "url('images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".png')";
 			});
 		}
-		}
 
-		function createImg(_this){
-			var img = document.createElement("div");
-			document.querySelector('body').appendChild(img);
-			img.classList.add("popup__image");
-			img.style.backgroundImage = "url('images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".png')";
-		}
 
 		//Animate the event circles in
 		setTimeout(function() {
