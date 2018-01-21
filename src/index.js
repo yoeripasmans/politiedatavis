@@ -210,11 +210,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 					circleClickedCheck = false;
 
-					if (window.innerWidth < 500 && circleClickedCheck == true) {
-						responsiveCheck = 5;
-					} else {
-						responsiveCheck = 2;
-					}
+					responsiveCheck = 2;
 
 					//Removes the function on scroll
 					document.querySelector('body').onscroll = function() {};
