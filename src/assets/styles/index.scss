@@ -111,6 +111,27 @@ svg {
 		margin-right: 0.618em;
 	}
 }
+.line {
+	&__event {
+		position: absolute;
+		height: 40px;
+		width: 40px;
+		transform-origin: center;
+		transform: scale(1);
+		border-radius: 50px;
+		border: 1px solid $border-color;
+		@include box-shadow(0px,4px,10px,$shadow-color);
+		background-color: #fff;
+		transition-delay: 1s;
+		transition: transform 0.5s;
+		transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 23px;
+
+		&--hidden {
+			transform: scale(0);
+		}
 
 .event-container {
 	position: absolute;
