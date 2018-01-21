@@ -178,6 +178,12 @@ svg {
 	@extend %popup;
 	margin-top: 20px;
 
+	&__time {
+		font-family: "Relative Bold";
+		font-size: 0.9em;
+		margin-bottom: 0.3em;
+	}
+
 	&__description {
 		@extend %paragraph-text-style;
 		flex-shrink: 1;

@@ -517,11 +517,20 @@ d3.tsv("data/data.tsv", function(error, data) {
 		//Adds descriptions for all events
 		var eventsContainers = document.querySelectorAll(".event-container");
 		var popups = document.querySelectorAll(".popup");
-		var descriptions = document.querySelectorAll(".popup");
+
 		for (i = 0; i < circleTotaleEvents; i++) {
-			//Create a div for the events'
+			//create a p for the time
+			var time = document.createElement("p");
+			time.classList.add("popup__time");
+
+			var timeText = document.createTextNode(popups[i].parentNode.getAttribute("tijd"));
+			time.appendChild(timeText);
+
+			popups[i].appendChild(time);
+
+			//Create a p for the description
 			var description = document.createElement("p");
-			eventsContainers[i].appendChild(descriptions[i]);
+			eventsContainers[i].appendChild(popups[i]);
 			popups[i].appendChild(description);
 			description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
 			description.classList.add("popup__description");
