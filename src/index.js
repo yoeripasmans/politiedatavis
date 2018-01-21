@@ -374,111 +374,26 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var popup = document.querySelectorAll('.popup');
 
-		console.log(window.pageYOffset);
-
 		if (window.pageYOffset > 10) {
 			document.querySelector('.popup--explanation').classList.add("popup--hidden");
 		} else {
 			document.querySelector('.popup--explanation').classList.remove("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 300 && popup.length > 0) {
-			popup[0].classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 300 && popup.length > 0) {
-			popup[0].classList.add("popup--hidden");
+		for (var i = 1; i <= popup.length; i++) {
+
+			if (window.pageYOffset >= i * 300) {
+				popup[i - 1].classList.remove("popup--hidden");
+			} else if (window.pageYOffset < i * 300) {
+				popup[i - 1].classList.add("popup--hidden");
+			}
 		}
 
-		if (window.pageYOffset >= 600 && popup.length > 1) {
-			popup[1].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 300 && window.pageYOffset < 600 && popup.length > 1) {
-			popup[1].classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 290 && popup.length == 0) {
+		if (window.pageYOffset >= popup.length * 300 + 290){
 			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 290 && popup.length == 0) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		}
-
-		if (window.pageYOffset >= 900 && popup.length > 2) {
-			popup[2].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 600 && window.pageYOffset < 900 && popup.length > 2) {
-			popup[2].classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 590 && popup.length == 1) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 590 && popup.length == 1) {
+		} else if (window.pageYOffset < popup.length * 300 + 290) {
 			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
-
-		if (window.pageYOffset >= 1200 && popup.length > 3) {
-			popup[3].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200 && popup.length > 3) {
-			popup[3].classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 890 && popup.length == 2) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 890 && popup.length == 2) {
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		}
-
-		if (window.pageYOffset >= 1500 && popup.length > 4) {
-			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500 && popup.length > 4) {
-			popup[4].classList.add("popup--hidden");
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 1190 && popup.length == 3) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 1190 && popup.length == 3) {
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		}
-
-		if (window.pageYOffset >= 1800 && popup.length > 5) {
-			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800 && popup.length > 5) {
-			popup[4].classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 1490 && popup.length == 4) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 1490 && popup.length == 4) {
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		}
-
-		if (window.pageYOffset >= 2100 && popup.length > 6) {
-			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100 && popup.length > 6) {
-			popup[4].classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 1790 && popup.length == 5) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 1790 && popup.length == 5) {
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		}
-
-		if (window.pageYOffset >= 2400 && popup.length > 7) {
-			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400 && popup.length > 7) {
-			popup[4].classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 2090 && popup.length == 6) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 2090 && popup.length == 6) {
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		}
-
-		if (window.pageYOffset >= 2700 && popup.length > 8) {
-			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700 && popup.length > 8) {
-			popup[4].classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 2390 && popup.length == 7) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 2390 && popup.length == 7) {
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		}
-
-		if (window.pageYOffset >= 3000 && popup.length > 9) {
-			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000 && popup.length > 9) {
-			popup[4].classList.add("popup--hidden");
-		} else if (window.pageYOffset >= 2690 && popup.length == 8) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 2690 && popup.length == 8) {
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		}
-
 	}
 
 	function createVideoTitle(_this, d) {
@@ -622,7 +537,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}
 
 		function showImg(){
-			console.log('yo');
+			console.log(tijdIndex[selectedFragment]);
 		}
 
 		//Animate the event circles in
