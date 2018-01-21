@@ -522,7 +522,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			//Create a div for the events'
 			var description = document.createElement("p");
 			eventsContainers[i].appendChild(descriptions[i]);
-			descriptions[i].appendChild(description);
+			popups[i].appendChild(description);
 			description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
 			description.classList.add("popup__description");
 
