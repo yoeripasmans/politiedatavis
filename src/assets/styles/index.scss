@@ -1,38 +1,29 @@
+/* __________ PARTIALS __________ */
+
 @import "partials/reset";
 @import "modules/colors";
 @import "modules/mixins";
 
+/* __________ TEXT STYLES __________ */
+
+%paragraph-text-style {
+	font-family: "Tissa Pro Regular";
+	font-size: 1em;
+	color: $text-color-lightgrey;
+	line-height: 1.3em;
+}
+
+%heading-text-style {
+	font-family: "Relative Bold";
+	font-size: 3em;
+	color: black;
+	line-height: 1em;
+}
+/* __________ GENERAL __________ */
+
 body {
-
-}
-
-.tool-tip {
-	position: absolute;
-	z-index: 10;
-	color: #fff;
-	padding: 8px;
-	background-color: #000;
-	background-color: rgba(0, 0, 0, 0.75);
-	border-radius: 6px;
-	font-size: 15px;
-	visibility: hidden;
-}
-
-.line {
-	width: 40px;
-	height: 0;
-	background-image: url("../images/timeline.svg");
-	background-size: auto 600px;
-	background-position: center top;
-	margin: 50vh auto;
-	background-repeat: repeat-y;
-}
-
-.back-button {
-	position: fixed;
-	left: 5em;
-	top: 5em;
-	z-index: 999;
+	margin: 0;
+	padding: 0;
 }
 
 svg {
@@ -51,6 +42,41 @@ svg {
 	width: 100%;
 }
 
+/* __________ OVERVIEW __________ */
+
+.tool-tip {
+	position: absolute;
+	z-index: 10;
+	color: #fff;
+	padding: 8px;
+	background-color: #000;
+	background-color: rgba(0, 0, 0, 0.75);
+	border-radius: 6px;
+	font-size: 15px;
+	visibility: hidden;
+}
+
+/* __________ TIMELINE __________ */
+
+.line {
+	width: 40px;
+	height: 0;
+	background-image: url("../images/timeline.svg");
+	background-size: auto 600px;
+	background-position: center top;
+	margin: 50vh auto;
+	background-repeat: repeat-y;
+}
+
+.back-button {
+	position: fixed;
+	left: 5em;
+	top: 5em;
+	z-index: 999;
+}
+
+/* __________ TIMELINE HEADING TEXT __________ */
+
 .header {
 	position: absolute;
 	top: 200px;
@@ -68,49 +94,48 @@ svg {
 	}
 
 	&__title-p {
+		@extend %paragraph-text-style;
+		font-size: .8em;
 		display: block;
-		font-family: "Tissa Pro Regular";
-		font-size: 0.8em;
 		margin-bottom: 0.618em;
-		color: $text-color-lightgrey;
 	}
 
 	&__title {
+		@extend %heading-text-style;
 		display: block;
-		font-family: "Relative Medium";
-		font-size: 3em;
 		@media (max-width: 700px) {
 			font-size: 2em;
 		}
 	}
 
 	&__vlogger {
-		display: block;
-		font-family: "Tissa Pro Regular";
+		@extend %paragraph-text-style;
 		font-size: 1.2em;
+		display: block;
 		margin-top: 1em;
-		color: $text-color-lightgrey;
+	}
+
+	%vlogger-icon {
+		content: "";
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		vertical-align: -16%;
+		margin-right: 0.618em;
 	}
 
 	&__vlogger--tess::before {
-		content: "";
-		display: inline-block;
-		width: 20px;
-		height: 20px;
+		@extend %vlogger-icon;
 		background: url("../images/tess.svg");
-		margin-right: 0.618em;
 	}
 
 	&__vlogger--janwillem::before {
-		content: "";
-		display: inline-block;
-		width: 20px;
-		height: 20px;
-		vertical-align: -20%;
+		@extend %vlogger-icon;
 		background: url("../images/janwillem.svg");
-		margin-right: 0.618em;
 	}
 }
+
+/* __________ TIMELINE EVENTS __________ */
 
 .event-container {
 	position: absolute;
@@ -126,10 +151,8 @@ svg {
 	&--end {
 		@extend .event-container;
 	}
-}
 
-@media screen and (max-width: 499px) {
-    .event-container {
+	@media screen and (max-width: 499px) {
         width: 200%;
 
 		&--explanation {
@@ -139,7 +162,7 @@ svg {
 		&--end {
 			width: 200%;
 		}
-    }
+	}
 }
 
 %popup {
@@ -156,16 +179,13 @@ svg {
 	margin-top: 20px;
 
 	&__description {
+		@extend %paragraph-text-style;
 		flex-shrink: 1;
 		height: auto;
 		padding: 20px;
 		border: 1px solid $border-color;
 		@include border-radius(5px);
 		@include box-shadow(0px,4px,10px,$shadow-color);
-		line-height: 1.3em;
-		font-size: 1em;
-		color: $text-color-lightgrey;
-		font-family: "Tissa Pro Regular";
 		background-color: white;
 
 		//Adds an arrow to the description box
