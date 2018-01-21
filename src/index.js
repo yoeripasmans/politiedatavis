@@ -30,6 +30,12 @@ var simulation = d3.forceSimulation()
 		return circleSize(d.totaleSchendingen) + 2; //Ensures the circles don't go on top of each other, this force is different for each circle
 	}));
 
+// Prep the tooltip bits, initial display is hidden
+//Append tool-tip to conainter
+var tooltip = d3.select(".svg-container")
+	.append("div")
+	.attr("class", "tool-tip");
+
 onResize();
 
 /* __________ LOADING DATA __________ */
@@ -77,6 +83,23 @@ d3.tsv("data/data.tsv", function(error, data) {
 				return colorInactive;
 			}
 		})
+		.attr("cursor", function(d) {
+			if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+				return "pointer";
+			} else if (d.status == "Inactief") {
+				return "default";
+			}
+		})
+		.on("mouseover", function(d) {
+			tooltip.style("visibility", "visible");
+			tooltip.text(d.titel);
+		})
+		.on("mousemove", function(d) {
+			return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+		})
+		.on("mouseout", function(d) {
+			tooltip.style("visibility", "hidden");
+		})
 		.on("click", function(d) {
 			circleClickEvent(this, d);
 		});
@@ -119,15 +142,21 @@ d3.tsv("data/data.tsv", function(error, data) {
 				scroll(_this);
 			};
 
+			tooltip.style("visibility", "hidden");
+
 			//Change the size of the clicked circle
 			d3.select(_this)
 				.on('click', null)
+				.on('mouseover', null)
+				.on('mouseout', null)
+				.on('mousemove', null)
 				.transition()
 				.duration(1000)
 				.ease(d3.easeCubicOut)
 				.attr("r", function(d) {
 					return circleSize(0);
-				});
+				})
+				.attr("cursor", "default");
 
 			//Place the clicked circle in the middle and hide the rest
 			simulation
@@ -152,11 +181,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.delay(850)
 				.duration(1000)
 				.style("height", function(d) {
-					return (circleTotaleEvents * 300) + "px";
+					return (circleTotaleEvents * 300) + 300 + "px";
 				});
 
 			createEvent(circleTotaleEvents, d);
-			createEventPopup(circleTotaleEvents, d);
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
@@ -178,6 +206,23 @@ d3.tsv("data/data.tsv", function(error, data) {
 					d3.selectAll(".bubble")
 						.on("click", function(d) {
 							circleClickEvent(this, d);
+						})
+						.on("mouseover", function(d) {
+							tooltip.style("visibility", "visible");
+							tooltip.text(d.titel);
+						})
+						.on("mousemove", function(d) {
+							return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+						})
+						.on("mouseout", function(d) {
+							tooltip.style("visibility", "hidden");
+						})
+						.attr("cursor", function(d) {
+							if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+								return "pointer";
+							} else if (d.status == "Inactief") {
+								return "default";
+							}
 						})
 						.transition()
 						.duration(1000)
@@ -306,70 +351,109 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		var popup = document.querySelectorAll('.popup');
 
-		if (window.pageYOffset > 0) {
-			document.querySelector('.popup--first').classList.add("popup--hidden");
+		console.log(window.pageYOffset);
+
+		if (window.pageYOffset > 10) {
+			document.querySelector('.popup--explanation').classList.add("popup--hidden");
 		} else {
-			document.querySelector('.popup--first').classList.remove("popup--hidden");
+			document.querySelector('.popup--explanation').classList.remove("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 300) {
+		if (window.pageYOffset >= 300 && popup.length > 0) {
 			popup[0].classList.remove("popup--hidden");
-		} else if (window.pageYOffset < 300) {
+		} else if (window.pageYOffset < 300 && popup.length > 0) {
 			popup[0].classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 600) {
+		if (window.pageYOffset >= 600 && popup.length > 1) {
 			popup[1].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 300 && window.pageYOffset < 600) {
+		} else if (window.pageYOffset > 300 && window.pageYOffset < 600 && popup.length > 1) {
 			popup[1].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 290 && popup.length == 0) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 290 && popup.length == 0) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 900) {
+		if (window.pageYOffset >= 900 && popup.length > 2) {
 			popup[2].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 600 && window.pageYOffset < 900) {
+		} else if (window.pageYOffset > 600 && window.pageYOffset < 900 && popup.length > 2) {
 			popup[2].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 590 && popup.length == 1) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 590 && popup.length == 1) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1200) {
+		if (window.pageYOffset >= 1200 && popup.length > 3) {
 			popup[3].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200) {
+		} else if (window.pageYOffset > 900 && window.pageYOffset < 1200 && popup.length > 3) {
 			popup[3].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 890 && popup.length == 2) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 890 && popup.length == 2) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1500) {
+		if (window.pageYOffset >= 1500 && popup.length > 4) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500) {
+		} else if (window.pageYOffset > 1200 && window.pageYOffset < 1500 && popup.length > 4) {
 			popup[4].classList.add("popup--hidden");
+			document.querySelector('.popup--end').classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 1190 && popup.length == 3) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 1190 && popup.length == 3) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 1800) {
+		if (window.pageYOffset >= 1800 && popup.length > 5) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800) {
+		} else if (window.pageYOffset > 1500 && window.pageYOffset < 1800 && popup.length > 5) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 1490 && popup.length == 4) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 1490 && popup.length == 4) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2100) {
+		if (window.pageYOffset >= 2100 && popup.length > 6) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100) {
+		} else if (window.pageYOffset > 1800 && window.pageYOffset < 2100 && popup.length > 6) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 1790 && popup.length == 5) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 1790 && popup.length == 5) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2400) {
+		if (window.pageYOffset >= 2400 && popup.length > 7) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400) {
+		} else if (window.pageYOffset > 2100 && window.pageYOffset < 2400 && popup.length > 7) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 2090 && popup.length == 6) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 2090 && popup.length == 6) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 2700) {
+		if (window.pageYOffset >= 2700 && popup.length > 8) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700) {
+		} else if (window.pageYOffset > 2400 && window.pageYOffset < 2700 && popup.length > 8) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 2390 && popup.length == 7) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 2390 && popup.length == 7) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
-		if (window.pageYOffset >= 3000) {
+		if (window.pageYOffset >= 3000 && popup.length > 9) {
 			popup[4].classList.remove("popup--hidden");
-		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000) {
+		} else if (window.pageYOffset > 2700 && window.pageYOffset < 3000 && popup.length > 9) {
 			popup[4].classList.add("popup--hidden");
+		} else if (window.pageYOffset >= 2690 && popup.length == 8) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < 2690 && popup.length == 8) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 
 	}
@@ -377,30 +461,28 @@ d3.tsv("data/data.tsv", function(error, data) {
 	function createVideoTitle(_this, d) {
 
 		var headerDiv = document.createElement("div");
-		headerDiv.setAttribute("class", "header");
+		headerDiv.classList.add("header");
 
 		var videoTitle = document.createElement("h1");
 		var videoTitleTextNode = document.createTextNode(d.titel);
-		videoTitle.setAttribute("class", "header__title");
+		videoTitle.classList.add("header__title");
 		videoTitle.appendChild(videoTitleTextNode);
 
 		var titlePar = document.createElement("p");
 		var titleParTextNode = document.createTextNode("Video titel:");
-		titlePar.setAttribute("class", "header__title-p");
+		titlePar.classList.add("header__title-p");
 		titlePar.appendChild(titleParTextNode);
 
 		var vloggerName = document.createElement("p");
 		var vloggerTextNode = document.createTextNode(d.fragmenten[0].account);
 
-		if (d.fragmenten[0].account =='Politievlogger Jan-Willem') {
-		vloggerName.setAttribute("class", "header__vlogger header__vlogger--janwillem");
-		}
-		else {
-		vloggerName.setAttribute("class", "header__vlogger header__vlogger--tess")
+		if (d.fragmenten[0].account == 'Politievlogger Jan-Willem') {
+			vloggerName.classList.add("header__vlogger", "header__vlogger--janwillem");
+		} else {
+			vloggerName.classList.add("header__vlogger", "header__vlogger--tess");
 		}
 
 		vloggerName.appendChild(vloggerTextNode);
-
 		headerDiv.appendChild(titlePar);
 		headerDiv.appendChild(videoTitle);
 		headerDiv.appendChild(vloggerName);
@@ -416,19 +498,51 @@ d3.tsv("data/data.tsv", function(error, data) {
 		var selectedFragment = 0;
 		var selectedSchending = 0;
 
+		var eventContainerExplanation = document.createElement("div"); //Create a container for the events
+		eventContainerExplanation.classList.add("event-container--explanation");
+
+		var circleExplanation = document.createElement("div"); //Create a div for the events
+		circleExplanation.classList.add("circle", "circle--hidden", "circle--explanation");
+
+		var popupExplanation = document.createElement("div"); //Create a container for the events description
+		popupExplanation.classList.add("popup--explanation");
+
+		var descriptionExplanation = document.createElement("p");
+		descriptionExplanation.innerHTML = "Scroll door de tijdlijn om het verloop van de video te bekijken.";
+		descriptionExplanation.classList.add("popup__description--explanation");
+
+		//All the appends
+		document.querySelector(".line").appendChild(eventContainerExplanation);
+		eventContainerExplanation.appendChild(circleExplanation);
+		eventContainerExplanation.appendChild(popupExplanation);
+		popupExplanation.appendChild(descriptionExplanation);
+
 		for (var i = 0; i < circleTotaleEvents; i++) {
+
 			//An array to loop through all the 'schendingen'
 			var categorieIndex = [d.fragmenten[selectedFragment].eersteSchendingCategorie, d.fragmenten[selectedFragment].tweedeSchendingCategorie, d.fragmenten[selectedFragment].derdeSchendingCategorie, d.fragmenten[selectedFragment].vierdeSchendingCategorie, d.fragmenten[selectedFragment].vijfdeSchendingCategorie, d.fragmenten[selectedFragment].zesdeSchendingCategorie];
+
 			var beschrijvingIndex = [d.fragmenten[selectedFragment].eersteSchendingBeschrijving, d.fragmenten[selectedFragment].tweedeSchendingBeschrijving, d.fragmenten[selectedFragment].derdeSchendingBeschrijving, d.fragmenten[selectedFragment].vierdeSchendingBeschrijving, d.fragmenten[selectedFragment].vijfdeSchendingBeschrijving, d.fragmenten[selectedFragment].zesdeSchendingBeschrijving];
+
 			var tijdIndex = [d.fragmenten[selectedFragment].eersteSchendingTijd, d.fragmenten[selectedFragment].tweedeSchendingTijd, d.fragmenten[selectedFragment].derdeSchendingTijd, d.fragmenten[selectedFragment].vierdeSchendingTijd, d.fragmenten[selectedFragment].vijfdeSchendingTijd, d.fragmenten[selectedFragment].zesdeSchendingTijd];
+
 			var screenshotIndex = [d.fragmenten[selectedFragment].eersteSchendingScreenshot, d.fragmenten[selectedFragment].tweedeSchendingScreenshot, d.fragmenten[selectedFragment].derdeSchendingScreenshot, d.fragmenten[selectedFragment].vierdeSchendingScreenshot, d.fragmenten[selectedFragment].vijfdeSchendingScreenshot, d.fragmenten[selectedFragment].zesdeSchendingScreenshot];
 
-			var eventDiv = document.createElement("div"); //Create a div for the events
+			var eventContainer = document.createElement("div"); //Create a container for the events
 
-			eventDiv.setAttribute("class", "line__event line__event--hidden line__event--" + categorieIndex[selectedSchending]);
-			eventDiv.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
-			eventDiv.setAttribute("tijd", tijdIndex[selectedSchending]);
-			eventDiv.setAttribute("screenshot", screenshotIndex[selectedSchending]);
+			var popup = document.createElement("div"); //Create a container for the events description
+
+			var circle = document.createElement("div"); //Create a div for the events
+			eventContainer.classList.add("event-container");
+			popup.classList.add("popup", "popup--hidden");
+			eventContainer.appendChild(circle);
+			eventContainer.appendChild(popup);
+
+
+			circle.classList.add("circle", "circle--hidden", "circle--" + categorieIndex[selectedSchending]);
+			eventContainer.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
+			eventContainer.setAttribute("tijd", tijdIndex[selectedSchending]);
+			eventContainer.setAttribute("screenshot", screenshotIndex[selectedSchending]);
 
 			selectedSchending++;
 
@@ -437,37 +551,68 @@ d3.tsv("data/data.tsv", function(error, data) {
 				selectedSchending = 0;
 			}
 
-			eventDiv.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
-			document.querySelector(".line").appendChild(eventDiv); //Add the eventDiv's to .line
-		}
+			eventContainer.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
+			document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
+		} //End loop
 
-		setTimeout(function() {
-			triggerEventAnimation();
-		}, 1000);
+		var eventContainerEnd = document.createElement("div"); //Create a container for the events
+		eventContainerEnd.classList.add("event-container--end");
 
-		function triggerEventAnimation() {
-			var events = document.querySelectorAll(".line__event");
-			for (i = 0; i < events.length; i++) {
-				events[i].classList.toggle("line__event--hidden");
+		var circleEnd = document.createElement("div"); //Create a div for the events
+		circleEnd.classList.add("circle", "circle--hidden", "circle--end");
+
+		var popupEnd = document.createElement("div"); //Create a container for the events description
+		popupEnd.classList.add("popup--end", "popup--hidden");
+
+		var EndDescription = document.createElement("p");
+		EndDescription.innerHTML = "The end.";
+		EndDescription.classList.add("popup__description--end");
+
+		eventContainerEnd.style.top = (circleTotaleEvents * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
+
+		//All the appends
+		document.querySelector(".line").appendChild(eventContainerEnd);
+		eventContainerEnd.appendChild(circleEnd);
+		eventContainerEnd.appendChild(popupEnd);
+		popupEnd.appendChild(EndDescription);
+
+		//Adds descriptions for all events
+		var eventsContainers = document.querySelectorAll(".event-container");
+		var popups = document.querySelectorAll(".popup");
+		var descriptions = document.querySelectorAll(".popup");
+		for (i = 0; i < circleTotaleEvents; i++) {
+			//Create a div for the events'
+			var description = document.createElement("p");
+			eventsContainers[i].appendChild(descriptions[i]);
+			descriptions[i].appendChild(description);
+			description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
+			description.classList.add("popup__description");
+
+			//Adds image button
+			if(eventsContainers[i].getAttribute("screenshot") !== "undefined"){
+			var imgButton = document.createElement("button");
+			popups[i].appendChild(imgButton);
+			imgButton.textContent = "Afbeelding bekijken";
+			imgButton.classList.add("popup__image-button");
+			imgButton.addEventListener('click', showImg);
 			}
 		}
-	}
 
-	function createEventPopup(circleTotaleEvents, d) {
-		var firstPopup = document.createElement("p");
-		document.querySelector('.line').appendChild(firstPopup);
-		firstPopup.innerHTML = "Scroll de tijdlijn om het verloop van de video te bekijken.";
-		firstPopup.classList.add("popup", "popup--first");
-		//Adds popup for all events
-		var events = document.querySelectorAll(".line__event");
-		for (var i = 0; i < circleTotaleEvents; i++) {
-			var popup = document.createElement("p"); //Create a div for the events'
-			events[i].appendChild(popup); //Add the eventDiv's to .line
-			popup.innerHTML = popup.parentNode.getAttribute("beschrijving");
-			popup.classList.add("popup", "popup--hidden");
+		function showImg(){
+			console.log('yo');
 		}
 
-	}
+		//Animate the event circles in
+		setTimeout(function() {
+			var events = document.querySelectorAll(".circle");
+			for (i = 0; i < events.length; i++) {
+				events[i].classList.toggle("circle--hidden");
+			}
+		}, 1000);
+
+	} //End createEvent function
+
+
 });
 
 function onResize() {
@@ -492,7 +637,12 @@ function onResize() {
 	d3.select("g")
 		.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
 
-	var events = document.querySelectorAll(".line__event");
+	var events = document.querySelectorAll(".event-container");
+	if (events.length > 0) {
+		document.querySelector(".event-container--end").style.top = (events.length * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
+
+	}
+
 	for (var i = 0; i < events.length; i++) {
 		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;";
 	}

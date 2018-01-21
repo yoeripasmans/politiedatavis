@@ -2,12 +2,30 @@
 @import "modules/colors";
 @import "modules/mixins";
 
+body {
+
+}
+
+.tool-tip {
+	position: absolute;
+	z-index: 10;
+	color: #fff;
+	padding: 8px;
+	background-color: #000;
+	background-color: rgba(0, 0, 0, 0.75);
+	border-radius: 6px;
+	font-size: 15px;
+	visibility: hidden;
+}
+
 .line {
 	width: 40px;
+	height: 0;
 	background-image: url("../images/timeline.svg");
 	background-size: auto 600px;
 	background-position: center top;
 	margin: 50vh auto;
+	background-repeat: repeat-y;
 }
 
 .back-button {
@@ -29,7 +47,7 @@ svg {
 
 .svg-container {
 	display: inline-block;
-	position: relative;
+	position: absolute;
 	width: 100%;
 }
 
@@ -52,7 +70,7 @@ svg {
 	&__title-p {
 		display: block;
 		font-family: "Tissa Pro Regular";
-		font-size: 1em;
+		font-size: 0.8em;
 		margin-bottom: 0.618em;
 		color: $text-color-lightgrey;
 	}
@@ -61,7 +79,6 @@ svg {
 		display: block;
 		font-family: "Relative Medium";
 		font-size: 3em;
-
 		@media (max-width: 700px) {
 			font-size: 2em;
 		}
@@ -83,6 +100,7 @@ svg {
 		background: url("../images/tess.svg");
 		margin-right: 0.618em;
 	}
+
 	&__vlogger--janwillem::before {
 		content: "";
 		display: inline-block;
@@ -115,50 +133,163 @@ svg {
 			transform: scale(0);
 		}
 
-		&--straat {
-			background-image: url("../images/straat.svg");
-		}
+.event-container {
+	position: absolute;
+	max-width: 350px;
+	display: flex;
+	padding-right: 30px;
+	box-sizing: border-box;
 
-		&--plaats {
-			background-image: url("../images/omgeving.svg");
-		}
+	&--explanation {
+		@extend .event-container;
+	}
 
-		&--overig {
-			background-image: url("../images/overig.svg");
-		}
-
-		&--slachtoffer {
-			background-image: url("../images/slachtoffer.svg");
-		}
-
-		&--verdachte {
-			background-image: url("../images/verdachte.svg");
-		}
-
-		&--huis {
-			background-image: url("../images/huis.svg");
-		}
+	&--end {
+		@extend .event-container;
 	}
 }
 
-.popup {
-	width: 250px;
-	height: auto;
-	transform: translateY(-50%);
-	padding: 1.5em;
-	border: 1px solid $border-color;
-	margin-left: 80px;
-	@include border-radius(5px);
-	@include box-shadow(0px,4px,10px,$shadow-color);
-	position: absolute;
-	margin-top: 21px;
-	line-height: 1.3em;
+@media screen and (max-width: 499px) {
+    .event-container {
+        width: 200%;
 
-	&--hidden {
-		opacity: 0;
+		&--explanation {
+			width: 200%;
+		}
+
+		&--end {
+			width: 200%;
+		}
+    }
+}
+
+%popup {
+	margin-left: 40px;
+    transform: translateY(-50%) scale(1);
+    transform-origin: left center;
+    transition: transform 0.3s;
+    transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
+	z-index: 999;
+}
+
+.popup {
+	@extend %popup;
+	margin-top: 20px;
+
+	&__description {
+		flex-shrink: 1;
+		height: auto;
+		padding: 20px;
+		border: 1px solid $border-color;
+		@include border-radius(5px);
+		@include box-shadow(0px,4px,10px,$shadow-color);
+		line-height: 1.3em;
+		font-size: 1em;
+		color: $text-color-lightgrey;
+		font-family: "Tissa Pro Regular";
+		background-color: white;
+
+		//Adds an arrow to the description box
+		&::before {
+			left: 0%;
+			top: 50%;
+			margin-left: -10px;
+			margin-top: -9px;
+			content: " ";
+			height: 20px;
+			width: 20px;
+			position: absolute;
+			transform: rotate(45deg);
+			border-left: solid 1px $border-color;
+			border-bottom: solid 1px $border-color;
+			border-bottom-left-radius: 5px;
+			background-color: white;
+		}
+
+		&--explanation {
+			@extend .popup__description;
+
+			&::before {
+				@extend .popup__description::before;
+			}
+		}
+
+		&--end {
+			@extend .popup__description;
+
+			&:before {
+				@extend .popup__description::before;
+			}
+		}
 	}
 
-	&--first {
+	&--explanation {
+		@extend %popup;
+	}
 
+	&--end {
+		@extend %popup;
+		margin-top: 20px;
+	}
+
+	&--hidden {
+		transform: translateY(-50%) scale(0);
+		transition: transform 0.2s;
+		transition-timing-function: linear;
+	}
+}
+
+.circle {
+	flex-shrink: 0;
+	height: 40px;
+	width: 40px;
+	transform-origin: center;
+	transform: scale(1);
+	border-radius: 50px;
+	border: 1px solid $border-color;
+	@include box-shadow(0px,4px,10px,$shadow-color);
+	background-color: #fff;
+	transition-delay: 1s;
+	transition: transform 0.5s;
+	transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 23px;
+	box-sizing: border-box;
+
+	&--explanation {
+		margin-top: -20px;
+	}
+
+	&--straat {
+		background-image: url("../images/straat.svg");
+		background-position: center 9px;
+	}
+
+	&--plaats {
+		background-image: url("../images/omgeving.svg");
+	}
+
+	&--overig {
+		background-image: url("../images/overig.svg");
+		background-position: center 8px;
+	}
+
+	&--slachtoffer {
+		background-image: url("../images/slachtoffer.svg");
+		background-position: center 7px;
+	}
+
+	&--verdachte {
+		background-image: url("../images/verdachte.svg");
+		background-position: center 7px;
+	}
+
+	&--huis {
+		background-image: url("../images/huis.svg");
+	}
+
+	&--hidden {
+		transform: scale(0);
 	}
 }
