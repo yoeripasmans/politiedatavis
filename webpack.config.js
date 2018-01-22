@@ -65,7 +65,7 @@ module.exports = {
 		}),
 
 		new HtmlWebpackPlugin({
-			title: 'Output Management'
+			title: 'Politievloggers'
 		}),
 
 		new CopyWebpackPlugin([{
