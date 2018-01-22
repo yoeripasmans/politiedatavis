@@ -1,6 +1,7 @@
 /* __________ AUTOMATIC RELOAD __________ */
 
 require('./assets/styles/index.scss');
+
 import * as d3 from 'd3';
 
 /* __________ VARIABLES __________ */
@@ -18,7 +19,7 @@ var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 13
 
 d3.select(window).on('resize', onResize);
 
-var svg = d3.select(".svg-container")
+var svg = d3.select("body").append("div").attr('class', 'svg-container')
 	.append("svg")
 	.attr("height", height)
 	.attr("width", window.innerWidth)

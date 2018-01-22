@@ -130,19 +130,19 @@ table {
 
 @font-face {
   font-family: "Relative Bold";
-  src: url(68808c3236c4a10fbf33de333ebc5fcd.woff2) format("woff2"), url(b1be7f592105b3e4cdf714990f39fd29.woff) format("woff"), url(18fddbba41faab21ff6c0b4df47a3d12.ttf) format("truetype"), url(a586da66c1d19d769c3976cdbbae0cfb.otf) format("opentype"); }
+  src: url(assets/fonts/Relative-Bold.woff2) format("woff2"), url(assets/fonts/Relative-Bold.woff) format("woff"), url(assets/fonts/Relative-Bold.ttf) format("truetype"), url(assets/fonts/Relative-Bold.otf) format("opentype"); }
 
 @font-face {
   font-family: "Relative Book";
-  src: url(0c0bbce908ab256f3f65046e21555197.woff2) format("woff2"), url(5c957a27ccf53bf1bf992e57aaf26920.woff) format("woff"), url(62c92bfd4402a7e30be2fcc09275b33e.ttf) format("truetype"), url(a5718d189ae9ed8a05cd592b38f6655c.otf) format("opentype"); }
+  src: url(assets/fonts/Relative-Book.woff2) format("woff2"), url(assets/fonts/Relative-Book.woff) format("woff"), url(assets/fonts/Relative-Book.ttf) format("truetype"), url(assets/fonts/Relative-Book.otf) format("opentype"); }
 
 @font-face {
   font-family: "Relative Medium";
-  src: url(6b1c6523f77893cb95b5dcf9a6dda27c.woff2) format("woff2"), url(17cd0b89b43f391e30cd271fffd2aab6.woff) format("woff"), url(1917ef2d20d653aa23da5f0ba9eea19b.ttf) format("truetype"), url(271cd57fcce19019d7bb8f809576a89c.otf) format("opentype"); }
+  src: url(assets/fonts/Relative-Medium.woff2) format("woff2"), url(assets/fonts/Relative-Medium.woff) format("woff"), url(assets/fonts/Relative-Medium.ttf) format("truetype"), url(assets/fonts/Relative-Medium.otf) format("opentype"); }
 
 @font-face {
   font-family: "Tissa Pro Regular";
-  src: url(a4492f51138092b526f933adf6c73df7.woff2) format("woff2"), url(ba292fa1ce33a895337b9db636a5b368.woff) format("woff"), url(1b9012bf05f8833e1e7577d37426434e.ttf) format("truetype"), url(2c652c1749bddfaa46c67ebda365d359.otf) format("opentype"); }
+  src: url(assets/fonts/TissaProRegular.woff2) format("woff2"), url(assets/fonts/TissaProRegular.woff) format("woff"), url(assets/fonts/TissaProRegular.ttf) format("truetype"), url(assets/fonts/TissaProRegular.otf) format("opentype"); }
 
 /* __________ TEXT STYLES __________ */
 .header__title-p, .header__vlogger, .popup__description, .popup__description--explanation, .popup__description--end {
@@ -192,7 +192,7 @@ svg {
 .line {
   width: 40px;
   height: 0;
-  background-image: url(10925e3cdfd5ba9479c2b03d9ed496fc.svg);
+  background-image: url(assets/images/timeline.svg);
   background-size: auto 600px;
   background-position: center top;
   margin: 50vh auto;
@@ -201,7 +201,7 @@ svg {
 .back-button {
   border: 1px solid #CD8001;
   background-color: #FFA101;
-  background-image: url(9fb7ed25fdf13143a76d2b79f26b909b.svg);
+  background-image: url(assets/images/sluiten.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 2em;
@@ -262,9 +262,9 @@ svg {
     vertical-align: -16%;
     margin-right: 0.618em; }
   .header__vlogger--tess::before {
-    background: url(76ad82799a57b881355650f8f2c91f0e.svg); }
+    background: url(assets/images/tess.svg); }
   .header__vlogger--janwillem::before {
-    background: url(63f741d8e8b0e3f2f881591f8a74eae5.svg); }
+    background: url(assets/images/janwillem.svg); }
 
 /* __________ TIMELINE EVENTS __________ */
 .event-container, .event-container--explanation, .event-container--end {
@@ -325,7 +325,7 @@ svg {
     width: 100%;
     margin-top: 1em; }
     .popup__image-button:before {
-      background: url(585576b2edccb148cc637861c5604ad1.svg);
+      background: url(assets/images/foto.svg);
       background-repeat: no-repeat;
       content: "";
       display: inline-block;
@@ -399,21 +399,21 @@ svg {
     transform: scale(0.4);
     transition-delay: 0.3s; }
   .circle--straat {
-    background-image: url(9ecd5b254c4bf037320f837f0d6e5ac3.svg);
+    background-image: url(assets/images/straat.svg);
     background-position: center 9px; }
   .circle--plaats {
-    background-image: url(526cb3a88b7c6d4dbc6e5ba3bbb2e642.svg); }
+    background-image: url(assets/images/omgeving.svg); }
   .circle--overig {
-    background-image: url(d05766ee60407ca6f149e7d884a558f4.svg);
+    background-image: url(assets/images/overig.svg);
     background-position: center 8px; }
   .circle--slachtoffer {
-    background-image: url(33f32ea2ea1bd34a4c6888fbcd317344.svg);
+    background-image: url(assets/images/slachtoffer.svg);
     background-position: center 7px; }
   .circle--verdachte {
-    background-image: url(0e225eac3eff386cca3e71bf6f5b8b5f.svg);
+    background-image: url(assets/images/verdachte.svg);
     background-position: center 7px; }
   .circle--huis {
-    background-image: url(99d3614b357bb890a35658f03a7011a4.svg); }
+    background-image: url(assets/images/huis.svg); }
   .circle--hidden {
     transform: scale(0); }
 
