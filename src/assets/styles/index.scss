@@ -166,7 +166,7 @@ svg {
 	&__time {
 		font-family: "Relative Bold";
 		font-size: 0.9em;
-		margin-bottom: 0.3em;
+		margin-bottom: 0.4em;
 		color: $text-color-lightgrey;
 	}
 
@@ -179,6 +179,21 @@ svg {
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
+	}
+
+	&__image-button {
+		height: 48px;
+		width: 100%;
+		background-color: $orange;
+		margin-top: 1em;
+		border: 1px solid $orange-border;
+		color: #fff;
+		font-family: "Relative Bold";
+		font-size: 16px;
+		font-weight: 500;
+		box-shadow: 0 6px 10px -5px $orange-shadow;
+		@include border-radius(5px);
+		cursor: pointer;
 	}
 
 	&__close-button {
