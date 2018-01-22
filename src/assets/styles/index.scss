@@ -283,6 +283,13 @@ svg {
 
 	&--explanation {
 		margin-top: -20px;
+		transition-delay: 1s;
+		transform: scale(0.4);
+	}
+
+	&--end {
+		transform: scale(0.4);
+		transition-delay: 1s;
 	}
 
 	&--straat {
