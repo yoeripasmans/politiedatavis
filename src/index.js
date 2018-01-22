@@ -587,20 +587,27 @@ d3.tsv("data/data.tsv", function(error, data) {
 			description.classList.add("popup__description");
 
 			//Adds image button
-			if(eventsContainers[i].getAttribute("screenshot") !== "undefined"){
-			var imgButton = document.createElement("button");
-			popups[i].appendChild(imgButton);
-			imgButton.textContent = "Afbeelding bekijken";
-			imgButton.classList.add("popup__image-button");
-			imgButton.addEventListener("click", function(){
-				createImg(this);
-			});
-		}
+			if (eventsContainers[i].getAttribute("screenshot") !== "undefined") {
+				var imgButton = document.createElement("button");
+				popups[i].appendChild(imgButton);
+				imgButton.textContent = "Afbeelding bekijken";
+				imgButton.classList.add("popup__image-button");
+				imgButton.addEventListener("click", function() {
+					createImg(this);
+				});
+			}
 		}
 
-		function createImg(_this){
+		function createImg(_this) {
 			var img = document.createElement("div");
+			var closeButton = document.createElement("button");
+			document.querySelector('body').appendChild(closeButton);
 			document.querySelector('body').appendChild(img);
+			closeButton.classList.add("popup__close-button");
+			closeButton.addEventListener('click', function(){
+				document.querySelector('body').removeChild(closeButton);
+				document.querySelector('body').removeChild(img);
+			});
 			img.classList.add("popup__image");
 			img.style.backgroundImage = "url('images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".png')";
 		}
