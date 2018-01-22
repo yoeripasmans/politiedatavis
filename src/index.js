@@ -551,6 +551,17 @@ function createEvent(circleTotaleEvents, d) {
 		description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
 		description.classList.add("popup__description");
 
+		//Adds image button
+		if (eventsContainers[i].getAttribute("screenshot") !== "undefined") {
+			var imgButton = document.createElement("button");
+			popups[i].appendChild(imgButton);
+			imgButton.textContent = "Afbeelding bekijken";
+			imgButton.classList.add("popup__image-button");
+			imgButton.addEventListener("click", function() {
+				createImg(this);
+			});
+		}
+
 	}
 
 	function createImg(_this) {
@@ -565,7 +576,7 @@ function createEvent(circleTotaleEvents, d) {
 			document.querySelector('body').removeChild(img);
 		});
 		img.classList.add("popup__image");
-		img.style.backgroundImage = "url('images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".png')";
+		img.style.backgroundImage = "url('assets/images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".png')";
 	}
 
 	//Animate the event circles in
