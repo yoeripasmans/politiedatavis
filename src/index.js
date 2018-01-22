@@ -12,7 +12,7 @@ var colorRemoved = "#ffcc34";
 var colorInactive = "#e2e2e2";
 var responsiveCheck;
 var circleClickedCheck = false;
-var circleSize = d3.scaleLinear().domain([0, 8]).range([8, 36]); //Scales between two number ranges
+var circleSize = d3.scaleLinear().domain([0, 12]).range([8, 36]); //Scales between two number ranges
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2550, 2850, 3150, 3450, 3750, 4050, 4350, 4650, 4950, 5100]).range([0, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
 
@@ -35,6 +35,16 @@ var simulation = d3.forceSimulation()
 var tooltip = d3.select(".svg-container")
 	.append("div")
 	.attr("class", "tool-tip");
+
+var pixelGrowth = {
+	"plaats": 1,
+	"straat": 2,
+	"huis": 3,
+	"verdachte": 3,
+	"slachtoffer": 3,
+	"beide": 6,
+	"overig": 2
+};
 
 onResize();
 
@@ -133,14 +143,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 		}
 
 		var circleIndex = d.index; //Index of clicked circle
-		var circleTotaleEvents = d.totaleEvents; //Save the totaleSchendingen to another varible for later use
-
-		if (d.status !== "Inactief" && d.status !== "Verwijderd") {
-
-			//Trigger the scroll function so the circle moves back and forth
-			document.querySelector('body').onscroll = function() {
-				scroll(_this);
-			};
+		var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
 
 			tooltip.style("visibility", "hidden");
 
@@ -201,6 +204,23 @@ d3.tsv("data/data.tsv", function(error, data) {
 				});
 
 			createEvent(circleTotaleEvents, d);
+
+			var schendingenTotaal = [];
+			for (var i = 0; i <= d.totaleEvents; i++ ) {
+				if (i == 0) {
+					schendingenTotaal[i] = 0;
+				} else if (i > 0) {
+					var categorie = document.querySelector(".event-" + (i - 1)).getAttribute("categorie");
+					schendingenTotaal[i] = schendingenTotaal[i - 1] + pixelGrowth[categorie];
+				}
+			}
+
+			if (d.status !== "Inactief" && d.status !== "Verwijderd") {
+
+				//Trigger the scroll function so the circle moves back and forth
+				document.querySelector('body').onscroll = function() {
+					scroll(_this, d, schendingenTotaal);
+				};
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
@@ -337,7 +357,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			});
 	}
 
-	function scroll(_this, d) {
+	function scroll(_this, d, schendingenTotaal) {
 
 		if (window.pageYOffset >= 0 && window.pageYOffset <= 5100) {
 			var circleWiggle;
@@ -351,24 +371,17 @@ d3.tsv("data/data.tsv", function(error, data) {
 			.duration(200)
 			.ease(d3.easeCubicOut)
 			.attr("r", function() {
+
 				if (window.pageYOffset < 300) {
 					return circleSize(0);
-				} else if (window.pageYOffset >= 300 && window.pageYOffset < 600) {
-					return circleSize(1);
-				} else if (window.pageYOffset >= 600 && window.pageYOffset < 900) {
-					return circleSize(2);
-				} else if (window.pageYOffset >= 900 && window.pageYOffset < 1200) {
-					return circleSize(3);
-				} else if (window.pageYOffset >= 1200 && window.pageYOffset < 1500) {
-					return circleSize(4);
-				} else if (window.pageYOffset >= 1500 && window.pageYOffset < 1800) {
-					return circleSize(5);
-				} else if (window.pageYOffset >= 1800 && window.pageYOffset < 2100) {
-					return circleSize(6);
-				} else if (window.pageYOffset >= 2100 && window.pageYOffset < 2400) {
-					return circleSize(7);
-				} else if (window.pageYOffset >= 2400) {
-					return circleSize(8);
+				}
+				for (var i = 0; i < d.totaleEvents; i++){
+					if (window.pageYOffset >= i * 300 && window.pageYOffset < i * 300 + 300) {
+ 					return circleSize(schendingenTotaal[i]);
+					}
+				}
+				if (window.pageYOffset >= d.totaleEvents * 300) {
+					return circleSize(schendingenTotaal[d.totaleEvents]);
 				}
 			});
 
@@ -395,183 +408,183 @@ d3.tsv("data/data.tsv", function(error, data) {
 			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 	}
+});
 
-	function createVideoTitle(_this, d) {
+function createVideoTitle(_this, d) {
 
-		var headerDiv = document.createElement("div");
-		headerDiv.classList.add("header");
+	var headerDiv = document.createElement("div");
+	headerDiv.classList.add("header");
 
-		var videoTitle = document.createElement("h1");
-		var videoTitleTextNode = document.createTextNode(d.titel);
-		videoTitle.classList.add("header__title");
-		videoTitle.appendChild(videoTitleTextNode);
+	var videoTitle = document.createElement("h1");
+	var videoTitleTextNode = document.createTextNode(d.titel);
+	videoTitle.classList.add("header__title");
+	videoTitle.appendChild(videoTitleTextNode);
 
-		var titlePar = document.createElement("p");
-		var titleParTextNode = document.createTextNode("Video titel:");
-		titlePar.classList.add("header__title-p");
-		titlePar.appendChild(titleParTextNode);
+	var titlePar = document.createElement("p");
+	var titleParTextNode = document.createTextNode("Video titel:");
+	titlePar.classList.add("header__title-p");
+	titlePar.appendChild(titleParTextNode);
 
-		var vloggerName = document.createElement("p");
-		var vloggerTextNode = document.createTextNode(d.fragmenten[0].account);
+	var vloggerName = document.createElement("p");
+	var vloggerTextNode = document.createTextNode(d.fragmenten[0].account);
 
-		if (d.fragmenten[0].account == 'Politievlogger Jan-Willem') {
-			vloggerName.classList.add("header__vlogger", "header__vlogger--janwillem");
-		} else {
-			vloggerName.classList.add("header__vlogger", "header__vlogger--tess");
-		}
-
-		vloggerName.appendChild(vloggerTextNode);
-		headerDiv.appendChild(titlePar);
-		headerDiv.appendChild(videoTitle);
-		headerDiv.appendChild(vloggerName);
-
-		var selectSvg = document.querySelector(".svg-container");
-
-		document.body.insertBefore(headerDiv, selectSvg);
+	if (d.fragmenten[0].account == 'Politievlogger Jan-Willem') {
+		vloggerName.classList.add("header__vlogger", "header__vlogger--janwillem");
+	} else {
+		vloggerName.classList.add("header__vlogger", "header__vlogger--tess");
 	}
 
-	// create div elements on the timeline at the event points
-	function createEvent(circleTotaleEvents, d) {
+	vloggerName.appendChild(vloggerTextNode);
+	headerDiv.appendChild(titlePar);
+	headerDiv.appendChild(videoTitle);
+	headerDiv.appendChild(vloggerName);
 
-		var selectedFragment = 0;
-		var selectedSchending = 0;
+	var selectSvg = document.querySelector(".svg-container");
 
-		var eventContainerExplanation = document.createElement("div"); //Create a container for the events
-		eventContainerExplanation.classList.add("event-container--explanation");
+	document.body.insertBefore(headerDiv, selectSvg);
+}
 
-		var circleExplanation = document.createElement("div"); //Create a div for the events
-		circleExplanation.classList.add("circle", "circle--hidden", "circle--explanation");
+// create div elements on the timeline at the event points
+function createEvent(circleTotaleEvents, d) {
 
-		var popupExplanation = document.createElement("div"); //Create a container for the events description
-		popupExplanation.classList.add("popup--explanation");
+	var selectedFragment = 0;
+	var selectedSchending = 0;
 
-		var descriptionExplanation = document.createElement("p");
-		descriptionExplanation.innerHTML = "Scroll door de tijdlijn om het verloop van de video te bekijken.";
-		descriptionExplanation.classList.add("popup__description--explanation");
+	var eventContainerExplanation = document.createElement("div"); //Create a container for the events
+	eventContainerExplanation.classList.add("event-container--explanation");
 
-		//All the appends
-		document.querySelector(".line").appendChild(eventContainerExplanation);
-		eventContainerExplanation.appendChild(circleExplanation);
-		eventContainerExplanation.appendChild(popupExplanation);
-		popupExplanation.appendChild(descriptionExplanation);
+	var circleExplanation = document.createElement("div"); //Create a div for the events
+	circleExplanation.classList.add("circle", "circle--hidden", "circle--explanation");
 
-		for (var i = 0; i < circleTotaleEvents; i++) {
+	var popupExplanation = document.createElement("div"); //Create a container for the events description
+	popupExplanation.classList.add("popup--explanation");
 
-			//An array to loop through all the 'schendingen'
-			var categorieIndex = [d.fragmenten[selectedFragment].eersteSchendingCategorie, d.fragmenten[selectedFragment].tweedeSchendingCategorie, d.fragmenten[selectedFragment].derdeSchendingCategorie, d.fragmenten[selectedFragment].vierdeSchendingCategorie, d.fragmenten[selectedFragment].vijfdeSchendingCategorie, d.fragmenten[selectedFragment].zesdeSchendingCategorie];
+	var descriptionExplanation = document.createElement("p");
+	descriptionExplanation.innerHTML = "Scroll door de tijdlijn om het verloop van de video te bekijken.";
+	descriptionExplanation.classList.add("popup__description--explanation");
 
-			var beschrijvingIndex = [d.fragmenten[selectedFragment].eersteSchendingBeschrijving, d.fragmenten[selectedFragment].tweedeSchendingBeschrijving, d.fragmenten[selectedFragment].derdeSchendingBeschrijving, d.fragmenten[selectedFragment].vierdeSchendingBeschrijving, d.fragmenten[selectedFragment].vijfdeSchendingBeschrijving, d.fragmenten[selectedFragment].zesdeSchendingBeschrijving];
+	//All the appends
+	document.querySelector(".line").appendChild(eventContainerExplanation);
+	eventContainerExplanation.appendChild(circleExplanation);
+	eventContainerExplanation.appendChild(popupExplanation);
+	popupExplanation.appendChild(descriptionExplanation);
 
-			var tijdIndex = [d.fragmenten[selectedFragment].eersteSchendingTijd, d.fragmenten[selectedFragment].tweedeSchendingTijd, d.fragmenten[selectedFragment].derdeSchendingTijd, d.fragmenten[selectedFragment].vierdeSchendingTijd, d.fragmenten[selectedFragment].vijfdeSchendingTijd, d.fragmenten[selectedFragment].zesdeSchendingTijd];
+	for (var i = 0; i < circleTotaleEvents; i++) {
 
-			var screenshotIndex = [d.fragmenten[selectedFragment].eersteSchendingScreenshot, d.fragmenten[selectedFragment].tweedeSchendingScreenshot, d.fragmenten[selectedFragment].derdeSchendingScreenshot, d.fragmenten[selectedFragment].vierdeSchendingScreenshot, d.fragmenten[selectedFragment].vijfdeSchendingScreenshot, d.fragmenten[selectedFragment].zesdeSchendingScreenshot];
+		//An array to loop through all the 'schendingen'
+		var categorieIndex = [d.fragmenten[selectedFragment].eersteSchendingCategorie, d.fragmenten[selectedFragment].tweedeSchendingCategorie, d.fragmenten[selectedFragment].derdeSchendingCategorie, d.fragmenten[selectedFragment].vierdeSchendingCategorie, d.fragmenten[selectedFragment].vijfdeSchendingCategorie, d.fragmenten[selectedFragment].zesdeSchendingCategorie];
 
-			var eventContainer = document.createElement("div"); //Create a container for the events
+		var beschrijvingIndex = [d.fragmenten[selectedFragment].eersteSchendingBeschrijving, d.fragmenten[selectedFragment].tweedeSchendingBeschrijving, d.fragmenten[selectedFragment].derdeSchendingBeschrijving, d.fragmenten[selectedFragment].vierdeSchendingBeschrijving, d.fragmenten[selectedFragment].vijfdeSchendingBeschrijving, d.fragmenten[selectedFragment].zesdeSchendingBeschrijving];
 
-			var popup = document.createElement("div"); //Create a container for the events description
+		var tijdIndex = [d.fragmenten[selectedFragment].eersteSchendingTijd, d.fragmenten[selectedFragment].tweedeSchendingTijd, d.fragmenten[selectedFragment].derdeSchendingTijd, d.fragmenten[selectedFragment].vierdeSchendingTijd, d.fragmenten[selectedFragment].vijfdeSchendingTijd, d.fragmenten[selectedFragment].zesdeSchendingTijd];
 
-			var circle = document.createElement("div"); //Create a div for the events
-			eventContainer.classList.add("event-container");
-			popup.classList.add("popup", "popup--hidden");
-			eventContainer.appendChild(circle);
-			eventContainer.appendChild(popup);
+		var screenshotIndex = [d.fragmenten[selectedFragment].eersteSchendingScreenshot, d.fragmenten[selectedFragment].tweedeSchendingScreenshot, d.fragmenten[selectedFragment].derdeSchendingScreenshot, d.fragmenten[selectedFragment].vierdeSchendingScreenshot, d.fragmenten[selectedFragment].vijfdeSchendingScreenshot, d.fragmenten[selectedFragment].zesdeSchendingScreenshot];
+
+		var eventContainer = document.createElement("div"); //Create a container for the events
+
+		var popup = document.createElement("div"); //Create a container for the events description
+
+		var circle = document.createElement("div"); //Create a div for the events
+		eventContainer.classList.add("event-container", "event-" + i);
+		popup.classList.add("popup", "popup--hidden");
+		eventContainer.appendChild(circle);
+		eventContainer.appendChild(popup);
 
 
-			circle.classList.add("circle", "circle--hidden", "circle--" + categorieIndex[selectedSchending]);
-			eventContainer.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
-			eventContainer.setAttribute("tijd", tijdIndex[selectedSchending]);
-			eventContainer.setAttribute("screenshot", screenshotIndex[selectedSchending]);
+		circle.classList.add("circle", "circle--hidden", "circle--" + categorieIndex[selectedSchending]);
+		eventContainer.setAttribute("categorie", categorieIndex[selectedSchending]);
+		eventContainer.setAttribute("beschrijving", beschrijvingIndex[selectedSchending]);
+		eventContainer.setAttribute("tijd", tijdIndex[selectedSchending]);
+		eventContainer.setAttribute("screenshot", screenshotIndex[selectedSchending]);
 
-			selectedSchending++;
+		selectedSchending++;
 
-			if (categorieIndex[selectedSchending] == undefined) {
-				selectedFragment++;
-				selectedSchending = 0;
-			}
-
-			eventContainer.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
-			document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
-		} //End loop
-
-		var eventContainerEnd = document.createElement("div"); //Create a container for the events
-		eventContainerEnd.classList.add("event-container--end");
-
-		var circleEnd = document.createElement("div"); //Create a div for the events
-		circleEnd.classList.add("circle", "circle--hidden", "circle--end");
-
-		var popupEnd = document.createElement("div"); //Create a container for the events description
-		popupEnd.classList.add("popup--end", "popup--hidden");
-
-		var EndDescription = document.createElement("p");
-		EndDescription.innerHTML = "The end.";
-		EndDescription.classList.add("popup__description--end");
-
-		eventContainerEnd.style.top = (circleTotaleEvents * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
-
-		//All the appends
-		document.querySelector(".line").appendChild(eventContainerEnd);
-		eventContainerEnd.appendChild(circleEnd);
-		eventContainerEnd.appendChild(popupEnd);
-		popupEnd.appendChild(EndDescription);
-
-		//Adds descriptions for all events
-		var eventsContainers = document.querySelectorAll(".event-container");
-		var popups = document.querySelectorAll(".popup");
-
-		for (i = 0; i < circleTotaleEvents; i++) {
-			//create a p for the time
-			var time = document.createElement("p");
-			time.classList.add("popup__time");
-
-			var timeText = document.createTextNode(popups[i].parentNode.getAttribute("tijd"));
-			time.appendChild(timeText);
-
-			popups[i].appendChild(time);
-
-			//Create a p for the description
-			var description = document.createElement("p");
-			eventsContainers[i].appendChild(popups[i]);
-			popups[i].appendChild(description);
-			description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
-			description.classList.add("popup__description");
-
-			//Adds image button
-			if (eventsContainers[i].getAttribute("screenshot") !== "undefined") {
-				var imgButton = document.createElement("button");
-				popups[i].appendChild(imgButton);
-				imgButton.textContent = "Afbeelding bekijken";
-				imgButton.classList.add("popup__image-button");
-				imgButton.addEventListener("click", function() {
-					createImg(this);
-				});
-			}
+		if (categorieIndex[selectedSchending] == undefined) {
+			selectedFragment++;
+			selectedSchending = 0;
 		}
 
-		function createImg(_this) {
-			var img = document.createElement("div");
-			var closeButton = document.createElement("button");
-			document.querySelector('body').appendChild(closeButton);
-			document.querySelector('body').appendChild(img);
-			closeButton.classList.add("popup__close-button");
-			closeButton.addEventListener('click', function(){
-				document.querySelector('body').removeChild(closeButton);
-				document.querySelector('body').removeChild(img);
+		eventContainer.style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;"; //Style the eventDiv
+		document.querySelector(".line").appendChild(eventContainer); //Add the eventDiv's to .line
+	} //End loop
+
+	var eventContainerEnd = document.createElement("div"); //Create a container for the events
+	eventContainerEnd.classList.add("event-container--end");
+
+	var circleEnd = document.createElement("div"); //Create a div for the events
+	circleEnd.classList.add("circle", "circle--hidden", "circle--end");
+
+	var popupEnd = document.createElement("div"); //Create a container for the events description
+	popupEnd.classList.add("popup--end", "popup--hidden");
+
+	var EndDescription = document.createElement("p");
+	EndDescription.innerHTML = "The end.";
+	EndDescription.classList.add("popup__description--end");
+
+	eventContainerEnd.style.top = (circleTotaleEvents * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
+
+	//All the appends
+	document.querySelector(".line").appendChild(eventContainerEnd);
+	eventContainerEnd.appendChild(circleEnd);
+	eventContainerEnd.appendChild(popupEnd);
+	popupEnd.appendChild(EndDescription);
+
+	//Adds descriptions for all events
+	var eventsContainers = document.querySelectorAll(".event-container");
+	var popups = document.querySelectorAll(".popup");
+
+	for (i = 0; i < circleTotaleEvents; i++) {
+		//create a p for the time
+		var time = document.createElement("p");
+		time.classList.add("popup__time");
+
+		var timeText = document.createTextNode(popups[i].parentNode.getAttribute("tijd"));
+		time.appendChild(timeText);
+
+		popups[i].appendChild(time);
+
+		//Create a p for the description
+		var description = document.createElement("p");
+		eventsContainers[i].appendChild(popups[i]);
+		popups[i].appendChild(description);
+		description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
+		description.classList.add("popup__description");
+
+		//Adds image button
+		if (eventsContainers[i].getAttribute("screenshot") !== "undefined") {
+			var imgButton = document.createElement("button");
+			popups[i].appendChild(imgButton);
+			imgButton.textContent = "Afbeelding bekijken";
+			imgButton.classList.add("popup__image-button");
+			imgButton.addEventListener("click", function() {
+				createImg(this);
 			});
-			img.classList.add("popup__image");
-			img.style.backgroundImage = "url('images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".png')";
 		}
+	}
 
-		//Animate the event circles in
-		setTimeout(function() {
-			var events = document.querySelectorAll(".circle");
-			for (i = 0; i < events.length; i++) {
-				events[i].classList.toggle("circle--hidden");
-			}
-		}, 1000);
+	function createImg(_this) {
+		var img = document.createElement("div");
+		var closeButton = document.createElement("button");
+		document.querySelector('body').appendChild(closeButton);
+		document.querySelector('body').appendChild(img);
+		closeButton.classList.add("popup__close-button");
+		closeButton.addEventListener('click', function(){
+			document.querySelector('body').removeChild(closeButton);
+			document.querySelector('body').removeChild(img);
+		});
+		img.classList.add("popup__image");
+		img.style.backgroundImage = "url('images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".png')";
+	}
 
-	} //End createEvent function
+	//Animate the event circles in
+	setTimeout(function() {
+		var events = document.querySelectorAll(".circle");
+		for (i = 0; i < events.length; i++) {
+			events[i].classList.toggle("circle--hidden");
+		}
+	}, 1000);
 
-});
+} //End createEvent function
 
 function onResize() {
 
