@@ -1,3 +1,4 @@
+/* __________ PARTIALS __________ */
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -127,20 +128,39 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+@font-face {
+  font-family: "Relative Bold";
+  src: url(assets/fonts/Relative-Bold.woff2) format("woff2"), url(assets/fonts/Relative-Bold.woff) format("woff"), url(assets/fonts/Relative-Bold.ttf) format("truetype"), url(assets/fonts/Relative-Bold.otf) format("opentype"); }
+
+@font-face {
+  font-family: "Relative Book";
+  src: url(assets/fonts/Relative-Book.woff2) format("woff2"), url(assets/fonts/Relative-Book.woff) format("woff"), url(assets/fonts/Relative-Book.ttf) format("truetype"), url(assets/fonts/Relative-Book.otf) format("opentype"); }
+
+@font-face {
+  font-family: "Relative Medium";
+  src: url(assets/fonts/Relative-Medium.woff2) format("woff2"), url(assets/fonts/Relative-Medium.woff) format("woff"), url(assets/fonts/Relative-Medium.ttf) format("truetype"), url(assets/fonts/Relative-Medium.otf) format("opentype"); }
+
+@font-face {
+  font-family: "Tissa Pro Regular";
+  src: url(assets/fonts/TissaProRegular.woff2) format("woff2"), url(assets/fonts/TissaProRegular.woff) format("woff"), url(assets/fonts/TissaProRegular.ttf) format("truetype"), url(assets/fonts/TissaProRegular.otf) format("opentype"); }
+
+/* __________ TEXT STYLES __________ */
+.header__title-p, .header__vlogger, .popup__description, .popup__description--explanation, .popup__description--end {
+  font-family: "Tissa Pro Regular";
+  font-size: 1em;
+  color: #485253;
+  line-height: 1.3em; }
+
+.header__title {
+  font-family: "Relative Bold";
+  font-size: 3em;
+  color: black;
+  line-height: 1em; }
+
+/* __________ GENERAL __________ */
 body {
-  background-color: #fff; }
-
-.line {
-  width: 40px;
-  background-image: url(f4078da300dbbdc88452bc7cd14f69e2.svg);
-  background-size: auto 600px;
-  background-position: center top;
-  margin: 50vh auto; }
-
-.back-button {
-  position: fixed;
-  left: 5em;
-  top: 5em; }
+  margin: 0;
+  padding: 0; }
 
 svg {
   display: block;
@@ -150,5 +170,251 @@ svg {
   right: 0;
   top: 0;
   bottom: 0; }
+
+.svg-container {
+  display: inline-block;
+  position: absolute;
+  width: 100%; }
+
+/* __________ OVERVIEW __________ */
+.tool-tip {
+  position: absolute;
+  z-index: 10;
+  color: #fff;
+  padding: 8px;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 6px;
+  font-size: 15px;
+  visibility: hidden; }
+
+/* __________ TIMELINE __________ */
+.line {
+  width: 40px;
+  height: 0;
+  background-image: url(assets/images/timeline.svg);
+  background-size: auto 600px;
+  background-position: center top;
+  margin: 50vh auto;
+  background-repeat: repeat-y; }
+
+.back-button {
+  border: 1px solid #CD8001;
+  background-color: #FFA101;
+  background-image: url(assets/images/sluiten.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2em;
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  position: fixed;
+  right: 5em;
+  top: 5em;
+  cursor: pointer;
+  z-index: 999;
+  transition-duration: 0.2s; }
+  .back-button:hover {
+    box-shadow: 0 6px 10px -5px rgba(255, 161, 1, 0.7); }
+
+.close-button {
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 15em;
+  position: fixed;
+  bottom: 4em;
+  z-index: 99999; }
+
+/* __________ TIMELINE HEADING TEXT __________ */
+.header {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translate(-40%, -50%); }
+  @media (max-width: 1000px) {
+    .header {
+      width: 70vw;
+      transform: translate(-45%, -50%); } }
+  @media (max-width: 700px) {
+    .header {
+      width: 90vw;
+      transform: translate(-50%, -50%); } }
+  .header__title-p {
+    font-size: 0.8em;
+    display: block;
+    margin-bottom: 0.618em; }
+  .header__title {
+    display: block; }
+    @media (max-width: 700px) {
+      .header__title {
+        font-size: 2em; } }
+  .header__vlogger {
+    font-size: 1.2em;
+    display: block;
+    margin-top: 1em; }
+  .header .header__vlogger--tess::before, .header .header__vlogger--janwillem::before {
+    content: "";
+    display: inline-block;
+    width: 17px;
+    height: 20px;
+    vertical-align: -16%;
+    margin-right: 0.618em; }
+  .header__vlogger--tess::before {
+    background: url(assets/images/tess.svg); }
+  .header__vlogger--janwillem::before {
+    background: url(assets/images/janwillem.svg); }
+
+/* __________ TIMELINE EVENTS __________ */
+.event-container, .event-container--explanation, .event-container--end {
+  position: absolute;
+  max-width: 350px;
+  display: flex;
+  padding-right: 30px;
+  box-sizing: border-box; }
+  @media screen and (max-width: 499px) {
+    .event-container, .event-container--explanation, .event-container--end {
+      width: 200%; }
+      .event-container--explanation {
+        width: 200%; }
+      .event-container--end {
+        width: 200%; } }
+
+.popup, .popup--explanation, .popup--end {
+  margin-left: 40px;
+  transform: translateY(-50%) scale(1);
+  transform-origin: left center;
+  transition: transform 0.3s;
+  transition-timing-function: cubic-bezier(0.75, -0.5, 0, 1.75);
+  z-index: 999; }
+
+.close-button, .popup__image-button {
+  border: 1px solid #CD8001;
+  height: 48px;
+  background-color: #FFA101;
+  color: #fff;
+  font-family: "Relative Medium";
+  font-size: 16px;
+  font-weight: 500;
+  transition-duration: 0.2s;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer; }
+  .close-button:hover, .popup__image-button:hover {
+    box-shadow: 0 6px 10px -5px rgba(255, 161, 1, 0.7); }
+
+.popup {
+  margin-top: 20px; }
+  .popup__time {
+    font-family: "Relative Bold";
+    font-size: 0.9em;
+    margin-bottom: 0.4em;
+    color: #485253; }
+  .popup__image {
+    background-color: rgba(255, 255, 255, 0.95);
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    position: fixed;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; }
+  .popup__image-button {
+    width: 100%;
+    margin-top: 1em; }
+    .popup__image-button:before {
+      background: url(assets/images/foto.svg);
+      background-repeat: no-repeat;
+      content: "";
+      display: inline-block;
+      width: 23px;
+      height: 20px;
+      vertical-align: -25%;
+      margin-right: 0.618em; }
+  .popup__close-button {
+    position: fixed;
+    right: 2em;
+    top: 2em;
+    cursor: pointer;
+    z-index: 99999; }
+  .popup__description, .popup__description--explanation, .popup__description--end {
+    flex-shrink: 1;
+    height: auto;
+    padding: 20px;
+    border: 1px solid #E3E3E3;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 4px 10px rgba(76, 76, 76, 0.1);
+    -moz-box-shadow: 0px 4px 10px rgba(76, 76, 76, 0.1);
+    box-shadow: 0px 4px 10px rgba(76, 76, 76, 0.1);
+    background-color: white; }
+    .popup__description::before, .popup__description--explanation::before, .popup__description--end::before, .popup__description--end:before {
+      left: 0;
+      top: 50%;
+      margin-left: -10px;
+      margin-top: -9px;
+      content: " ";
+      height: 20px;
+      width: 20px;
+      position: absolute;
+      transform: rotate(45deg);
+      border-left: solid 1px #E3E3E3;
+      border-bottom: solid 1px #E3E3E3;
+      border-bottom-left-radius: 5px;
+      background-color: white; }
+  .popup--end {
+    margin-top: 20px; }
+  .popup--hidden {
+    transform: translateY(-50%) scale(0);
+    transition: transform 0.2s;
+    transition-timing-function: linear; }
+
+.circle {
+  flex-shrink: 0;
+  height: 40px;
+  width: 40px;
+  transform-origin: center;
+  transform: scale(1);
+  border-radius: 50px;
+  border: 1px solid #E3E3E3;
+  -webkit-box-shadow: 0px 4px 10px rgba(76, 76, 76, 0.1);
+  -moz-box-shadow: 0px 4px 10px rgba(76, 76, 76, 0.1);
+  box-shadow: 0px 4px 10px rgba(76, 76, 76, 0.1);
+  background-color: #fff;
+  transition-delay: 1s;
+  transition: transform 0.5s;
+  transition-timing-function: cubic-bezier(0.75, -0.5, 0, 1.75);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 23px;
+  box-sizing: border-box; }
+  .circle--explanation {
+    margin-top: -20px;
+    transition-delay: 0.3s;
+    transform: scale(0.4); }
+  .circle--end {
+    transform: scale(0.4);
+    transition-delay: 0.3s; }
+  .circle--straat {
+    background-image: url(assets/images/straat.svg);
+    background-position: center 9px; }
+  .circle--plaats {
+    background-image: url(assets/images/omgeving.svg); }
+  .circle--overig {
+    background-image: url(assets/images/overig.svg);
+    background-position: center 8px; }
+  .circle--slachtoffer {
+    background-image: url(assets/images/slachtoffer.svg);
+    background-position: center 7px; }
+  .circle--verdachte {
+    background-image: url(assets/images/verdachte.svg);
+    background-position: center 7px; }
+  .circle--huis {
+    background-image: url(assets/images/huis.svg); }
+  .circle--hidden {
+    transform: scale(0); }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJidW5kbGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

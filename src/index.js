@@ -1,6 +1,7 @@
 /* __________ AUTOMATIC RELOAD __________ */
 
 require('./assets/styles/index.scss');
+
 import * as d3 from 'd3';
 
 /* __________ VARIABLES __________ */
@@ -18,7 +19,7 @@ var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 13
 
 d3.select(window).on('resize', onResize);
 
-var svg = d3.select(".svg-container")
+var svg = d3.select("body").append("div").attr('class', 'svg-container')
 	.append("svg")
 	.attr("height", height)
 	.attr("width", window.innerWidth)
@@ -224,7 +225,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 			//Insert backbutton
 			d3.select(".svg-container").insert('button', 'svg')
-				.text('Terug')
 				.attr('class', 'back-button')
 				.on('click', function(d) {
 
@@ -402,7 +402,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			}
 		}
 
-		if (window.pageYOffset >= popup.length * 300 + 290){
+		if (window.pageYOffset >= popup.length * 300 + 290) {
 			document.querySelector('.popup--end').classList.remove("popup--hidden");
 		} else if (window.pageYOffset < popup.length * 300 + 290) {
 			document.querySelector('.popup--end').classList.add("popup--hidden");
@@ -517,8 +517,9 @@ function createEvent(circleTotaleEvents, d) {
 	var popupEnd = document.createElement("div"); //Create a container for the events description
 	popupEnd.classList.add("popup--end", "popup--hidden");
 
+
 	var EndDescription = document.createElement("p");
-	EndDescription.innerHTML = "The end.";
+	EndDescription.innerHTML = "Einde van de video.";
 	EndDescription.classList.add("popup__description--end");
 
 	eventContainerEnd.style.top = (circleTotaleEvents * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
@@ -550,16 +551,6 @@ function createEvent(circleTotaleEvents, d) {
 		description.innerHTML = description.parentNode.parentNode.getAttribute("beschrijving");
 		description.classList.add("popup__description");
 
-		//Adds image button
-		if (eventsContainers[i].getAttribute("screenshot") !== "undefined") {
-			var imgButton = document.createElement("button");
-			popups[i].appendChild(imgButton);
-			imgButton.textContent = "Afbeelding bekijken";
-			imgButton.classList.add("popup__image-button");
-			imgButton.addEventListener("click", function() {
-				createImg(this);
-			});
-		}
 	}
 
 	function createImg(_this) {
@@ -567,7 +558,8 @@ function createEvent(circleTotaleEvents, d) {
 		var closeButton = document.createElement("button");
 		document.querySelector('body').appendChild(closeButton);
 		document.querySelector('body').appendChild(img);
-		closeButton.classList.add("popup__close-button");
+		closeButton.classList.add("close-button");
+		closeButton.innerHTML = "Afbeelding sluiten";
 		closeButton.addEventListener('click', function(){
 			document.querySelector('body').removeChild(closeButton);
 			document.querySelector('body').removeChild(img);
