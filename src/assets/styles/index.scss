@@ -1,11 +1,8 @@
 /* __________ PARTIALS __________ */
-
 @import "partials/reset";
 @import "modules/colors";
 @import "modules/mixins";
-
 /* __________ TEXT STYLES __________ */
-
 %paragraph-text-style {
 	font-family: "Tissa Pro Regular";
 	font-size: 1em;
@@ -20,7 +17,6 @@
 	line-height: 1em;
 }
 /* __________ GENERAL __________ */
-
 body {
 	margin: 0;
 	padding: 0;
@@ -41,9 +37,7 @@ svg {
 	position: absolute;
 	width: 100%;
 }
-
 /* __________ OVERVIEW __________ */
-
 .tool-tip {
 	position: absolute;
 	z-index: 10;
@@ -55,9 +49,7 @@ svg {
 	font-size: 15px;
 	visibility: hidden;
 }
-
 /* __________ TIMELINE __________ */
-
 .line {
 	width: 40px;
 	height: 0;
@@ -74,20 +66,16 @@ svg {
 	top: 5em;
 	z-index: 999;
 }
-
 /* __________ TIMELINE HEADING TEXT __________ */
-
 .header {
 	position: absolute;
 	top: 200px;
 	left: 50%;
 	transform: translate(-40%, -50%);
-
 	@media (max-width: 1000px) {
 		width: 70vw;
 		transform: translate(-45%, -50%);
 	}
-
 	@media (max-width: 700px) {
 		width: 90vw;
 		transform: translate(-50%, -50%);
@@ -95,7 +83,7 @@ svg {
 
 	&__title-p {
 		@extend %paragraph-text-style;
-		font-size: .8em;
+		font-size: 0.8em;
 		display: block;
 		margin-bottom: 0.618em;
 	}
@@ -134,9 +122,7 @@ svg {
 		background: url("../images/janwillem.svg");
 	}
 }
-
 /* __________ TIMELINE EVENTS __________ */
-
 .event-container {
 	position: absolute;
 	max-width: 350px;
@@ -151,9 +137,8 @@ svg {
 	&--end {
 		@extend .event-container;
 	}
-
 	@media screen and (max-width: 499px) {
-        width: 200%;
+		width: 200%;
 
 		&--explanation {
 			width: 200%;
@@ -167,10 +152,10 @@ svg {
 
 %popup {
 	margin-left: 40px;
-    transform: translateY(-50%) scale(1);
-    transform-origin: left center;
-    transition: transform 0.3s;
-    transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
+	transform: translateY(-50%) scale(1);
+	transform-origin: left center;
+	transition: transform 0.3s;
+	transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
 	z-index: 999;
 }
 
@@ -185,6 +170,25 @@ svg {
 		color: $text-color-lightgrey;
 	}
 
+	&__image {
+		background-color: rgba(255,255,255,0.95);
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		position: fixed;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	&__close-button {
+		position: fixed;
+		right: 2em;
+		top: 2em;
+		cursor: pointer;
+		z-index: 99999;
+	}
+
 	&__description {
 		@extend %paragraph-text-style;
 		flex-shrink: 1;
@@ -194,10 +198,9 @@ svg {
 		@include border-radius(5px);
 		@include box-shadow(0px,4px,10px,$shadow-color);
 		background-color: white;
-
 		//Adds an arrow to the description box
 		&::before {
-			left: 0%;
+			left: 0;
 			top: 50%;
 			margin-left: -10px;
 			margin-top: -9px;
