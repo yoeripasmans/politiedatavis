@@ -61,10 +61,35 @@ svg {
 }
 
 .back-button {
+	border: 1px solid $orange-border;
+	background-color: $orange;
+	background-image: url("../images/sluiten.svg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 2em;
+	width: 40px;
+	height: 40px;
+	@include border-radius(50%);
 	position: fixed;
-	left: 5em;
+	right: 5em;
 	top: 5em;
+	cursor: pointer;
 	z-index: 999;
+	transition-duration: 0.2s;
+
+	&:hover {
+		box-shadow: 0 6px 10px -5px $orange-shadow;
+	}
+}
+
+.close-button {
+	@extend %button;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: 15em;
+	position: fixed;
+	bottom: 4em;
+	z-index: 99999;
 }
 /* __________ TIMELINE HEADING TEXT __________ */
 .header {
@@ -106,7 +131,7 @@ svg {
 	%vlogger-icon {
 		content: "";
 		display: inline-block;
-		width: 20px;
+		width: 17px;
 		height: 20px;
 		vertical-align: -16%;
 		margin-right: 0.618em;
@@ -159,6 +184,23 @@ svg {
 	z-index: 999;
 }
 
+%button {
+	border: 1px solid $orange-border;
+	height: 48px;
+	background-color: $orange;
+	color: #fff;
+	font-family: "Relative Medium";
+	font-size: 16px;
+	font-weight: 500;
+	transition-duration: 0.2s;
+	@include border-radius(5px);
+	cursor: pointer;
+
+	&:hover {
+		box-shadow: 0 6px 10px -5px $orange-shadow;
+	}
+}
+
 .popup {
 	@extend %popup;
 	margin-top: 20px;
@@ -182,18 +224,20 @@ svg {
 	}
 
 	&__image-button {
-		height: 48px;
+		@extend %button;
 		width: 100%;
-		background-color: $orange;
 		margin-top: 1em;
-		border: 1px solid $orange-border;
-		color: #fff;
-		font-family: "Relative Bold";
-		font-size: 16px;
-		font-weight: 500;
-		box-shadow: 0 6px 10px -5px $orange-shadow;
-		@include border-radius(5px);
-		cursor: pointer;
+
+		&:before {
+			background: url("../images/foto.svg");
+			background-repeat: no-repeat;
+			content: "";
+			display: inline-block;
+			width: 23px;
+			height: 20px;
+			vertical-align: -25%;
+			margin-right: 0.618em;
+		}
 	}
 
 	&__close-button {
@@ -283,13 +327,13 @@ svg {
 
 	&--explanation {
 		margin-top: -20px;
-		transition-delay: 1s;
+		transition-delay: 0.3s;
 		transform: scale(0.4);
 	}
 
 	&--end {
 		transform: scale(0.4);
-		transition-delay: 1s;
+		transition-delay: 0.3s;
 	}
 
 	&--straat {
