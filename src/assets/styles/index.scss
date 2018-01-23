@@ -39,15 +39,31 @@ svg {
 }
 /* __________ OVERVIEW __________ */
 .tool-tip {
+	@extend %paragraph-text-style;
+	padding: 16px;
+	border: 1px solid $border-color;
+	@include border-radius(5px);
+	@include box-shadow(0px,4px,10px,$shadow-color);
+	background-color: white;
 	position: absolute;
-	z-index: 10;
-	color: #fff;
-	padding: 8px;
-	background-color: #000;
-	background-color: rgba(0, 0, 0, 0.75);
-	border-radius: 6px;
-	font-size: 15px;
 	visibility: hidden;
+	max-width: 200px;
+	font-size: 0.8em;
+
+	//Adds an arrow to the description box
+	&::before {
+		left: -8px;
+		top: 16px;
+		content: "";
+		height: 14px;
+		width: 14px;
+		position: absolute;
+		transform: rotate(45deg);
+		border-left: solid 1px $border-color;
+		border-bottom: solid 1px $border-color;
+		border-bottom-left-radius: 5px;
+		background-color: white;
+	}
 }
 /* __________ TIMELINE __________ */
 .line {
@@ -75,7 +91,7 @@ svg {
 	top: 5em;
 	cursor: pointer;
 	z-index: 999;
-	transition-duration: 0.2s;
+	transition: 1s;
 
 	&:hover {
 		box-shadow: 0 6px 10px -5px $orange-shadow;
@@ -94,7 +110,7 @@ svg {
 /* __________ TIMELINE HEADING TEXT __________ */
 .header {
 	position: absolute;
-	top: 200px;
+	top: 150px;
 	left: 50%;
 	transform: translate(-40%, -50%);
 	@media (max-width: 1000px) {
@@ -192,9 +208,13 @@ svg {
 	font-family: "Relative Medium";
 	font-size: 16px;
 	font-weight: 500;
-	transition-duration: 0.2s;
+	transition: 1s;
 	@include border-radius(5px);
 	cursor: pointer;
+
+	@media screen and (max-width: 499px) {
+		font-size: 14px;
+	}
 
 	&:hover {
 		box-shadow: 0 6px 10px -5px $orange-shadow;
@@ -237,6 +257,10 @@ svg {
 			height: 20px;
 			vertical-align: -25%;
 			margin-right: 0.618em;
+
+			@media screen and (max-width: 600px) {
+				display: none;
+			}
 		}
 	}
 
@@ -257,13 +281,13 @@ svg {
 		@include border-radius(5px);
 		@include box-shadow(0px,4px,10px,$shadow-color);
 		background-color: white;
+		position: relative;
 		//Adds an arrow to the description box
 		&::before {
-			left: 0;
+			left: -11px;
 			top: 50%;
-			margin-left: -10px;
 			margin-top: -9px;
-			content: " ";
+			content: "";
 			height: 20px;
 			width: 20px;
 			position: absolute;
@@ -356,6 +380,11 @@ svg {
 	}
 
 	&--verdachte {
+		background-image: url("../images/verdachte.svg");
+		background-position: center 7px;
+	}
+
+	&--beide {
 		background-image: url("../images/verdachte.svg");
 		background-position: center 7px;
 	}
