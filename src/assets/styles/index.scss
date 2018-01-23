@@ -49,7 +49,6 @@ svg {
 	visibility: hidden;
 	max-width: 200px;
 	font-size: 0.8em;
-
 	//Adds an arrow to the description box
 	&::before {
 		left: -8px;
@@ -211,7 +210,6 @@ svg {
 	transition: 1s;
 	@include border-radius(5px);
 	cursor: pointer;
-
 	@media screen and (max-width: 499px) {
 		font-size: 14px;
 	}
@@ -257,7 +255,6 @@ svg {
 			height: 20px;
 			vertical-align: -25%;
 			margin-right: 0.618em;
-
 			@media screen and (max-width: 600px) {
 				display: none;
 			}
@@ -395,5 +392,136 @@ svg {
 
 	&--hidden {
 		transform: scale(0);
+	}
+}
+
+.intro-button {
+	z-index: 222;
+}
+
+.intro-container {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255,255,255,0.8);
+	position: fixed;
+	transition: 0.2s;
+
+	&--hidden {
+		opacity: 0;
+		z-index: -1;
+	}
+
+	&--open {
+		opacity: 1;
+		z-index: 500;
+	}
+}
+
+.open-button {
+	@extend %button;
+	position: absolute;
+	right: 2em;
+	top: 2em;
+
+	&--hidden {
+		display: none;
+	}
+}
+
+.box {
+	width: 400px;
+	height: 560px;
+	background-color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	overflow: hidden;
+	border: 1px solid $border-color;
+	@include border-radius(5px);
+	@include box-shadow(0px,4px,10px,$shadow-color);
+
+	.box-header {
+		max-width: 100%;
+		display: flex;
+		padding: 2.5em;
+
+		&__title {
+			@extend %heading-text-style;
+			@media (max-width: 700px) {
+				font-size: 2em;
+			}
+		}
+
+		&__close-button {
+			position: static;
+			margin-left: auto;
+		}
+	}
+
+	.box-container {
+		width: 100%;
+		height: 20em;
+		display: flex;
+		transition: transform 0.4s;
+		overflow: hidden;
+
+		.box-content {
+			width: 100%;
+			height: 100%;
+			padding: 0 2.5em;
+			display: flex;
+			overflow: hidden;
+			flex-direction: column;
+
+			&__img {
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 100%;
+				width: 100%;
+				height: 11em;
+				display: block;
+				pointer-events: none;
+				cursor: default;
+				z-index: 1;
+				@include border-radius(10px);
+				border: 1px solid $border-color;
+			}
+
+			&__desc {
+				@extend %paragraph-text-style;
+				margin-top: 2em;
+				font-size: 18px;
+				color: #485253;
+			}
+		}
+	}
+
+	.slider-controls {
+		position: absolute;
+		right: 2em;
+		bottom: 2em;
+		display: flex;
+
+		&__next-button {
+			@extend %button;
+			width: 10em;
+		}
+
+		&__prev-button {
+			height: 48px;
+			font-family: "Relative Medium";
+			font-size: 16px;
+			font-weight: 500;
+			cursor: pointer;
+			@media screen and (max-width: 499px) {
+				font-size: 14px;
+			}
+			background-color: #fff;
+			color: #485253;
+			border: none;
+			margin-left: auto;
+			margin-right: 15px;
+		}
 	}
 }

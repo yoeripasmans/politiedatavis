@@ -67,9 +67,15 @@ module.exports = {
 				to: 'assets/images/frames'
 			},
 			{
+				from: 'src/assets/images/uitleg',
+				to: 'assets/images/uitleg'
+
+			},
+			{
 				from: 'src/data',
 				to: 'data'
 			},
+
 		]),
 
   ],

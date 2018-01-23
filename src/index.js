@@ -122,21 +122,17 @@ d3.tsv("data/data.tsv", function(error, data) {
 			});
 	}
 
-	function getFirstPos(_this, d) {
-		const firstHorizontalPosition = d.x;
-		return firstHorizontalPosition;
-	}
-
 	function circleClickEvent(_this, d) {
 
 		circleClickedCheck = true;
-
 
 		if (window.innerWidth < 500 && circleClickedCheck == true) {
 			responsiveCheck = 5;
 		} else {
 			responsiveCheck = 2;
 		}
+
+		document.querySelector('.open-button').classList.add("open-button--hidden");
 
 		var circleIndex = d.index; //Index of clicked circle
 		var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
@@ -233,6 +229,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 					circleClickedCheck = false;
 					responsiveCheck = 2;
+
+					document.querySelector('.open-button').classList.remove("open-button--hidden");
 
 					//Removes the function on scroll
 					document.querySelector('body').onscroll = function() {};
@@ -630,6 +628,158 @@ function createEvent(circleTotaleEvents, d) {
 	}, 1000);
 
 } //End createEvent function
+
+
+
+function createIntro() {
+	var currentSlideID = 0;
+	var animatePos = 0;
+	var containerWidth = 400;
+
+	var images = ["uitleg_3", "uitleg_2", "uitleg_1"];
+	var text = ["Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken.", "Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken.", "Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken."];
+
+	var slidesLength = images.length;
+	var sliderWidth = slidesLength * containerWidth;
+
+	var introContainer = document.createElement("div");
+	document.querySelector('body').appendChild(introContainer);
+	introContainer.classList.add("intro-container", "intro-container--hidden");
+
+	var introBox = document.createElement("div");
+	introContainer.appendChild(introBox);
+	introBox.classList.add("box");
+
+	var introBoxHeader = document.createElement("header");
+	introBox.appendChild(introBoxHeader);
+	introBoxHeader.classList.add("box-header");
+
+	var introBoxHeaderTitle = document.createElement("h1");
+	introBoxHeader.appendChild(introBoxHeaderTitle);
+	introBoxHeaderTitle.textContent = "Uitleg";
+	introBoxHeaderTitle.classList.add("box-header__title");
+
+	var introBoxContainer = document.createElement("div");
+	introBox.appendChild(introBoxContainer);
+	introBoxContainer.classList.add("box-container");
+
+	var sliderControlsContainer = document.createElement("div");
+	introBox.appendChild(sliderControlsContainer);
+	sliderControlsContainer.classList.add("slider-controls");
+
+	var prevButton = document.createElement("button");
+	sliderControlsContainer.appendChild(prevButton);
+	prevButton.textContent = "Vorige";
+	prevButton.classList.add("slider-controls__prev-button");
+	prevButton.addEventListener('click', animatePrev);
+
+	var nextButton = document.createElement("button");
+	sliderControlsContainer.appendChild(nextButton);
+	nextButton.textContent = "Volgende stap";
+	nextButton.classList.add("slider-controls__next-button");
+	nextButton.addEventListener('click', animateNext);
+
+	var openButton = document.createElement("button");
+	document.querySelector('body').appendChild(openButton);
+	openButton.textContent = "Uitleg";
+	openButton.classList.add("open-button");
+	openButton.addEventListener('click', openSlider);
+
+	var closeButton = document.createElement("button");
+	document.querySelector('.box-header').appendChild(closeButton);
+	closeButton.classList.add("box-header__close-button", "back-button");
+	closeButton.addEventListener('click', closeSlider);
+
+	//Makes three slides
+	for (var i = 0; i < slidesLength; i++) {
+
+		var contentContainer = document.createElement("div");
+		introBoxContainer.appendChild(contentContainer);
+		contentContainer.classList.add("box-content");
+
+		var introImg = document.createElement("div");
+		contentContainer.appendChild(introImg);
+		introImg.classList.add("box-content__img");
+		introImg.style.backgroundImage = "url('assets/images/uitleg/" + images[i] + ".gif')";
+
+		var introDesc = document.createElement("p");
+		contentContainer.appendChild(introDesc);
+		introDesc.classList.add("box-content__desc");
+		introDesc.textContent = text[i];
+	}
+
+	function openSlider(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		introContainer.classList.add("intro-container--open");
+		introContainer.classList.remove("intro-container--hidden");
+		currentSlideID = 0;
+		animatePos = containerWidth * currentSlideID;
+		sliderNavIcons();
+		initPos();
+	}
+
+	function closeSlider() {
+		document.querySelector('.intro-container').classList.add("intro-container--hidden");
+		document.querySelector('.intro-container').classList.remove("intro-container--open");
+		sliderNavIcons();
+		initPos();
+	}
+
+	function setSliderWidth() {
+		sliderWidth = slidesLength * containerWidth;
+		animatePos = containerWidth * currentSlideID;
+		introBoxContainer.style.width = sliderWidth + 'px';
+		introBoxContainer.style.transform = 'translateX(-' + animatePos + 'px)';
+	}
+
+	function animateNext() {
+		if (currentSlideID < (slidesLength - 1)) {
+			currentSlideID++;
+			animatePos = containerWidth * currentSlideID;
+			introBoxContainer.style.transform = 'translateX(-' + animatePos + 'px)';
+			sliderNavIcons();
+		} else {
+			closeSlider();
+		}
+
+	}
+
+	function animatePrev() {
+		if (currentSlideID > 0) {
+			currentSlideID--;
+			animatePos = containerWidth * currentSlideID;
+			introBoxContainer.style.transform = 'translateX(-' + animatePos + 'px)';
+			sliderNavIcons();
+		}
+	}
+
+	function sliderNavIcons() {
+		if (currentSlideID === 0) {
+			prevButton.style.display = 'none';
+		} else {
+			prevButton.style.display = 'inline';
+		}
+
+		if (currentSlideID >= (slidesLength - 1)) {
+			nextButton.textContent = "Naar visualizatie";
+
+		} else {
+			nextButton.textContent = "Volgende stap";
+		}
+
+	}
+
+	function initPos() {
+		animatePos = containerWidth * currentSlideID;
+		introBoxContainer.style.transform = 'translateX(-' + animatePos + 'px)';
+	}
+
+	setSliderWidth();
+
+}
+
+createIntro();
 
 function onResize() {
 
