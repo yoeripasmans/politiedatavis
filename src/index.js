@@ -594,7 +594,7 @@ function createEvent(circleTotaleEvents, d) {
             document.querySelector('body').removeChild(img);
         });
         img.classList.add("popup__image");
-        img.style.backgroundImage = "url('assets/images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".png')";
+        img.style.backgroundImage = "url('assets/images/frames/" + _this.parentNode.parentNode.getAttribute("screenshot") + ".jpg')";
     }
 
     //Animate the event circles in
