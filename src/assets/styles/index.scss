@@ -39,18 +39,6 @@ svg {
 }
 /* __________ OVERVIEW __________ */
 .tool-tip {
-	/* @extend %paragraph-text-style;
-	position: absolute;
-	z-index: 10;
-	color: #fff;
-	padding: 8px;
-	background-color: #000;
-	background-color: rgba(0, 0, 0, 0.75);
-	@include border-radius(5px);
-	font-size: 15px;
-	visibility: hidden;
-	max-width: 200px; */
-
 	@extend %paragraph-text-style;
 	padding: 16px;
 	border: 1px solid $border-color;
@@ -61,6 +49,7 @@ svg {
 	visibility: hidden;
 	max-width: 200px;
 	font-size: 0.8em;
+
 	//Adds an arrow to the description box
 	&::before {
 		left: -8px;
