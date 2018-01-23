@@ -1,26 +1,149 @@
-videoID	account	titel	categorie	lengte	datum	betrokken	status	indicent	locatieHerleidbaar	betrokkenenHerleidbaar	overigHerleidbaar	totaleSchendingen	totaleEvents	url	eersteSchendingCategorie	eersteSchendingTijd	eersteSchendingBeschrijving	eersteSchendingScreenshot	tweedeSchendingCategorie	tweedeSchendingTijd	tweedeSchendingBeschrijving	tweedeSchendingScreenshot	derdeSchendingCategorie	derdeSchendingTijd	derdeSchendingBeschrijving	derdeSchendingScreenshot	vierdeSchendingCategorie	vierdeSchendingTijd	vierdeSchendingBeschrijving	vierdeSchendingScreenshot	vijfdeSchendingCategorie	vijfdeSchendingTijd	vijfdeSchendingBeschrijving	vijfSchendingScreenshot	zesdeSchendingCategorie	zesdeSchendingtijd	zesdeSchendingBeschrijving	zesdeSchendingScreenshot
 1	Politievlogger Jan-Willem	Belofte maakt schuld	Overig	0:00:39	7-6-2016	Verdachte	Normaal	Klachten onderhoud tuin	1	0	0	6	3	https://youtu.be/98j5X6wtlTc?t=5m12s	plaats	5:18	De plaatsnaam wordt herkenbaar gemaakt op het verkeersbord.	fragment1_01	straat	5:22	De hele straat wordt gefilmd en het huis met alle zonnepanelen maakt het gemakkelijk herleidbaar.	fragment1_02	huis	5:29	Het opvallende schuine dak van de buren is herkenbaar.	fragment1_03
 2	Politievlogger Jan-Willem	Politie dagdienst op de motor	Medisch	0:01:18	13-6-2016	Slachtoffer	Normaal	Vrouw gaf geen gehoor	1	0	0	3	1	https://youtu.be/ll2mFFGi4DM?t=1m14s	huis	2:02	Het huisnummer op de garage is zichtbaar.	fragment2_01
 3	Politievlogger Jan-Willem	Politie deel 2 scooter controle,	Overlast	0:01:06	26-6-2016	Verdachte	Normaal	Geluidsoverlast	0	0	0	2	1	https://youtu.be/XdhoqP0fbqs?t=4m42s	overig	5:32	De wijk wordt herkenbaar in beeld gebracht.	fragment3_01
 4	Politievlogger Jan-Willem	Noodhulpdienst zaterdagmiddag	Geweld	0:03:01	10-7-2016	Beide	Normaal	Moeder dreigt met mes	1	0	0	1	1	https://youtu.be/AXdbbqk-Pvw?t=10m37s	plaats	10:41	Omliggende wijken worden herkenbaar gemaakt.	fragment4_01
 4	Politievlogger Jan-Willem	Noodhulpdienst zaterdagmiddag	Overlast	0:04:42	10-7-2016	Verdachte	Normaal	Dronken man	0	1	0	3	1	https://youtu.be/AXdbbqk-Pvw?t=12m53s	verdachte	4:40	Stem herkenbaar dader.	fragment5_01
-5	Politievlogger Jan-Willem	Politie Utrecht, dienst in de binnenstad	Overlast	0:01:47	30-10-2016	Verdachte	Normaal	Overlast op straat - ruzie	1	1	1	10	4	https://youtu.be/wjgohPDxK2o?t=12m54s	straat	13:23	Straatnaam wordt herkenbaar gemaakt.	fragment6_01	huis	13:25	Huisnummer in beeld.	fragment6_02	verdachte	13:39	Herkenbaare tattoo van de man in beeld gebracht, daarnaast herkenbare kleding en zie je dat hij in een scootmobiel rijdt.	fragment6_03	overig	14:20	Herkenbaar gebouw in beeld gebracht	fragment6_04
+5	Politievlogger Jan-Willem	Politie Utrecht, dienst in de binnenstad	Overlast	0:01:47	30-10-2016	Verdachte	Normaal	Overlast op straat - ruzie	1	1	1	10	4	https://youtu.be/wjgohPDxK2o?t=12m54s	straat	13:23	Straatnaam wordt herkenbaar in beeld gebracht.	fragment6_01	huis	13:25	Huisnummer in beeld.	fragment6_02	verdachte	13:39	Herkenbaare tattoo van de man in beeld gebracht, daarnaast herkenbare kleding en zie je dat hij in een scootmobiel rijdt.	fragment6_03	overig	14:20	Herkenbaar gebouw in beeld gebracht	fragment6_04
 6	Politievlogger Jan-Willem	Vrouw onwel in de woning & aanhouding verdachten inbraak	Medisch	0:03:09	5-2-2017	Slachtoffer	Normaal	Vrouw onwel	0	0	0	2	1	https://youtu.be/OqveglzFyyk?t=2m9s	overig	2:51	Herkenbare gebouwen in beeld gebracht.	fragment7_01
 7	Politievlogger Jan-Willem	Politie aanhouding vernieling	Overlast	0:02:28	19-2-2017	Verdachte	Normaal	Vernieling	1	1	0	6	2	https://youtu.be/gu1Etp-u0Ng?t=3m44s	verdachte	3:54	De kleding en het opvallende accent van de verdachten zijn duidelijk te zien / horen.	fragment8_01	huis	4:00	Enkele huisnummers in de straat worden herkenbaar in beeld gebracht.	fragment8_02
 8	Politievlogger Jan-Willem	Dienst samen met de politiestudent👮	Geweld	0:02:33	26-3-2017	Verdachte	Normaal	Ruzie in woning	1	1	0	6	3	https://youtu.be/dMreJqwiXwI?t=9m28s	plaats	10:11	De plaatsnaam wordt herkenbaar gemaakt op het verkeersbord.	fragment9_01	straat	10:54	De gehele route is te volgen waardoor de straat eenvoudig te herleiden is.	fragment9_02	slachtoffer	11:02	Ondanks dat de vrouw onherkenbaar is gemaaakt, zie je nog wel haar kleding en lengte.	fragment9_03
-9	Politievlogger Jan-Willem	Dylan Peys mee met politievlogger Jan-Willem	Overig	0:03:01	30-4-2017	Verdachte	Aangepast	Aanhouding diefstal	1	1	0	3	4	https://youtu.be/5G-gQ94p7FQ?t=3m6s	plaats	3:14	De wijk waarin het indicent plaatsvindt wordt in beeld gebracht.	fragment10_01	straat	3:31	De gehele route is te volgen waardoor de straat eenvoudig te herleiden is.	fragment10_2	huis	3:37	Het huis van de verdachte wordt duidelijk in beeld gebracht.	fragment10_03	verdachte	5:08	De leeftijd van het slachtoffer wordt in de video vermeld. In combinatie met het huis waar de verdachte woont is zijn identiteit te achterhalen.
-10	Politievlogger Jan-Willem	Melding man met een vuurwapen	Medisch	0:01:08	20-8-2016	Slachtoffer	Normaal	Vrouw onwel	1	0	0	2	3	https://youtu.be/Ty9uuwhjIHs?t=8m53s	plaats	9:20	Er zijn herkenbare omgevingspunten zichtbaar, waaruit de omgeving kan worden herleid.	fragment11_01	straat	9:47	De gehele route is te volgen waardoor de straat eenvoudig te herleiden is.	fragment11_02	huis	9:50	De voortuin van het slachtoffer is herkenbaar in beeld.	fragment11_03
-11	Politievlogger Tess	Noodhulp met Mark in de Bijlmermeer Politievlogger Tess	Geweld	0:00:56	19-5-2017	Beide	Normaal	Huiselijk geweld	0	1	1	3	2	https://youtu.be/sJlI1QRfouU?t=1m58s	overig	2:17	Kentekens van auto's in de straat worden weergegeven. Ook zijn de huisnummers van de overburen te zien.	fragment12_01	slachtoffer	2:37	Het postuur en de kleding van het slachtoffer zijn duidelijk zichtbaar. Ook is haar fiets duidelijk te zien.	fragment12_02
-12	Politievlogger Jan-Willem	Feyenoord finale, FiFa melding, en RTL Live	Overlast	0:02:45	21-5-2017	Verdachte	Normaal	Overlast	1	0	1	3	3	https://youtu.be/Tmqw_jVcjxQ?t=13m10s	straat	14:00	De gehele route wordt gefilmd waaruit de straat eenvoudig herleid kan worden.	fragment13_01	huis	14:31	Het huisnummer wordt hier onzorgvuldig vervaagd waardoor het alsnog goed te zien is.	fragment13_02	overig	14:47	Het kenteken van een van de auto's voor het huis wordt getoond.	fragment13_03
-13	Politievlogger Jan-Willem	Nachtdienst Politie, laserpen, drugs, wapen en diverse meldingen	Overlast	0:01:10	4-6-2017	Verdachte	Normaal	Geluidsoverlast	1	1	0	3	2	https://youtu.be/IFvaNxxH5is?t=2m	straat	2:02	De wijk waarin het indicent plaatsvindt wordt in beeld gebracht.	fragment14_01	verdachte	2:36	De stem van de verdachte is herkenbaar en het gezicht is onzorgvuldig vervaagd.	fragment14_02
-13	Politievlogger Jan-Willem	Nachtdienst Politie, laserpen, drugs, wapen en diverse meldingen	Verkeer	0:01:02	4-6-2017	Verdachte	Normaal	Bekeuring foutparkeren	1	0	1	3	2	https://youtu.be/IFvaNxxH5is?t=3m10s	straat	3:12	De wijk waarin het indicent plaatsvindt wordt in beeld gebracht.	fragment15_01	overig	3:16	Kenteken van een auto in de straat wordt getoond.	fragment15_02
+9	Politievlogger Jan-Willem	Dylan Peys mee met politievlogger Jan-Willem	Overig	0:03:01	30-4-2017	Verdachte	Aangepast	Aanhouding diefstal	1	1	0	9	4	https://youtu.be/5G-gQ94p7FQ?t=3m6s	plaats	3:14	De wijk waarin het incident plaatsvindt wordt in beeld gebracht.	fragment10_01	straat	3:31	De gehele route is te volgen waardoor de straat eenvoudig te herleiden is.	fragment10_2	huis	3:37	Het huis van de verdachte wordt duidelijk in beeld gebracht.	fragment10_03	verdachte	5:08	De leeftijd van het slachtoffer wordt in de video vermeld. In combinatie met het huis waar de verdachte woont is zijn identiteit te achterhalen.
+10	Politievlogger Jan-Willem	Melding man met een vuurwapen	Medisch	0:01:08	20-8-2016	Slachtoffer	Normaal	Vrouw onwel	1	0	0	6	3	https://youtu.be/Ty9uuwhjIHs?t=8m53s	plaats	9:20	Er zijn herkenbare omgevingspunten zichtbaar, waaruit de omgeving kan worden herleid.	fragment11_01	straat	9:47	De gehele route is te volgen waardoor de straat eenvoudig te herleiden is.	fragment11_02	huis	9:50	De voortuin van het slachtoffer is herkenbaar in beeld.	fragment11_03
+11	Politievlogger Tess	Noodhulp met Mark in de Bijlmermeer Politievlogger Tess	Geweld	0:00:56	19-5-2017	Beide	Normaal	Huiselijk geweld	0	1	1	5	2	https://youtu.be/sJlI1QRfouU?t=1m58s	overig	2:17	Kentekens van auto's in de straat worden weergegeven. Ook zijn de huisnummers van de overburen te zien.	fragment12_01	slachtoffer	2:37	Het postuur en de kleding van het slachtoffer zijn duidelijk zichtbaar. Ook is haar fiets duidelijk te zien.	fragment12_02
+12	Politievlogger Jan-Willem	Feyenoord finale, FiFa melding, en RTL Live	Overlast	0:02:45	21-5-2017	Verdachte	Normaal	Overlast	1	0	1	7	3	https://youtu.be/Tmqw_jVcjxQ?t=13m10s	straat	14:00	De gehele route wordt gefilmd waaruit de straat eenvoudig herleid kan worden.	fragment13_01	huis	14:31	Het huisnummer wordt hier onzorgvuldig vervaagd waardoor het alsnog goed te zien is.	fragment13_02	overig	14:47	Het kenteken van een van de auto's voor het huis wordt getoond.	fragment13_03
+13	Politievlogger Jan-Willem	Nachtdienst Politie, laserpen, drugs, wapen en diverse meldingen	Overlast	0:01:10	4-6-2017	Verdachte	Normaal	Geluidsoverlast	1	1	0	5	2	https://youtu.be/IFvaNxxH5is?t=2m	straat	2:02	De wijk waarin het indicent plaatsvindt wordt in beeld gebracht.	fragment14_01	verdachte	2:36	De stem van de verdachte is herkenbaar en het gezicht is onzorgvuldig vervaagd.	fragment14_02
+13	Politievlogger Jan-Willem	Nachtdienst Politie, laserpen, drugs, wapen en diverse meldingen	Verkeer	0:01:02	4-6-2017	Verdachte	Normaal	Bekeuring foutparkeren	1	0	1	4	2	https://youtu.be/IFvaNxxH5is?t=3m10s	straat	3:12	De wijk waarin het indicent plaatsvindt wordt in beeld gebracht.	fragment15_01	overig	3:16	Kenteken van een auto in de straat wordt getoond.	fragment15_02
 14	Politievlogger Tess	Noodhulp dienst met een bedreiging, diefstal en verward persoon	Verkeer	0:01:25	10-6-2017	Verdachte	Normaal	Verlaten voertuig	0	0	1	2	1	https://youtu.be/RdIAGam_EaA?t=3m24s	overig	4:25	Het kenteken van het voertuig wordt onzorgvuldig vervaagd in de hoeken. Hierdoor worden de cijfers en letters één voor één herkenbaar gemaakt.	fragment16_01
-14	Politievlogger Tess	Noodhulp dienst met een bedreiging, diefstal en verward persoon	Overlast	0:01:54	10-6-2017	Beide	Normaal	Conflict klant en winkelier	1	1	0	3	2	https://youtu.be/RdIAGam_EaA?t=5m42s	huis	6:34	Zowel de naam en het huisnummer van een dichtbijzijde winkel worden getoond.	fragment17_01	slachtoffer	6:53	Kleding en opvallende armbanden zijn duidelijk in zicht. Ook is het accent van het slachtoffer goed te herkennen. 	fragment17_02
-15	Politievlogger Tess	Aanhouding van een persoon op een dak	Overlast	0:03:00	24-6-2017	Verdachte	Normaal	Geluidsoverlast	0	0	0	1	1	https://youtu.be/x4tzFZ3ChDw?t=59s	overig	1:41	De namen van de bewoners worden aan de hand van de naambordjes getoond.	fragment18_01
-15	Politievlogger Tess	Aanhouding van een persoon op een dak	Medisch	0:02:03	24-6-2017	Slachtoffer	Normaal	Verward persoon op dak	1	0	0	2	1	https://youtu.be/x4tzFZ3ChDw?t=3m17s	plaats	3:28	Door herkenbare gebouwen is het eenvoudig te achterhalen in welke wijk ze zich bevinden.	fragment19_01
-16	Politievlogger Jan-Willem	Politievlogger op bezoek bij het basisteam Lekpoort (Houten / Nieuwegein)	Verkeer	0:01:59	25-6-2017	Verdachte	Normaal	Rijden zonder rijbewijs	0	1	1	3	2	https://youtu.be/G66bnY2sCYU?t=2m19s	overig	2:23	Herkenbare auto in beeld gebracht	fragment20_01	verdachte	2:34	Stem van verdachte is herkbenbaar.
+14	Politievlogger Tess	Noodhulp dienst met een bedreiging, diefstal en verward persoon	Overlast	0:01:54	10-6-2017	Beide	Normaal	Conflict klant en winkelier	1	1	0	6	2	https://youtu.be/RdIAGam_EaA?t=5m42s	huis	6:34	Zowel de naam en het huisnummer van een dichtbijzijde winkel worden getoond.	fragment17_01	slachtoffer	6:53	Kleding en opvallende armbanden zijn duidelijk in zicht. Ook is het accent van het slachtoffer goed te herkennen. 	fragment17_02
+15	Politievlogger Tess	Aanhouding van een persoon op een dak	Overlast	0:03:00	24-6-2017	Verdachte	Normaal	Geluidsoverlast	0	0	0	2	1	https://youtu.be/x4tzFZ3ChDw?t=59s	overig	1:41	De namen van de bewoners worden aan de hand van de naambordjes getoond.	fragment18_01
+15	Politievlogger Tess	Aanhouding van een persoon op een dak	Medisch	0:02:03	24-6-2017	Slachtoffer	Normaal	Verward persoon op dak	1	0	0	1	1	https://youtu.be/x4tzFZ3ChDw?t=3m17s	plaats	3:28	Door herkenbare gebouwen is het eenvoudig te achterhalen in welke wijk ze zich bevinden.	fragment19_01
+16	Politievlogger Jan-Willem	Politievlogger op bezoek bij het basisteam Lekpoort (Houten / Nieuwegein)	Verkeer	0:01:59	25-6-2017	Verdachte	Normaal	Rijden zonder rijbewijs	0	1	1	5	2	https://youtu.be/G66bnY2sCYU?t=2m19s	overig	2:23	Er wordt een herkenbare auto wordt in beeld gebracht.	fragment20_01	verdachte	2:34	Stem van verdachte is herkbenbaar.
 17	Politievlogger Jan-Willem	Politie Utrecht, HETERDAAD AUTO-INBRAAK	Overig	0:00:44	16-7-2017	Slachtoffer	Normaal	Vonnis rechtbank bezorgen	1	0	0	2	1	https://youtu.be/flRNsp4LG54?t=5m29s	straat	5:35	De wijk wordt herkenbaar in beeld gebracht.	fragment21_01
-17	Politievlogger Jan-Willem	Politie Utrecht, HETERDAAD AUTO-INBRAAK	Verkeerd	0:01:09	16-7-2017	Verdachte	Normaal	Scooter opgevoerd	1	0	0	2	2	https://youtu.be/flRNsp4LG54?t=4m20s	huis	4:52	Huisnummer wordt duidelijk in beeld gebracht.	fragment22_01	straat	4:55	De straatnaam wordt in beeld gebracht.	fragment22_02
-18	Politievlogger Tess	Auto-Inbraak heterdaad!	Geweld	0:03:15	22-7-2017	Beide	Normaal	Huiselijk geweld	1	1	0	3	2	https://youtu.be/Y589b2zWgpI?t=2m33s	plaats	2:53	De wijk waarin het indicent plaatsvindt wordt in beeld gebracht.	fragment23_01	slachtoffer	3:12	Stem van verdachte is herkbenbaar.
-18	Politievlogger Tess	Auto-Inbraak heterdaad!	Geweld	0:01:32	22-7-2017	Beide	Normaal	Bedreiging	0	0	1	2	3	https://youtu.be/Y589b2zWgpI?t=5m47s	huis	6:04	Huisnummers bij de plaats van het incident worden duidelijk in beeld gebracht.	fragment24_01	wijk	6:20	De wijk waar het incident plaats vond wordt in beeld gebracht.	fragment24_02	overig	6:23	Het kenteken van de auto's voor het huis wordt getoond.	fragment24_03
-18	Politievlogger Tess	Auto-Inbraak heterdaad!	Overlast	0:01:33	22-7-2017	Beide	Normaal	Conflict huisgenoten	1	1	0	3	2	https://youtu.be/Y589b2zWgpI?t=7m18s	plaats	7:19	De route naar het incident wordt gefilmd waaruit de straat eenvoudig herleid kan worden.	fragment25_01	slachtoffer	7:52	Het postuur en de kleding van het slachtoffer zijn duidelijk zichtbaar. Daarnaast kan je zien wat voor een telefoon hij heeft.	fragment25_01																
+17	Politievlogger Jan-Willem	Politie Utrecht, HETERDAAD AUTO-INBRAAK	Verkeerd	0:01:09	16-7-2017	Verdachte	Normaal	Scooter opgevoerd	1	0	0	5	2	https://youtu.be/flRNsp4LG54?t=4m20s	huis	4:52	Huisnummer wordt duidelijk in beeld gebracht.	fragment22_01	straat	4:55	De straatnaam wordt in beeld gebracht.	fragment22_02
+18	Politievlogger Tess	Auto-Inbraak heterdaad!	Geweld	0:03:15	22-7-2017	Beide	Normaal	Huiselijk geweld	1	1	0	4	2	https://youtu.be/Y589b2zWgpI?t=2m33s	plaats	2:53	De wijk waarin het indicent plaatsvindt wordt in beeld gebracht.	fragment23_01	slachtoffer	3:12	Stem van verdachte is herkbenbaar.
+18	Politievlogger Tess	Auto-Inbraak heterdaad!	Geweld	0:01:32	22-7-2017	Beide	Normaal	Bedreiging	0	0	1	5	3	https://youtu.be/Y589b2zWgpI?t=5m47s	huis	6:04	Huisnummers bij de plaats van het incident worden duidelijk in beeld gebracht.	fragment24_01	plaats	6:20	De wijk waar het incident plaats vond wordt in beeld gebracht.	fragment24_02	overig	6:23	Het kenteken van de auto's voor het huis wordt getoond.	fragment24_03
+18	Politievlogger Tess	Auto-Inbraak heterdaad!	Overlast	0:01:33	22-7-2017	Beide	Normaal	Conflict huisgenoten	1	1	0	4	2	https://youtu.be/Y589b2zWgpI?t=7m18s	plaats	7:19	De route naar het incident wordt gefilmd waaruit de straat eenvoudig herleid kan worden.	fragment25_01	slachtoffer	7:52	Het postuur en de kleding van het slachtoffer zijn duidelijk zichtbaar. Daarnaast kan je zien wat voor een telefoon hij heeft.	fragment25_01
+19	Politievlogger Jan-Willem	Aanhouding politie na achtervolging. Nachtdienst	Geweld	0:02:05	23-7-2017	Beide	Normaal	Bedreiging	1	0	0	2	1	https://youtu.be/LZhlMC_DO6w?t=1m23s	straat	1:45	De straat wordt herkenbaar in beeld gebracht.	fragment26_01
+19	Politievlogger Jan-Willem	Aanhouding politie na achtervolging. Nachtdienst	Medisch	0:01:22	23-7-2017	Slachtoffer	Normaal	Gewonde vrouw (mogelijk zelfmoord) in woning	1	0	0	3	1	https://youtu.be/LZhlMC_DO6w?t=4m7s	huis	4:54	Het huis wordt in beeld gebracht met herkenbare aspecten.	fragment27_01
+19	Politievlogger Jan-Willem	Aanhouding politie na achtervolging. Nachtdienst	Overlast	0:02:21	23-7-2017	Verdachte	Normaal	Geluidsoverlast	0	0	0	3	1	https://youtu.be/LZhlMC_DO6w?t=7m2s	huis	7:53	Het huisnummer is zichtbaar.	fragment28_01
+20	Politievlogger Jan-Willem	Nieuwe motor, overlast door drank, ruzie op de snelweg	Overlast	0:08:29	27-8-2017	Verdachte	Verwijderd	Dronken man	1	1	1	8	3	https://youtu.be/faDUWcWbDXo?t=7m49s	huis	1:05	Het huis wordt duidelijk in beeld gebracht. Daarnaast zie je het huisnummer.	fragment29_01	overig	1:28	Er wordt binnen in het huis gefilmd. 	fragment29_02	verdachte	2:08	Verdachte dronken man wordt in beeld gebracht met herkenbare kleding, stem en gedrag. 	fragment29_03
+21	Politievlogger Jan-Willem	Hulpverlening of strafrecht? Welke keuzes zou jij maken?	Geweld	0:01:53	3-9-2017	Beide	Verwijderd	Vechtpartij in woning	1	0	0	2	1	https://youtu.be/PMCE7JUcmdI?t=10m39s	straat	1:21	De straatnaam en buurt worden getoond boven de voordeur. Hierdoor is het adres heel eenvoudig te herleiden.	fragment30_01
+21	Politievlogger Jan-Willem	Hulpverlening of strafrecht? Welke keuzes zou jij maken?	Overlast	0:06:08	3-9-2017	Verdachte	Verwijderd	Geluidsoverlast	1	1	0	12	4	https://youtu.be/PMCE7JUcmdI?t=12m33s	plaats	12:45	De wijk wordt herkenbaar in beeld gebracht.	fragment31_01	straat	13:04	De straat wordt herkenbaar in beeld gebracht. Ook de route hier naartoe is deels te zien.	fragment31_02	beide	13:50	Van zowel de verdachte als de kinderen van de verdachte worden de kleding en stemmen herkenbaar vertoond.	fragment31_03	huis	16:38	Het portiek van het huis van de verdachte wordt getoond.	fragment31_04
+21	Politievlogger Jan-Willem	Hulpverlening of strafrecht? Welke keuzes zou jij maken?	Geweld	0:03:09	3-9-2017	Beide	Verwijderd	Bedreiging	0	1	0	3	1	https://youtu.be/PMCE7JUcmdI?t=20m12s	verdachte	20:26	De stem van de verdachte is herkenbaar te horen. Ook wordt er later in de video informatie over de situatie waarin de verdachte verkeerd vermeld.
+22	Politievlogger Jan-Willem	Aanhouding door politie tijdens de nachtdienst	Overlast	0:01:11	10-9-2017	Verdachte	Normaal	Geluidsoverlast	0	1	0	3	1	https://youtu.be/w6MAmDsDTLA?t=3m19s	verdachte	3:51	De stem van de verdachte is herkenbaar te horen.
+23	Politievlogger Jan-Willem	Verdachte STRAATROOF aangehouden. Inzet BOEFPROOF.	Overlast	0:04:01	17-9-2017	Verdachte	Normaal	Geluidsoverlast	0	1	0	3	1	https://youtu.be/8TZ5_nHUPhw?t=39s	verdachte	3:32	De stem van de verdachte is herkenbaar te horen.
+24	Politievlogger Jan-Willem	Assistentie collega's handhaving	Overlast	0:01:32	29-10-2017	Verdachte	Normaal	Geschreeuw	1	0	0	5	2	https://youtu.be/roNtmd8pI-o?t=9m22s	straat	9:23	De straatnaam komt leebaar in beeld.	fragment35_01	huis	9:57	De voorgevel van het huis komt duidelijk in beeld.	fragment35_02
+24	Politievlogger Jan-Willem	Assistentie collega's handhaving	Overlast	0:02:45	29-10-2017	Beide	Normaal	Ex in de achtertuin	1	1	0	6	3	https://youtu.be/roNtmd8pI-o?t=10m53s	plaats	10:53	Er zijn aanwijzingen zichtbaar over de wijk waarin het incident zich voordoet.	fragment36_01	straat	11:04	De straat wordt herkenbaar in beeld gebracht, waardoor deze herleidbaar is.	fragment36_02	verdachte	11:06	De kleding van de verdachte komt herkenbaar in beeld. Ook is zijn stem niet vervormt en deelt hij zeer persoonlijke informatie.	fragment36_03
+25	Politievlogger Jan-Willem	Croco Jill een dienst mee met de politie	Overlast	0:02:21	19-11-2017	Verdachte	Normaal	Hangjongeren	0	0	1	2	1	https://youtu.be/4ZstbffJWm8?t=6m9s	overig	7:18	Betrokkene geeft aan in de buurt te wonen waar gefilmd wordt.
+25	Politievlogger Jan-Willem	Croco Jill een dienst mee met de politie	Geweld	0:01:06	19-11-2017	Beide	Normaal	Ruzie in woning	1	1	0	9	3	https://youtu.be/4ZstbffJWm8?t=11m32s	straat	11:46	De route wordt gefilmd waaruit de straat herleid kan worden.	fragment38_01	huis	12:34	Het trappenhuis en de voordeur van de woning komen in beeld.	fragment38_02	beide	12:34	De stem van beide betrokkenen is herkenbaar in beeld.
+26	Politievlogger Jan-Willem	Nachtdienst 1e & 2e kerstnacht	Overig	0:01:53	1-1-2017	Slachtoffer	Normaal	Inbraak	0	0	1	2	1	https://youtu.be/FWDMyU-zk34?t=4m23s	overig	4:24	Uit het gesprek dat in het filmpje gevoerd wordt valt informatie over het bedrijf in kwestie te achterhalen.
+27	Politievlogger Jan-Willem 	Horecadienst deel 2	Overlast	0:01:00	21-04-2017	Verdachte	Normaal	Jongeren die op straat drank drinken	0	1	0	3	1	https://youtu.be/gq2zZPsPQ7o?t=4m34s	slachtoffer	5:06	De gevel van het pand, waarvan in de video vermeld wordt dat een van de verdachten er woont, is herkenbaar in beeld.	fragment40_01
+28							Inactief					0
+29							Inactief					0
+30							Inactief					0
+31							Inactief					0
+32							Inactief					0
+33							Inactief					0
+34							Inactief					0
+35							Inactief					0
+36							Inactief					0
+37							Inactief					0
+38							Inactief					0
+39							Inactief					0
+40							Inactief					0
+41							Inactief					0
+42							Inactief					0
+43							Inactief					0
+44							Inactief					0
+45							Inactief					0
+46							Inactief					0
+47							Inactief					0
+48							Inactief					0
+49							Inactief					0
+50							Inactief					0
+51							Inactief					0
+52							Inactief					0
+53							Inactief					0
+54							Inactief					0
+55							Inactief					0
+56							Inactief					0
+57							Inactief					0
+58							Inactief					0
+59							Inactief					0
+60							Inactief					0
+61							Inactief					0
+62							Inactief					0
+63							Inactief					0
+64							Inactief					0
+65							Inactief					0
+66							Inactief					0
+67							Inactief					0
+68							Inactief					0
+69							Inactief					0
+70							Inactief					0
+71							Inactief					0
+72							Inactief					0
+73							Inactief					0
+74							Inactief					0
+75							Inactief					0
+76							Inactief					0
+77							Inactief					0
+78							Inactief					0
+79							Inactief					0
+80							Inactief					0
+81							Inactief					0
+82							Inactief					0
+83							Inactief					0
+84							Inactief					0
+85							Inactief					0
+86							Inactief					0
+87							Inactief					0
+88							Inactief					0
+89							Inactief					0
+90							Inactief					0
+91							Inactief					0
+92							Inactief					0
+93							Inactief					0
+94							Inactief					0
+95							Inactief					0
+96							Inactief					0
+97							Inactief					0
+98							Inactief					0
+99							Inactief					0
+100							Inactief					0
+101							Inactief					0
+102							Inactief					0
+103							Inactief					0
+104							Inactief					0
+105							Inactief					0
+106							Inactief					0
+107							Inactief					0
+108							Inactief					0
+109							Inactief					0
+110							Inactief					0
+111							Inactief					0
+112							Inactief					0
+113							Inactief					0
+114							Inactief					0
+115							Inactief					0
+116							Inactief					0
+117							Inactief					0
+118							Inactief					0
+119							Inactief					0
+120							Inactief					0
+121							Inactief					0
+122							Inactief					0
+123							Inactief					0
+124							Inactief					0
+125							Inactief					0
+126							Inactief					0
+127							Inactief					0
+128							Inactief					0
+129							Inactief					0
+130							Inactief					0
+131							Inactief					0
+132							Inactief					0
+133							Inactief					0
+134							Inactief					0
+135							Inactief					0
+136							Inactief					0																										
