@@ -39,15 +39,42 @@ svg {
 }
 /* __________ OVERVIEW __________ */
 .tool-tip {
+	/* @extend %paragraph-text-style;
 	position: absolute;
 	z-index: 10;
 	color: #fff;
 	padding: 8px;
 	background-color: #000;
 	background-color: rgba(0, 0, 0, 0.75);
-	border-radius: 6px;
+	@include border-radius(5px);
 	font-size: 15px;
 	visibility: hidden;
+	max-width: 200px; */
+
+	@extend %paragraph-text-style;
+	padding: 16px;
+	border: 1px solid $border-color;
+	@include border-radius(5px);
+	@include box-shadow(0px,4px,10px,$shadow-color);
+	background-color: white;
+	position: absolute;
+	visibility: hidden;
+	max-width: 200px;
+	font-siz: 0.8em;
+	//Adds an arrow to the description box
+	&::before {
+		left: -8px;
+		top: 16px;
+		content: "";
+		height: 14px;
+		width: 14px;
+		position: absolute;
+		transform: rotate(45deg);
+		border-left: solid 1px $border-color;
+		border-bottom: solid 1px $border-color;
+		border-bottom-left-radius: 5px;
+		background-color: white;
+	}
 }
 /* __________ TIMELINE __________ */
 .line {
@@ -94,7 +121,7 @@ svg {
 /* __________ TIMELINE HEADING TEXT __________ */
 .header {
 	position: absolute;
-	top: 200px;
+	top: 150px;
 	left: 50%;
 	transform: translate(-40%, -50%);
 	@media (max-width: 1000px) {

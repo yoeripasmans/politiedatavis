@@ -239,7 +239,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 				            })
 				            .on("mousemove", function(d) {
 								if (d.status !== "Inactief") {
-				                	return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+				                	return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
 								}
 				            })
 				            .on("mouseout", function(d) {
@@ -613,7 +613,7 @@ function onResize() {
             })
             .on("mousemove", function(d) {
 				if (d.status !== "Inactief") {
-                	return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+                	return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
 				}
             })
             .on("mouseout", function(d) {
