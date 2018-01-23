@@ -75,7 +75,7 @@ svg {
 	top: 5em;
 	cursor: pointer;
 	z-index: 999;
-	transition-duration: 0.2s;
+	transition: 1s;
 
 	&:hover {
 		box-shadow: 0 6px 10px -5px $orange-shadow;
@@ -192,9 +192,13 @@ svg {
 	font-family: "Relative Medium";
 	font-size: 16px;
 	font-weight: 500;
-	transition-duration: 0.2s;
+	transition: 1s;
 	@include border-radius(5px);
 	cursor: pointer;
+
+	@media screen and (max-width: 499px) {
+		font-size: 14px;
+	}
 
 	&:hover {
 		box-shadow: 0 6px 10px -5px $orange-shadow;
@@ -237,6 +241,10 @@ svg {
 			height: 20px;
 			vertical-align: -25%;
 			margin-right: 0.618em;
+
+			@media screen and (max-width: 600px) {
+				display: none;
+			}
 		}
 	}
 
@@ -257,13 +265,13 @@ svg {
 		@include border-radius(5px);
 		@include box-shadow(0px,4px,10px,$shadow-color);
 		background-color: white;
+		position: relative;
 		//Adds an arrow to the description box
 		&::before {
-			left: 0;
+			left: -11px;
 			top: 50%;
-			margin-left: -10px;
 			margin-top: -9px;
-			content: " ";
+			content: "";
 			height: 20px;
 			width: 20px;
 			position: absolute;
@@ -356,6 +364,11 @@ svg {
 	}
 
 	&--verdachte {
+		background-image: url("../images/verdachte.svg");
+		background-position: center 7px;
+	}
+
+	&--beide {
 		background-image: url("../images/verdachte.svg");
 		background-position: center 7px;
 	}

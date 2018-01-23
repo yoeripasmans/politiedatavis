@@ -100,7 +100,7 @@ d3.tsv("data/data.tsv", function(error, data) {
             }
         })
         .on("click", function(d) {
-            circleClickEvent(this, d);
+        	circleClickEvent(this, d);
         });
 
     //Run a simulation on every circle (node)
@@ -206,7 +206,7 @@ d3.tsv("data/data.tsv", function(error, data) {
             }
         }
 
-        if (d.status !== "Inactief" && d.status !== "Verwijderd") {
+        if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
 
             //Trigger the scroll function so the circle moves back and forth
             document.querySelector('body').onscroll = function() {
@@ -219,7 +219,6 @@ d3.tsv("data/data.tsv", function(error, data) {
                 .on('click', function(d) {
 
                     circleClickedCheck = false;
-
                     responsiveCheck = 2;
 
                     //Removes the function on scroll
@@ -233,14 +232,20 @@ d3.tsv("data/data.tsv", function(error, data) {
 				    } else {
 				        d3.selectAll(".bubble")
 				            .on("mouseover", function(d) {
-				                tooltip.style("visibility", "visible");
-				                tooltip.text(d.titel);
+								if (d.status !== "Inactief") {
+					                tooltip.style("visibility", "visible");
+					                tooltip.text(d.titel);
+								}
 				            })
 				            .on("mousemove", function(d) {
-				                return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+								if (d.status !== "Inactief") {
+				                	return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+								}
 				            })
 				            .on("mouseout", function(d) {
-				                tooltip.style("visibility", "hidden");
+								if (d.status !== "Inactief") {
+				                	tooltip.style("visibility", "hidden");
+								}
 				            });
 				    }
 
@@ -281,7 +286,7 @@ d3.tsv("data/data.tsv", function(error, data) {
                         .force("r", d3.forceRadial(function(d) {
                             return 0;
                         }))
-                        .alpha(0.25)
+                        .alpha(0.15)
                         .alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
                         .restart();
 
@@ -305,6 +310,7 @@ d3.tsv("data/data.tsv", function(error, data) {
             }
 
         } else {
+			console.log("else");
             shakeAnimation(_this);
         }
     } // End circleClickEvent
@@ -600,14 +606,20 @@ function onResize() {
     } else {
         d3.selectAll(".bubble")
             .on("mouseover", function(d) {
-                tooltip.style("visibility", "visible");
-                tooltip.text(d.titel);
+				if (d.status !== "Inactief") {
+					tooltip.style("visibility", "visible");
+	                tooltip.text(d.titel);
+				}
             })
             .on("mousemove", function(d) {
-                return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+				if (d.status !== "Inactief") {
+                	return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+				}
             })
             .on("mouseout", function(d) {
-                tooltip.style("visibility", "hidden");
+				if (d.status !== "Inactief") {
+                	tooltip.style("visibility", "hidden");
+				}
             });
     }
 
