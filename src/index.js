@@ -225,19 +225,28 @@ d3.tsv("data/data.tsv", function(error, data) {
                     //Removes the function on scroll
                     document.querySelector('body').onscroll = function() {};
 
+					if (window.innerWidth < 500) {
+				        d3.selectAll(".bubble")
+				            .on('mouseover', null)
+				            .on('mouseout', null)
+				            .on('mousemove', null);
+				    } else {
+				        d3.selectAll(".bubble")
+				            .on("mouseover", function(d) {
+				                tooltip.style("visibility", "visible");
+				                tooltip.text(d.titel);
+				            })
+				            .on("mousemove", function(d) {
+				                return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+				            })
+				            .on("mouseout", function(d) {
+				                tooltip.style("visibility", "hidden");
+				            });
+				    }
+
                     d3.selectAll(".bubble")
                         .on("click", function(d) {
                             circleClickEvent(this, d);
-                        })
-                        .on("mouseover", function(d) {
-                            tooltip.style("visibility", "visible");
-                            tooltip.text(d.titel);
-                        })
-                        .on("mousemove", function(d) {
-                            return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
-                        })
-                        .on("mouseout", function(d) {
-                            tooltip.style("visibility", "hidden");
                         })
                         .attr("cursor", function(d) {
                             if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
@@ -534,7 +543,7 @@ function createEvent(circleTotaleEvents, d) {
 
         popups[i].appendChild(time);
 
-        //Create a p for the description
+        //Create a <p> for the description
         var description = document.createElement("p");
         eventsContainers[i].appendChild(popups[i]);
         popups[i].appendChild(description);
@@ -581,25 +590,14 @@ function createEvent(circleTotaleEvents, d) {
 
 function onResize() {
 
-    if (window.innerWidth < 500 && circleClickedCheck == true) {
-        responsiveCheck = 5;
-    } else {
-        responsiveCheck = 2;
-    }
-
-    if (responsiveCheck == 5) {
-        d3.select(".svg-container")
-            .style("width", "40%");
+    if (window.innerWidth < 500) {
+        console.log("mobile");
 
         d3.selectAll(".bubble")
-            .on("mouseover", null)
-            .on("mousemove", null)
-            .on("mouseout", null);
-
+            .on('mouseover', null)
+            .on('mouseout', null)
+            .on('mousemove', null);
     } else {
-        d3.select(".svg-container")
-            .style("width", "100%");
-
         d3.selectAll(".bubble")
             .on("mouseover", function(d) {
                 tooltip.style("visibility", "visible");
@@ -611,6 +609,22 @@ function onResize() {
             .on("mouseout", function(d) {
                 tooltip.style("visibility", "hidden");
             });
+    }
+
+    if (window.innerWidth < 500 && circleClickedCheck == true) {
+        responsiveCheck = 5;
+    } else {
+        responsiveCheck = 2;
+    }
+
+    if (responsiveCheck == 5) {
+
+        d3.select(".svg-container")
+            .style("width", "40%");
+
+    } else {
+        d3.select(".svg-container")
+            .style("width", "100%");
     }
 
     d3.select("svg")
