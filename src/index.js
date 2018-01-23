@@ -139,10 +139,18 @@ d3.tsv("data/data.tsv", function(error, data) {
         tooltip.style("visibility", "hidden");
 
         d3.selectAll(".bubble")
-            .on('click', null)
-            .on('mouseover', null)
-            .on('mouseout', null)
-            .on('mousemove', null)
+            .on('click', function() {
+
+			})
+            .on('mouseover', function() {
+
+			})
+            .on('mouseout', function() {
+
+			})
+            .on('mousemove', function() {
+
+			})
             .attr("cursor", "default")
             .transition()
             .duration(300)
@@ -226,9 +234,15 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 					if (window.innerWidth < 500) {
 				        d3.selectAll(".bubble")
-				            .on('mouseover', null)
-				            .on('mouseout', null)
-				            .on('mousemove', null);
+				            .on('mouseover', function() {
+
+							})
+				            .on('mouseout', function() {
+
+							})
+				            .on('mousemove', function() {
+
+							});
 				    } else {
 				        d3.selectAll(".bubble")
 				            .on("mouseover", function(d) {
@@ -600,10 +614,16 @@ function onResize() {
         console.log("mobile");
 
         d3.selectAll(".bubble")
-            .on('mouseover', null)
-            .on('mouseout', null)
-            .on('mousemove', null);
-    } else {
+            .on('mouseover', function() {
+
+			})
+            .on('mouseout', function() {
+
+			})
+            .on('mousemove', function() {
+
+			});
+    } else if (window.innerWidth >= 500 && circleClickedCheck == false) {
         d3.selectAll(".bubble")
             .on("mouseover", function(d) {
 				if (d.status !== "Inactief") {
