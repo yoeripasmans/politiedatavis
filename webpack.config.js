@@ -64,10 +64,6 @@ module.exports = {
 			allChunks: true,
 		}),
 
-		new HtmlWebpackPlugin({
-			title: 'Politievloggers'
-		}),
-
 		new CopyWebpackPlugin([{
 				from: 'src/assets/images/frames',
 				to: 'assets/images/frames'
