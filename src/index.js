@@ -100,7 +100,7 @@ d3.tsv("data/data.tsv", function(error, data) {
             }
         })
         .on("click", function(d) {
-        	circleClickEvent(this, d);
+            circleClickEvent(this, d);
         });
 
     //Run a simulation on every circle (node)
@@ -136,85 +136,85 @@ d3.tsv("data/data.tsv", function(error, data) {
         var circleIndex = d.index; //Index of clicked circle
         var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
 
-        tooltip.style("visibility", "hidden");
-
-        d3.selectAll(".bubble")
-            .on('click', function() {
-
-			})
-            .on('mouseover', function() {
-
-			})
-            .on('mouseout', function() {
-
-			})
-            .on('mousemove', function() {
-
-			})
-            .attr("cursor", "default")
-            .transition()
-            .duration(300)
-            .attr("fill", "transparent");
-
-        //Change the size of the clicked circle
-        d3.select(_this)
-            .attr("fill", function(d) {
-                if (d.status == "Normaal") {
-                    return colorNormal;
-                } else if (d.status == "Aangepast") {
-                    return colorEdited;
-                } else if (d.status == "Verwijderd") {
-                    return colorRemoved;
-                } else if (d.status == "Inactief") {
-                    return colorInactive;
-                }
-            })
-            .transition()
-            .duration(1000)
-            .ease(d3.easeCubicOut)
-            .attr("r", function(d) {
-                return circleSize(0);
-            });
-
-        //Place the clicked circle in the middle and hide the rest
-        simulation
-            .force("r", d3.forceRadial(function(d) {
-                if (d.index == circleIndex) {
-                    return 0;
-                } else {
-                    return 400;
-                }
-            }))
-            .alpha(0.4)
-            .alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
-            .restart();
-
-        createVideoTitle(_this, d);
-
-        //Insert timeline
-        d3.select(".svg-container").insert('div', 'svg')
-            .data(data)
-            .attr('class', 'line')
-            .transition()
-            .delay(850)
-            .duration(1000)
-            .style("height", function(d) {
-                return (circleTotaleEvents * 300) + 300 + "px";
-            });
-
-        createEvent(circleTotaleEvents, d);
-
-        var schendingenTotaal = [];
-        for (var i = 0; i <= d.totaleEvents; i++) {
-            if (i == 0) {
-                schendingenTotaal[i] = 0;
-            } else if (i > 0) {
-                var categorie = document.querySelector(".event-" + (i - 1)).getAttribute("categorie");
-                schendingenTotaal[i] = schendingenTotaal[i - 1] + pixelGrowth[categorie];
-            }
-        }
-
         if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+
+            tooltip.style("visibility", "hidden");
+
+            d3.selectAll(".bubble")
+                .on('click', function() {
+
+                })
+                .on('mouseover', function() {
+
+                })
+                .on('mouseout', function() {
+
+                })
+                .on('mousemove', function() {
+
+                })
+                .attr("cursor", "default")
+                .transition()
+                .duration(300)
+                .attr("fill", "transparent");
+
+            //Change the size of the clicked circle
+            d3.select(_this)
+                .attr("fill", function(d) {
+                    if (d.status == "Normaal") {
+                        return colorNormal;
+                    } else if (d.status == "Aangepast") {
+                        return colorEdited;
+                    } else if (d.status == "Verwijderd") {
+                        return colorRemoved;
+                    } else if (d.status == "Inactief") {
+                        return colorInactive;
+                    }
+                })
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function(d) {
+                    return circleSize(0);
+                });
+
+            //Place the clicked circle in the middle and hide the rest
+            simulation
+                .force("r", d3.forceRadial(function(d) {
+                    if (d.index == circleIndex) {
+                        return 0;
+                    } else {
+                        return 400;
+                    }
+                }))
+                .alpha(0.4)
+                .alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+                .restart();
+
+            createVideoTitle(_this, d);
+
+            //Insert timeline
+            d3.select(".svg-container").insert('div', 'svg')
+                .data(data)
+                .attr('class', 'line')
+                .transition()
+                .delay(850)
+                .duration(1000)
+                .style("height", function(d) {
+                    return (circleTotaleEvents * 300) + 300 + "px";
+                });
+
+            createEvent(circleTotaleEvents, d);
+
+            var schendingenTotaal = [];
+            for (var i = 0; i <= d.totaleEvents; i++) {
+                if (i == 0) {
+                    schendingenTotaal[i] = 0;
+                } else if (i > 0) {
+                    var categorie = document.querySelector(".event-" + (i - 1)).getAttribute("categorie");
+                    schendingenTotaal[i] = schendingenTotaal[i - 1] + pixelGrowth[categorie];
+                }
+            }
 
             //Trigger the scroll function so the circle moves back and forth
             document.querySelector('body').onscroll = function() {
@@ -232,36 +232,36 @@ d3.tsv("data/data.tsv", function(error, data) {
                     //Removes the function on scroll
                     document.querySelector('body').onscroll = function() {};
 
-					if (window.innerWidth < 500) {
-				        d3.selectAll(".bubble")
-				            .on('mouseover', function() {
+                    if (window.innerWidth < 500) {
+                        d3.selectAll(".bubble")
+                            .on('mouseover', function() {
 
-							})
-				            .on('mouseout', function() {
+                            })
+                            .on('mouseout', function() {
 
-							})
-				            .on('mousemove', function() {
+                            })
+                            .on('mousemove', function() {
 
-							});
-				    } else {
-				        d3.selectAll(".bubble")
-				            .on("mouseover", function(d) {
-								if (d.status !== "Inactief") {
-					                tooltip.style("visibility", "visible");
-					                tooltip.text(d.titel);
-								}
-				            })
-				            .on("mousemove", function(d) {
-								if (d.status !== "Inactief") {
-				                	return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
-								}
-				            })
-				            .on("mouseout", function(d) {
-								if (d.status !== "Inactief") {
-				                	tooltip.style("visibility", "hidden");
-								}
-				            });
-				    }
+                            });
+                    } else {
+                        d3.selectAll(".bubble")
+                            .on("mouseover", function(d) {
+                                if (d.status !== "Inactief") {
+                                    tooltip.style("visibility", "visible");
+                                    tooltip.text(d.titel);
+                                }
+                            })
+                            .on("mousemove", function(d) {
+                                if (d.status !== "Inactief") {
+                                    return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
+                                }
+                            })
+                            .on("mouseout", function(d) {
+                                if (d.status !== "Inactief") {
+                                    tooltip.style("visibility", "hidden");
+                                }
+                            });
+                    }
 
                     d3.selectAll(".bubble")
                         .on("click", function(d) {
@@ -324,7 +324,7 @@ d3.tsv("data/data.tsv", function(error, data) {
             }
 
         } else {
-			console.log("else");
+            console.log("else");
             shakeAnimation(_this);
         }
     } // End circleClickEvent
@@ -616,30 +616,30 @@ function onResize() {
         d3.selectAll(".bubble")
             .on('mouseover', function() {
 
-			})
+            })
             .on('mouseout', function() {
 
-			})
+            })
             .on('mousemove', function() {
 
-			});
+            });
     } else if (window.innerWidth >= 500 && circleClickedCheck == false) {
         d3.selectAll(".bubble")
             .on("mouseover", function(d) {
-				if (d.status !== "Inactief") {
-					tooltip.style("visibility", "visible");
-	                tooltip.text(d.titel);
-				}
+                if (d.status !== "Inactief") {
+                    tooltip.style("visibility", "visible");
+                    tooltip.text(d.titel);
+                }
             })
             .on("mousemove", function(d) {
-				if (d.status !== "Inactief") {
-                	return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
-				}
+                if (d.status !== "Inactief") {
+                    return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
+                }
             })
             .on("mouseout", function(d) {
-				if (d.status !== "Inactief") {
-                	tooltip.style("visibility", "hidden");
-				}
+                if (d.status !== "Inactief") {
+                    tooltip.style("visibility", "hidden");
+                }
             });
     }
 
