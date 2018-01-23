@@ -47,18 +47,47 @@ svg {
 	&__title {
 		@extend %heading-text-style;
 	}
+
 	&__p-1 {
 		@extend %paragraph-text-style;
 		font-size: 1.414em;
 		margin-top: 1.618em;
 		width: 30em;
 	}
+
 	&__p-2 {
 		@extend %paragraph-text-style;
 		font-size: 1em;
 		margin-top: 1.618em;
 		width: 30em;
 	}
+}
+
+.legend {
+	position: absolute;
+	left: 4em;
+	bottom: 5em;
+
+	&__items-container {
+		width: 50em;
+		height: 2em;
+	}
+
+		&__item{
+
+			display: inline-block;
+
+			&::before {
+				content: "";
+				width: 20px;
+				height: 20px;
+				background-color: blue;
+				position: absolute;
+				left: -30px;
+				border-radius: 50px;
+			}
+		}
+
 }
 
 .tool-tip {

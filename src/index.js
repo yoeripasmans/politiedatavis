@@ -110,6 +110,7 @@ d3.tsv("data/data.tsv", function(error, data) {
     onResize();
 
     createOverviewHeader();
+    createOverviewLegend();
 
     /* __________ FUNCTIONS __________ */
 
@@ -140,6 +141,33 @@ d3.tsv("data/data.tsv", function(error, data) {
       var selectSvg = document.querySelector(".svg-container");
       document.body.insertBefore(overviewHeaderDiv, selectSvg);
       }
+
+      function createOverviewLegend () {
+
+        var legendItems = ["Orginele video's", "Aangepaste video's", "Verwijderde video's", "Video's zonder privacy schendingen", "Weinig privacyschendingen", "Veel privacyschendingen"];
+
+        var overviewLegendDiv = document.createElement("div");
+        overviewLegendDiv.classList.add("legend");
+
+        var legendTitle = document.createElement("h2");
+        legendTitle.classList.add("legend__title");
+        legendTitle.textContent = "Legenda";
+        overviewLegendDiv.appendChild(legendTitle);
+
+        var legendItemsDiv = document.createElement("div");
+        legendItemsDiv.classList.add("legend__items-container");
+        overviewLegendDiv.appendChild(legendItemsDiv);
+
+        for (var i = 0; i < 6; i++) {
+          var legendItem = document.createElement("p");
+          legendItem.classList.add("legend__item", "legend__item-" + i);
+          legendItem.textContent = legendItems[i];
+          legendItemsDiv.appendChild(legendItem);
+        }
+
+        var selectSvg = document.querySelector(".svg-container");
+        document.body.insertBefore(overviewLegendDiv, selectSvg.nextSibling);
+        }
 
     function movingIn() {
         circles
