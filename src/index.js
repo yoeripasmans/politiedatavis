@@ -391,7 +391,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					return horizontalPosition;
 				});
 
-				setTimeout(runningFalse, 500);
+			setTimeout(runningFalse, 500);
 
 			function runningFalse() {
 				isRunning = false;
