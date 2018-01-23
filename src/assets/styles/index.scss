@@ -38,6 +38,29 @@ svg {
 	width: 100%;
 }
 /* __________ OVERVIEW __________ */
+
+.overview-header {
+	position: absolute;
+	top: 4em;
+	left: 4em;
+
+	&__title {
+		@extend %heading-text-style;
+	}
+	&__p-1 {
+		@extend %paragraph-text-style;
+		font-size: 1.414em;
+		margin-top: 1.618em;
+		width: 30em;
+	}
+	&__p-2 {
+		@extend %paragraph-text-style;
+		font-size: 1em;
+		margin-top: 1.618em;
+		width: 30em;
+	}
+}
+
 .tool-tip {
 	@extend %paragraph-text-style;
 	padding: 16px;

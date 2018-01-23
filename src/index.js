@@ -109,7 +109,37 @@ d3.tsv("data/data.tsv", function(error, data) {
 
     onResize();
 
+    createOverviewHeader();
+
     /* __________ FUNCTIONS __________ */
+
+    function createOverviewHeader () {
+
+      var overviewHeaderDiv = document.createElement("div");
+      overviewHeaderDiv.classList.add("overview-header");
+
+      var overviewH1 = document.createElement("h1");
+      overviewH1.classList.add("overview-header__title");
+      var h1text = document.createTextNode("Privacyschendingen");
+      overviewH1.appendChild(h1text);
+
+      var overviewPar1 = document.createElement("p");
+      overviewPar1.classList.add("overview-header__p-1");
+      var parText1 = document.createTextNode("In de datavisualisatie is te zien in welke video’s de politievloggers teveel privacygevoelige informatie vrijgeven.");
+      overviewPar1.appendChild(parText1);
+
+      var overviewPar2 = document.createElement("p");
+      overviewPar2.classList.add("overview-header__p-2");
+      var parText2 = document.createTextNode("* De grootte van de cirkels worden bepaald door het aantal privacyschendingen.");
+      overviewPar2.appendChild(parText2);
+
+      overviewHeaderDiv.appendChild(overviewH1);
+      overviewHeaderDiv.appendChild(overviewPar1);
+      overviewHeaderDiv.appendChild(overviewPar2);
+
+      var selectSvg = document.querySelector(".svg-container");
+      document.body.insertBefore(overviewHeaderDiv, selectSvg);
+      }
 
     function movingIn() {
         circles
@@ -138,6 +168,7 @@ d3.tsv("data/data.tsv", function(error, data) {
         if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
 
             tooltip.style("visibility", "hidden");
+            d3.select(".overview-header").remove();
 
             d3.selectAll(".bubble")
                 .on('click', function() {
@@ -228,6 +259,8 @@ d3.tsv("data/data.tsv", function(error, data) {
                     circleClickedCheck = false;
                     responsiveCheck = 2;
 
+                    createOverviewHeader(); //creates header on overview page
+
                     //Removes the function on scroll
                     document.querySelector('body').onscroll = function() {};
 
@@ -294,6 +327,7 @@ d3.tsv("data/data.tsv", function(error, data) {
                     d3.select(".line").remove(); //Remove timeline
                     d3.select(".back-button").remove(); //Remove backbutton
                     d3.select(".header").remove(); // remove header
+
 
                     simulation
                         .force("r", d3.forceRadial(function(d) {
