@@ -625,7 +625,6 @@ function createEvent(circleTotaleEvents, d) {
 		for (i = 0; i < events.length; i++) {
 			events[i].classList.toggle("circle--hidden");
 		}
-
 		document.querySelector(".popup--explanation").classList.remove("popup--hidden");
 	}, 1000);
 
