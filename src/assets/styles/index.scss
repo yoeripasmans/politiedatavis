@@ -71,13 +71,14 @@ svg {
 	&__items-container {
 		width: 50em;
 		height: 2em;
+		display: flex;
+		background: green;
+		flex-wrap: wrap;
 	}
 
 		&__item{
 
-		display: flex;
-		height: 2em;
-
+		background: red;
 
 			&::before {
 				content: "";
