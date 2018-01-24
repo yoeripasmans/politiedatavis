@@ -48,7 +48,6 @@ svg {
 	position: absolute;
 	visibility: hidden;
 	max-width: 200px;
-
 	//Adds an arrow to the description box
 	&::before {
 		left: -8px;
@@ -429,7 +428,8 @@ svg {
 }
 
 .box {
-	width: 400px;
+	width: 100%;
+	max-width: 400px;
 	height: 560px;
 	background-color: #fff;
 	position: absolute;
@@ -460,7 +460,7 @@ svg {
 	}
 
 	.box-container {
-		width: 100%;
+		width: 300%;
 		height: 20em;
 		display: flex;
 		transition: transform 0.4s;

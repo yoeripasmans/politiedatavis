@@ -635,7 +635,7 @@ function createEvent(circleTotaleEvents, d) {
 function createIntro() {
 	var currentSlideID = 0;
 	var animatePos = 0;
-	var containerWidth = 400;
+
 
 	var images = ["uitleg_3", "uitleg_2", "uitleg_1"];
 	var text = ["Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken.", "Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken.", "Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken."];
@@ -691,6 +691,8 @@ function createIntro() {
 	closeButton.classList.add("box-header__close-button", "back-button");
 	closeButton.addEventListener('click', closeSlider);
 
+	var containerWidth = document.querySelector('.box').offsetWidth;
+
 	//Makes three slides
 	for (var i = 0; i < slidesLength; i++) {
 
@@ -716,6 +718,7 @@ function createIntro() {
 		introContainer.classList.remove("intro-container--hidden");
 		currentSlideID = 0;
 		animatePos = containerWidth * currentSlideID;
+		containerWidth = document.querySelector('.box').offsetWidth;
 		sliderNavIcons();
 		initPos();
 	}
@@ -730,7 +733,7 @@ function createIntro() {
 	function setSliderWidth() {
 		sliderWidth = slidesLength * containerWidth;
 		animatePos = containerWidth * currentSlideID;
-		introBoxContainer.style.width = sliderWidth + 'px';
+		introBoxContainer.style.width = 300 + '%';
 		introBoxContainer.style.transform = 'translateX(-' + animatePos + 'px)';
 	}
 
