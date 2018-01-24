@@ -140,30 +140,29 @@ d3.tsv("data/data.tsv", function(error, data) {
 	/* __________ FUNCTIONS __________ */
 
 	function createOverviewHeader () {
+		var overviewHeaderDiv = document.createElement("div");
+		overviewHeaderDiv.classList.add("overview-header");
 
-      var overviewHeaderDiv = document.createElement("div");
-      overviewHeaderDiv.classList.add("overview-header");
+		var overviewH1 = document.createElement("h1");
+		overviewH1.classList.add("overview-header__title");
+		var h1text = document.createTextNode("Privacyschendingen");
+		overviewH1.appendChild(h1text);
 
-      var overviewH1 = document.createElement("h1");
-      overviewH1.classList.add("overview-header__title");
-      var h1text = document.createTextNode("Privacyschendingen");
-      overviewH1.appendChild(h1text);
+		var overviewPar1 = document.createElement("p");
+		overviewPar1.classList.add("overview-header__p-1");
+		var parText1 = document.createTextNode("In de datavisualisatie is te zien in welke video’s de politievloggers teveel privacygevoelige informatie vrijgeven.");
+		overviewPar1.appendChild(parText1);
 
-      var overviewPar1 = document.createElement("p");
-      overviewPar1.classList.add("overview-header__p-1");
-      var parText1 = document.createTextNode("In de datavisualisatie is te zien in welke video’s de politievloggers teveel privacygevoelige informatie vrijgeven.");
-      overviewPar1.appendChild(parText1);
+		overviewHeaderDiv.appendChild(overviewH1);
+		overviewHeaderDiv.appendChild(overviewPar1);
 
-      overviewHeaderDiv.appendChild(overviewH1);
-      overviewHeaderDiv.appendChild(overviewPar1);
+		var selectSvg = document.querySelector(".svg-container");
+		document.body.insertBefore(overviewHeaderDiv, selectSvg);
+	}
 
-      var selectSvg = document.querySelector(".svg-container");
-      document.body.insertBefore(overviewHeaderDiv, selectSvg);
-      }
+	function createOverviewLegend () {
 
-      function createOverviewLegend () {
-
-        var legendItems = ["Orginele video's", "Aangepaste video's", "Verwijderde video's", "Video's zonder privacy schendingen", "Weinig privacyschendingen", "Veel privacyschendingen"];
+        var legendItems = ["Orginele video's", "Aangepaste video's", "Verwijderde video's", "Video's zonder privacyschendingen", "Weinig privacyschendingen", "Veel privacyschendingen"];
 
         var overviewLegendDiv = document.createElement("div");
         overviewLegendDiv.classList.add("legend");
@@ -178,15 +177,58 @@ d3.tsv("data/data.tsv", function(error, data) {
         overviewLegendDiv.appendChild(legendItemsDiv);
 
         for (var i = 0; i < 6; i++) {
-          var legendItem = document.createElement("p");
-          legendItem.classList.add("legend__item", "legend__item-" + i);
-          legendItem.textContent = legendItems[i];
-          legendItemsDiv.appendChild(legendItem);
-        }
+
+			var legendItemsWrap1,
+				legendItemsWrap2,
+				legendItemsWrap3;
+
+			if (i == 0) {
+				legendItemsWrap1 = document.createElement("div");
+				legendItemsWrap1.classList.add("legend__items-wrap");
+				legendItemsDiv.appendChild(legendItemsWrap1);
+			}
+
+			if (i == 0 || i == 1) {
+				var legendItem1 = document.createElement("p");
+				legendItem1.classList.add("legend__item", "legend__item-" + i);
+				legendItem1.textContent = legendItems[i];
+				legendItemsDiv.appendChild(legendItem1);
+				legendItemsWrap1.appendChild(legendItem1);
+			}
+
+			if (i == 2) {
+				legendItemsWrap2 = document.createElement("div");
+				legendItemsWrap2.classList.add("legend__items-wrap");
+				legendItemsDiv.appendChild(legendItemsWrap2);
+			}
+
+			if (i == 2 || i == 3) {
+				var legendItem2 = document.createElement("p");
+				legendItem2.classList.add("legend__item", "legend__item-" + i);
+				legendItem2.textContent = legendItems[i];
+				legendItemsDiv.appendChild(legendItem2);
+				legendItemsWrap2.appendChild(legendItem2);
+			}
+
+			if (i == 4) {
+				legendItemsWrap3 = document.createElement("div");
+				legendItemsWrap3.classList.add("legend__items-wrap");
+				legendItemsDiv.appendChild(legendItemsWrap3);
+			}
+
+			if (i == 4 || i == 5) {
+				var legendItem3 = document.createElement("p");
+				legendItem3.classList.add("legend__item", "legend__item-" + i);
+				legendItem3.textContent = legendItems[i];
+				legendItemsDiv.appendChild(legendItem3);
+				legendItemsWrap3.appendChild(legendItem3);
+			}
+
+		}
 
         var selectSvg = document.querySelector(".svg-container");
-        document.body.insertBefore(overviewLegendDiv, selectSvg.nextSibling);
-        }
+        document.body.insertBefore(overviewLegendDiv, selectSvg);
+    }
 
 	function movingIn() {
 		circles
@@ -866,7 +908,7 @@ function createIntro() {
 		}
 
 		if (currentSlideID >= (slidesLength - 1)) {
-			nextButton.textContent = "Naar visualizatie";
+			nextButton.textContent = "Naar visualisatie";
 
 		} else {
 			nextButton.textContent = "Volgende stap";
@@ -885,12 +927,7 @@ function createIntro() {
 
 function onResize() {
 
-	console.log("Alpha " + simulation.alpha());
-	console.log("AlphaDecay " + simulation.alphaDecay());
-
 	if (window.innerWidth < 500) {
-
-		console.log("====================================");
 
 		d3.selectAll(".bubble")
 			.on('mouseover', function() {

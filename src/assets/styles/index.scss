@@ -45,7 +45,7 @@ svg {
 	position: absolute;
 	width: 100%;
 	box-sizing: border-box;
-	padding: 4em;
+	padding: 2em;
 
 	&__title {
 		@extend %heading-text-style;
@@ -54,7 +54,7 @@ svg {
 	&__p-1 {
 		@extend %paragraph-text-style;
 		font-size: 1.414em;
-		margin-top: 1.618em;
+		margin-top: 1em;
 		max-width: 30em;
 	}
 
@@ -91,19 +91,24 @@ svg {
 
 .legend {
 	position: absolute;
-	left: 4em;
-	bottom: 5em;
+	left: 2em;
+	bottom: 2em;
 
 	&__title {
 		font-family: "Relative Medium";
 		font-size: 1.618em;
 	}
 
-	&__items-container {
+	&__items-wrap {
+		/* background-color: red; */
+		margin-right: 30px;
 		margin-top: 1em;
-		float: left;
-		@include columns(100px, 3);
+	}
 
+	&__items-container {
+		float: left;
+		display: flex;
+		flex-wrap: wrap-reverse;
 	}
 
 		&__item {
@@ -219,7 +224,7 @@ svg {
 .header {
 
 	position: absolute;
-	padding-top: 4em;
+	padding-top: 2em;
 	left: 50%;
 	transform: translate(-50%, 0);
 	float:left;
