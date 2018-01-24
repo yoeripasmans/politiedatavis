@@ -50,404 +50,444 @@ var pixelGrowth = {
 
 d3.tsv("data/data.tsv", function(error, data) {
 
-	data = d3.nest()
-		.key(function(d) {
-			return d.videoID; //Adds the dataset into objects in arrays
-		})
-		.entries(data)
-		.map(function(d) {
-			return {
-				fragmenten: d.values //Change the name from 'values' to 'fragmenten'
-			};
-		});
+    data = d3.nest()
+        .key(function(d) {
+            return d.videoID; //Adds the dataset into objects in arrays
+        })
+        .entries(data)
+        .map(function(d) {
+            return {
+                fragmenten: d.values //Change the name from 'values' to 'fragmenten'
+            };
+        });
 
-	data.forEach(function(d) { //Adds a 'totaleSchendingen' property to the video object
-		d.totaleSchendingen = 0;
-		d.totaleEvents = 0;
+    data.forEach(function(d) { //Adds a 'totaleSchendingen' property to the video object
+        d.totaleSchendingen = 0;
+        d.totaleEvents = 0;
 
-		for (var i = 0; i < d.fragmenten.length; i++) {
-			d.status = d.fragmenten[i].status;
-			d.titel = d.fragmenten[i].titel;
-			d.totaleSchendingen += Number(d.fragmenten[i].totaleSchendingen);
-			d.totaleEvents += Number(d.fragmenten[i].totaleEvents);
-		}
-	});
+        for (var i = 0; i < d.fragmenten.length; i++) {
+            d.status = d.fragmenten[i].status;
+            d.titel = d.fragmenten[i].titel;
+            d.totaleSchendingen += Number(d.fragmenten[i].totaleSchendingen);
+            d.totaleEvents += Number(d.fragmenten[i].totaleEvents);
+        }
+    });
 
-	var circles = svg.selectAll(".bubble")
-		.data(data)
-		.enter().append("circle")
-		.attr("class", "bubble")
-		.attr("r", function(d) {
-			return circleSize(d.totaleSchendingen);
-		})
-		.attr("fill", function(d) {
-			if (d.status == "Normaal") {
-				return colorNormal;
-			} else if (d.status == "Aangepast") {
-				return colorEdited;
-			} else if (d.status == "Verwijderd") {
-				return colorRemoved;
-			} else if (d.status == "Inactief") {
-				return colorInactive;
-			}
-		})
-		.attr("cursor", function(d) {
-			if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
-				return "pointer";
-			} else if (d.status == "Inactief") {
-				return "default";
-			}
-		})
-		.on("click", function(d) {
-			circleClickEvent(this, d);
-		});
+    var circles = svg.selectAll(".bubble")
+        .data(data)
+        .enter().append("circle")
+        .attr("class", "bubble")
+        .attr("r", function(d) {
+            return circleSize(d.totaleSchendingen);
+        })
+        .attr("fill", function(d) {
+            if (d.status == "Normaal") {
+                return colorNormal;
+            } else if (d.status == "Aangepast") {
+                return colorEdited;
+            } else if (d.status == "Verwijderd") {
+                return colorRemoved;
+            } else if (d.status == "Inactief") {
+                return colorInactive;
+            }
+        })
+        .attr("cursor", function(d) {
+            if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+                return "pointer";
+            } else if (d.status == "Inactief") {
+                return "default";
+            }
+        })
+        .on("click", function(d) {
+            circleClickEvent(this, d);
+        });
 
-	//Run a simulation on every circle (node)
-	simulation.nodes(data)
-		.on('tick', movingIn) //Run movingIn on every "tick" of the clock
-		.on('end', function() {});
+    //Run a simulation on every circle (node)
+    simulation.nodes(data)
+        .on('tick', movingIn) //Run movingIn on every "tick" of the clock
+        .on('end', function() {});
 
-	onResize();
+    onResize();
 
-	/* __________ FUNCTIONS __________ */
+    createOverviewHeader();
+    createOverviewLegend();
 
-	function movingIn() {
-		circles
-			.attr("cx", function(d) {
-				return d.x;
-			})
+    /* __________ FUNCTIONS __________ */
 
-			.attr("cy", function(d) {
-				return d.y;
-			});
-	}
+    function createOverviewHeader () {
 
-	function circleClickEvent(_this, d) {
+      var overviewHeaderDiv = document.createElement("div");
+      overviewHeaderDiv.classList.add("overview-header");
 
-		circleClickedCheck = true;
+      var overviewH1 = document.createElement("h1");
+      overviewH1.classList.add("overview-header__title");
+      var h1text = document.createTextNode("Privacyschendingen");
+      overviewH1.appendChild(h1text);
 
-		if (window.innerWidth < 500 && circleClickedCheck == true) {
-			responsiveCheck = 5;
-		} else {
-			responsiveCheck = 2;
-		}
+      var overviewPar1 = document.createElement("p");
+      overviewPar1.classList.add("overview-header__p-1");
+      var parText1 = document.createTextNode("In de datavisualisatie is te zien in welke video’s de politievloggers teveel privacygevoelige informatie vrijgeven.");
+      overviewPar1.appendChild(parText1);
 
-		document.querySelector('.open-button').classList.add("open-button--hidden");
+      var overviewPar2 = document.createElement("p");
+      overviewPar2.classList.add("overview-header__p-2");
+      var parText2 = document.createTextNode("* De grootte van de cirkels worden bepaald door het aantal privacyschendingen.");
+      overviewPar2.appendChild(parText2);
 
-		var circleIndex = d.index; //Index of clicked circle
-		var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
+      overviewHeaderDiv.appendChild(overviewH1);
+      overviewHeaderDiv.appendChild(overviewPar1);
+      overviewHeaderDiv.appendChild(overviewPar2);
 
-		if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+      var selectSvg = document.querySelector(".svg-container");
+      document.body.insertBefore(overviewHeaderDiv, selectSvg);
+      }
 
-			tooltip.style("visibility", "hidden");
+      function createOverviewLegend () {
 
-			d3.selectAll(".bubble")
-				.on('click', function() {
+        var legendItems = ["Orginele video's", "Aangepaste video's", "Verwijderde video's", "Video's zonder privacy schendingen", "Weinig privacyschendingen", "Veel privacyschendingen"];
 
-				})
-				.on('mouseover', function() {
+        var overviewLegendDiv = document.createElement("div");
+        overviewLegendDiv.classList.add("legend");
 
-				})
-				.on('mouseout', function() {
+        var legendTitle = document.createElement("h2");
+        legendTitle.classList.add("legend__title");
+        legendTitle.textContent = "Legenda";
+        overviewLegendDiv.appendChild(legendTitle);
 
-				})
-				.on('mousemove', function() {
+        var legendItemsDiv = document.createElement("div");
+        legendItemsDiv.classList.add("legend__items-container");
+        overviewLegendDiv.appendChild(legendItemsDiv);
 
-				})
-				.attr("cursor", "default")
-				.transition()
-				.duration(300)
-				.attr("fill", "transparent");
+        for (var i = 0; i < 6; i++) {
+          var legendItem = document.createElement("p");
+          legendItem.classList.add("legend__item", "legend__item-" + i);
+          legendItem.textContent = legendItems[i];
+          legendItemsDiv.appendChild(legendItem);
+        }
 
-			//Change the size of the clicked circle
-			d3.select(_this)
-				.attr("fill", function(d) {
-					if (d.status == "Normaal") {
-						return colorNormal;
-					} else if (d.status == "Aangepast") {
-						return colorEdited;
-					} else if (d.status == "Verwijderd") {
-						return colorRemoved;
-					} else if (d.status == "Inactief") {
-						return colorInactive;
-					}
-				})
-				.transition()
-				.duration(1000)
-				.ease(d3.easeCubicOut)
-				.attr("r", function(d) {
-					return circleSize(0);
-				});
+        var selectSvg = document.querySelector(".svg-container");
+        document.body.insertBefore(overviewLegendDiv, selectSvg.nextSibling);
+        }
 
-			//Place the clicked circle in the middle and hide the rest
-			simulation
-				.force("r", d3.forceRadial(function(d) {
-					if (d.index == circleIndex) {
-						return 0;
-					} else {
-						return 400;
-					}
-				}))
-				.alpha(0.4)
-				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
-				.restart();
+    function movingIn() {
+        circles
+            .attr("cx", function(d) {
+                return d.x;
+            })
 
-			createVideoTitle(_this, d);
+            .attr("cy", function(d) {
+                return d.y;
+            });
+    }
 
-			//Insert timeline
-			d3.select(".svg-container").insert('div', 'svg')
-				.data(data)
-				.attr('class', 'line')
-				.transition()
-				.delay(850)
-				.duration(1000)
-				.style("height", function(d) {
-					return (circleTotaleEvents * 300) + 300 + "px";
-				});
+    function circleClickEvent(_this, d) {
 
-			createEvent(circleTotaleEvents, d);
+        circleClickedCheck = true;
 
-			var schendingenTotaal = [];
-			for (var i = 0; i <= d.totaleEvents; i++) {
-				if (i == 0) {
-					schendingenTotaal[i] = 0;
-				} else if (i > 0) {
-					var categorie = document.querySelector(".event-" + (i - 1)).getAttribute("categorie");
-					schendingenTotaal[i] = schendingenTotaal[i - 1] + pixelGrowth[categorie];
-				}
-			}
+        if (window.innerWidth < 500 && circleClickedCheck == true) {
+            responsiveCheck = 5;
+        } else {
+            responsiveCheck = 2;
+        }
 
-			//Trigger the scroll function so the circle moves back and forth
-			document.querySelector('body').onscroll = function() {
-				scroll(_this, d, schendingenTotaal);
-			};
+        var circleIndex = d.index; //Index of clicked circle
+        var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
 
-			//Insert backbutton
-			d3.select(".svg-container").insert('button', 'svg')
-				.attr('class', 'back-button')
-				.on('click', function(d) {
+        if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
 
-					circleClickedCheck = false;
-					responsiveCheck = 2;
+            tooltip.style("visibility", "hidden");
+            d3.select(".overview-header").remove();
 
-					document.querySelector('.open-button').classList.remove("open-button--hidden");
+            d3.selectAll(".bubble")
+                .on('click', function() {
 
-					//Removes the function on scroll
-					document.querySelector('body').onscroll = function() {};
+                })
+                .on('mouseover', function() {
 
-					if (window.innerWidth < 500) {
-						d3.selectAll(".bubble")
-							.on('mouseover', function() {
+                })
+                .on('mouseout', function() {
 
-							})
-							.on('mouseout', function() {
+                })
+                .on('mousemove', function() {
 
-							})
-							.on('mousemove', function() {
+                })
+                .attr("cursor", "default")
+                .transition()
+                .duration(300)
+                .attr("fill", "transparent");
 
-							});
-					} else {
-						d3.selectAll(".bubble")
-							.on("mouseover", function(d) {
-								if (d.status !== "Inactief") {
-									tooltip.style("visibility", "visible");
-									tooltip.text(d.titel);
-								}
-							})
-							.on("mousemove", function(d) {
-								if (d.status !== "Inactief") {
-									return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
-								}
-							})
-							.on("mouseout", function(d) {
-								if (d.status !== "Inactief") {
-									tooltip.style("visibility", "hidden");
-								}
-							});
-					}
+            //Change the size of the clicked circle
+            d3.select(_this)
+                .attr("fill", function(d) {
+                    if (d.status == "Normaal") {
+                        return colorNormal;
+                    } else if (d.status == "Aangepast") {
+                        return colorEdited;
+                    } else if (d.status == "Verwijderd") {
+                        return colorRemoved;
+                    } else if (d.status == "Inactief") {
+                        return colorInactive;
+                    }
+                })
+                .transition()
+                .duration(1000)
+                .ease(d3.easeCubicOut)
+                .attr("r", function(d) {
+                    return circleSize(0);
+                });
 
-					d3.selectAll(".bubble")
-						.on("click", function(d) {
-							circleClickEvent(this, d);
-						})
-						.attr("cursor", function(d) {
-							if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
-								return "pointer";
-							} else if (d.status == "Inactief") {
-								return "default";
-							}
-						})
-						.transition()
-						.duration(1000)
-						.ease(d3.easeCubicOut)
-						.attr("fill", function(d) {
-							if (d.status == "Normaal") {
-								return colorNormal;
-							} else if (d.status == "Aangepast") {
-								return colorEdited;
-							} else if (d.status == "Verwijderd") {
-								return colorRemoved;
-							} else if (d.status == "Inactief") {
-								return colorInactive;
-							}
-						})
-						.attr("r", function(d) {
-							return circleSize(d.totaleSchendingen);
-						});
+            //Place the clicked circle in the middle and hide the rest
+            simulation
+                .force("r", d3.forceRadial(function(d) {
+                    if (d.index == circleIndex) {
+                        return 0;
+                    } else {
+                        return 400;
+                    }
+                }))
+                .alpha(0.4)
+                .alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+                .restart();
 
-					d3.select(".line").remove(); //Remove timeline
-					d3.select(".back-button").remove(); //Remove backbutton
-					d3.select(".header").remove(); // remove header
+            createVideoTitle(_this, d);
 
-					simulation
-						.force("r", d3.forceRadial(function(d) {
-							return 0;
-						}))
-						.alpha(0.15)
-						.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
-						.restart();
+            //Insert timeline
+            d3.select(".svg-container").insert('div', 'svg')
+                .data(data)
+                .attr('class', 'line')
+                .transition()
+                .delay(850)
+                .duration(1000)
+                .style("height", function(d) {
+                    return (circleTotaleEvents * 300) + 300 + "px";
+                });
 
-					d3.select("g")
-						.transition()
-						.duration(1000)
-						.ease(d3.easeCubicOut)
-						.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+            createEvent(circleTotaleEvents, d);
 
-				});
+            var schendingenTotaal = [];
+            for (var i = 0; i <= d.totaleEvents; i++) {
+                if (i == 0) {
+                    schendingenTotaal[i] = 0;
+                } else if (i > 0) {
+                    var categorie = document.querySelector(".event-" + (i - 1)).getAttribute("categorie");
+                    schendingenTotaal[i] = schendingenTotaal[i - 1] + pixelGrowth[categorie];
+                }
+            }
 
-			//Position the timeline accordingly
-			d3.select("g")
-				.transition()
-				.duration(1000)
-				.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+            //Trigger the scroll function so the circle moves back and forth
+            document.querySelector('body').onscroll = function() {
+                scroll(_this, d, schendingenTotaal);
+            };
 
-			if (responsiveCheck == 5) {
-				d3.select(".svg-container")
-					.style("width", "40%");
-			}
+            //Insert backbutton
+            d3.select(".svg-container").insert('button', 'svg')
+                .attr('class', 'back-button')
+                .on('click', function(d) {
 
-		} else {
+                    circleClickedCheck = false;
+                    responsiveCheck = 2;
 
-			shakeAnimation(_this);
-		}
-	} // End circleClickEvent
+                    createOverviewHeader(); //creates header on overview page
 
-	var isRunning = false;
+                    //Removes the function on scroll
+                    document.querySelector('body').onscroll = function() {};
 
-	function shakeAnimation(_this) {
+                    if (window.innerWidth < 500) {
+                        d3.selectAll(".bubble")
+                            .on('mouseover', function() {
+
+                            })
+                            .on('mouseout', function() {
+
+                            })
+                            .on('mousemove', function() {
+
+                            });
+                    } else {
+                        d3.selectAll(".bubble")
+                            .on("mouseover", function(d) {
+                                if (d.status !== "Inactief") {
+                                    tooltip.style("visibility", "visible");
+                                    tooltip.text(d.titel);
+                                }
+                            })
+                            .on("mousemove", function(d) {
+                                if (d.status !== "Inactief") {
+                                    return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
+                                }
+                            })
+                            .on("mouseout", function(d) {
+                                if (d.status !== "Inactief") {
+                                    tooltip.style("visibility", "hidden");
+                                }
+                            });
+                    }
+
+                    d3.selectAll(".bubble")
+                        .on("click", function(d) {
+                            circleClickEvent(this, d);
+                        })
+                        .attr("cursor", function(d) {
+                            if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+                                return "pointer";
+                            } else if (d.status == "Inactief") {
+                                return "default";
+                            }
+                        })
+                        .transition()
+                        .duration(1000)
+                        .ease(d3.easeCubicOut)
+                        .attr("fill", function(d) {
+                            if (d.status == "Normaal") {
+                                return colorNormal;
+                            } else if (d.status == "Aangepast") {
+                                return colorEdited;
+                            } else if (d.status == "Verwijderd") {
+                                return colorRemoved;
+                            } else if (d.status == "Inactief") {
+                                return colorInactive;
+                            }
+                        })
+                        .attr("r", function(d) {
+                            return circleSize(d.totaleSchendingen);
+                        });
+
+                    d3.select(".line").remove(); //Remove timeline
+                    d3.select(".back-button").remove(); //Remove backbutton
+                    d3.select(".header").remove(); // remove header
 
 
-		if (isRunning == false) {
-			return animationLoop(_this);
-		}
+                    simulation
+                        .force("r", d3.forceRadial(function(d) {
+                            return 0;
+                        }))
+                        .alpha(0.15)
+                        .alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+                        .restart();
 
-		function animationLoop(_this) {
+                    d3.select("g")
+                        .transition()
+                        .duration(1000)
+                        .ease(d3.easeCubicOut)
+                        .attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
 
-			//Shake animation
-			var horizontalPosition = Number(_this.getAttribute("cx")),
-				shakeDuration = 80,
-				shakeDeviation = 4,
-				shakeEasing = d3.easeCubicOut;
+                });
 
-			isRunning = true;
+            //Position the timeline accordingly
+            d3.select("g")
+                .transition()
+                .duration(1000)
+                .attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
 
-			d3.select(_this)
-				.transition()
-				.duration(shakeDuration)
-				.ease(shakeEasing)
-				.attr("cx", function(d) {
-					return horizontalPosition + shakeDeviation;
-				})
-				.transition()
-				.duration(shakeDuration)
-				.ease(shakeEasing)
-				.attr("cx", function(d) {
-					return horizontalPosition - shakeDeviation;
-				})
-				.transition()
-				.duration(shakeDuration)
-				.ease(shakeEasing)
-				.attr("cx", function(d) {
-					return horizontalPosition + shakeDeviation;
-				})
-				.transition()
-				.duration(shakeDuration)
-				.ease(shakeEasing)
-				.attr("cx", function(d) {
-					return horizontalPosition - shakeDeviation;
-				})
-				.transition()
-				.duration(shakeDuration)
-				.ease(shakeEasing)
-				.attr("cx", function(d) {
-					return horizontalPosition + shakeDeviation;
-				})
-				.transition()
-				.duration(shakeDuration)
-				.ease(shakeEasing)
-				.attr("cx", function(d) {
-					return horizontalPosition;
-				});
+            if (responsiveCheck == 5) {
+                d3.select(".svg-container")
+                    .style("width", "40%");
+            }
 
-			setTimeout(runningFalse, 500);
+        } else {
+            console.log("else");
+            shakeAnimation(_this);
+        }
+    } // End circleClickEvent
 
-			function runningFalse() {
-				isRunning = false;
-			}
-		}
-	}
+    function shakeAnimation(_this) {
 
-	function scroll(_this, d, schendingenTotaal) {
+        //Shake animation
+        var horizontalPosition = Number(_this.getAttribute("cx")),
+            shakeDuration = 80,
+            shakeDeviation = 4,
+            shakeEasing = d3.easeCubicOut;
 
-		if (window.pageYOffset >= 0 && window.pageYOffset <= 5100) {
-			var circleWiggle;
-			circleWiggle = (window.innerWidth / responsiveCheck) + circleTimelinePosition(window.pageYOffset);
-			d3.select("g")
-				.attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
-		}
+        d3.select(_this)
+            .transition()
+            .duration(shakeDuration)
+            .ease(shakeEasing)
+            .attr("cx", function(d) {
+                return horizontalPosition + shakeDeviation;
+            })
+            .transition()
+            .duration(shakeDuration)
+            .ease(shakeEasing)
+            .attr("cx", function(d) {
+                return horizontalPosition - shakeDeviation;
+            })
+            .transition()
+            .duration(shakeDuration)
+            .ease(shakeEasing)
+            .attr("cx", function(d) {
+                return horizontalPosition + shakeDeviation;
+            })
+            .transition()
+            .duration(shakeDuration)
+            .ease(shakeEasing)
+            .attr("cx", function(d) {
+                return horizontalPosition - shakeDeviation;
+            })
+            .transition()
+            .duration(shakeDuration)
+            .ease(shakeEasing)
+            .attr("cx", function(d) {
+                return horizontalPosition + shakeDeviation;
+            })
+            .transition()
+            .duration(shakeDuration)
+            .ease(shakeEasing)
+            .attr("cx", function(d) {
+                return horizontalPosition;
+            });
+    }
 
-		d3.select(_this)
-			.transition()
-			.duration(200)
-			.ease(d3.easeCubicOut)
-			.attr("r", function() {
+    function scroll(_this, d, schendingenTotaal) {
 
-				if (window.pageYOffset < 300) {
-					return circleSize(0);
-				}
-				for (var i = 0; i < d.totaleEvents; i++) {
-					if (window.pageYOffset >= i * 300 && window.pageYOffset < i * 300 + 300) {
-						return circleSize(schendingenTotaal[i]);
-					}
-				}
-				if (window.pageYOffset >= d.totaleEvents * 300) {
-					return circleSize(schendingenTotaal[d.totaleEvents]);
-				}
-			});
+        if (window.pageYOffset >= 0 && window.pageYOffset <= 5100) {
+            var circleWiggle;
+            circleWiggle = (window.innerWidth / responsiveCheck) + circleTimelinePosition(window.pageYOffset);
+            d3.select("g")
+                .attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
+        }
 
-		var popup = document.querySelectorAll('.popup');
+        d3.select(_this)
+            .transition()
+            .duration(200)
+            .ease(d3.easeCubicOut)
+            .attr("r", function() {
 
-		if (window.pageYOffset > 10) {
-			document.querySelector('.popup--explanation').classList.add("popup--hidden");
-		} else {
-			document.querySelector('.popup--explanation').classList.remove("popup--hidden");
-		}
+                if (window.pageYOffset < 300) {
+                    return circleSize(0);
+                }
+                for (var i = 0; i < d.totaleEvents; i++) {
+                    if (window.pageYOffset >= i * 300 && window.pageYOffset < i * 300 + 300) {
+                        return circleSize(schendingenTotaal[i]);
+                    }
+                }
+                if (window.pageYOffset >= d.totaleEvents * 300) {
+                    return circleSize(schendingenTotaal[d.totaleEvents]);
+                }
+            });
 
-		for (var i = 1; i <= popup.length; i++) {
+        var popup = document.querySelectorAll('.popup');
 
-			if (window.pageYOffset >= i * 300) {
-				popup[i - 1].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < i * 300) {
-				popup[i - 1].classList.add("popup--hidden");
-			}
-		}
+        if (window.pageYOffset > 10) {
+            document.querySelector('.popup--explanation').classList.add("popup--hidden");
+        } else {
+            document.querySelector('.popup--explanation').classList.remove("popup--hidden");
+        }
 
-		if (window.pageYOffset >= popup.length * 300 + 290) {
-			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < popup.length * 300 + 290) {
-			document.querySelector('.popup--end').classList.add("popup--hidden");
-		}
-	}
+        for (var i = 1; i <= popup.length; i++) {
+
+            if (window.pageYOffset >= i * 300) {
+                popup[i - 1].classList.remove("popup--hidden");
+            } else if (window.pageYOffset < i * 300) {
+                popup[i - 1].classList.add("popup--hidden");
+            }
+        }
+
+        if (window.pageYOffset >= popup.length * 300 + 290) {
+            document.querySelector('.popup--end').classList.remove("popup--hidden");
+        } else if (window.pageYOffset < popup.length * 300 + 290) {
+            document.querySelector('.popup--end').classList.add("popup--hidden");
+        }
+    }
 });
 
 function createVideoTitle(_this, d) {
