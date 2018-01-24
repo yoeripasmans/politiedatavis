@@ -154,14 +154,8 @@ d3.tsv("data/data.tsv", function(error, data) {
       var parText1 = document.createTextNode("In de datavisualisatie is te zien in welke video’s de politievloggers teveel privacygevoelige informatie vrijgeven.");
       overviewPar1.appendChild(parText1);
 
-      var overviewPar2 = document.createElement("p");
-      overviewPar2.classList.add("overview-header__p-2");
-      var parText2 = document.createTextNode("* De grootte van de cirkels worden bepaald door het aantal privacyschendingen.");
-      overviewPar2.appendChild(parText2);
-
       overviewHeaderDiv.appendChild(overviewH1);
       overviewHeaderDiv.appendChild(overviewPar1);
-      overviewHeaderDiv.appendChild(overviewPar2);
 
       var selectSvg = document.querySelector(".svg-container");
       document.body.insertBefore(overviewHeaderDiv, selectSvg);
