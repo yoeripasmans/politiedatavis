@@ -194,7 +194,7 @@ d3.tsv("data/data.tsv", function(error, data) {
         var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
 
         if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
-
+			document.querySelector('.open-button').classList.add("open-button--hidden");
             tooltip.style("visibility", "hidden");
             d3.select(".overview-header").remove();
 
