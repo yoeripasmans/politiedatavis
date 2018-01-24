@@ -1,10 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 
 module.exports = {
 	entry: "./src/index.js",
@@ -64,27 +62,29 @@ module.exports = {
 			allChunks: true,
 		}),
 
-		new HtmlWebpackPlugin({
-			title: 'Politievloggers'
-		}),
-
 		new CopyWebpackPlugin([{
 				from: 'src/assets/images/frames',
 				to: 'assets/images/frames'
 			},
 			{
+				from: 'src/assets/images/uitleg',
+				to: 'assets/images/uitleg'
+
+			},
+			{
 				from: 'src/data',
 				to: 'data'
 			},
+
 		]),
 
-	],
+  ],
 
-	// Automatically reload the page when compilation is done.
-	devServer: {
-		port: 3000,
-		compress: true,
-		contentBase: 'dist/',
-	},
+  // Automatically reload the page when compilation is done.
+  devServer: {
+    port: 3000,
+    compress: true,
+    contentBase: 'dist/',
+  },
 
 };
