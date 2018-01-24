@@ -222,7 +222,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 		if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
 
-			tooltip.style("visibility", "hidden");
+			tooltip.style("display", "none");
 			d3.select(".overview-header").remove(); // remove overview header
             d3.select(".legend").remove(); // remove legend
 
@@ -341,7 +341,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 						d3.selectAll(".bubble")
 							.on("mouseover", function(d) {
 								if (d.status !== "Inactief") {
-									tooltip.style("visibility", "visible");
+									tooltip.style("display", "inline-block");
 									tooltip.text(d.titel);
 								}
 							})
@@ -352,7 +352,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 							})
 							.on("mouseout", function(d) {
 								if (d.status !== "Inactief") {
-									tooltip.style("visibility", "hidden");
+									tooltip.style("display", "none");
 								}
 							});
 					}
@@ -913,7 +913,7 @@ function onResize() {
 		d3.selectAll(".bubble")
 			.on("mouseover", function(d) {
 				if (d.status !== "Inactief") {
-					tooltip.style("visibility", "visible");
+					tooltip.style("display", "inline-block");
 					tooltip.text(d.titel);
 				}
 			})
@@ -924,7 +924,7 @@ function onResize() {
 			})
 			.on("mouseout", function(d) {
 				if (d.status !== "Inactief") {
-					tooltip.style("visibility", "hidden");
+					tooltip.style("display", "none");
 				}
 			});
 	}

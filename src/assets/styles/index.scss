@@ -139,7 +139,7 @@ svg {
 	@include box-shadow(0px,4px,10px,$shadow-color);
 	background-color: white;
 	position: absolute;
-	visibility: hidden;
+	display: none;
 	max-width: 200px;
 	//Adds an arrow to the description box
 	&::before {
