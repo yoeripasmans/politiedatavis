@@ -126,8 +126,65 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 	onResize();
 	createIntro();
+	createOverviewHeader();
+    createOverviewLegend();
 
 	/* __________ FUNCTIONS __________ */
+
+	function createOverviewHeader () {
+
+      var overviewHeaderDiv = document.createElement("div");
+      overviewHeaderDiv.classList.add("overview-header");
+
+      var overviewH1 = document.createElement("h1");
+      overviewH1.classList.add("overview-header__title");
+      var h1text = document.createTextNode("Privacyschendingen");
+      overviewH1.appendChild(h1text);
+
+      var overviewPar1 = document.createElement("p");
+      overviewPar1.classList.add("overview-header__p-1");
+      var parText1 = document.createTextNode("In de datavisualisatie is te zien in welke video’s de politievloggers teveel privacygevoelige informatie vrijgeven.");
+      overviewPar1.appendChild(parText1);
+
+      var overviewPar2 = document.createElement("p");
+      overviewPar2.classList.add("overview-header__p-2");
+      var parText2 = document.createTextNode("* De grootte van de cirkels worden bepaald door het aantal privacyschendingen.");
+      overviewPar2.appendChild(parText2);
+
+      overviewHeaderDiv.appendChild(overviewH1);
+      overviewHeaderDiv.appendChild(overviewPar1);
+      overviewHeaderDiv.appendChild(overviewPar2);
+
+      var selectSvg = document.querySelector(".svg-container");
+      document.body.insertBefore(overviewHeaderDiv, selectSvg);
+      }
+
+      function createOverviewLegend () {
+
+        var legendItems = ["Orginele video's", "Aangepaste video's", "Verwijderde video's", "Video's zonder privacy schendingen", "Weinig privacyschendingen", "Veel privacyschendingen"];
+
+        var overviewLegendDiv = document.createElement("div");
+        overviewLegendDiv.classList.add("legend");
+
+        var legendTitle = document.createElement("h2");
+        legendTitle.classList.add("legend__title");
+        legendTitle.textContent = "Legenda";
+        overviewLegendDiv.appendChild(legendTitle);
+
+        var legendItemsDiv = document.createElement("div");
+        legendItemsDiv.classList.add("legend__items-container");
+        overviewLegendDiv.appendChild(legendItemsDiv);
+
+        for (var i = 0; i < 6; i++) {
+          var legendItem = document.createElement("p");
+          legendItem.classList.add("legend__item", "legend__item-" + i);
+          legendItem.textContent = legendItems[i];
+          legendItemsDiv.appendChild(legendItem);
+        }
+
+        var selectSvg = document.querySelector(".svg-container");
+        document.body.insertBefore(overviewLegendDiv, selectSvg.nextSibling);
+        }
 
 	function movingIn() {
 		circles
@@ -158,6 +215,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 		if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
 
 			tooltip.style("visibility", "hidden");
+			d3.select(".overview-header").remove(); // remove overview header
+            d3.select(".legend").remove(); // remove legend
 
 			d3.selectAll(".bubble")
 				.on('click', function() {
@@ -247,6 +306,9 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 					circleClickedCheck = false;
 					responsiveCheck = 2;
+
+					createOverviewHeader(); //creates header on overview page
+                    createOverviewLegend(); // creates legend on overview page
 
 					document.querySelector('.open-button').classList.remove("open-button--hidden");
 
