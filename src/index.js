@@ -131,10 +131,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 		} else {
 			responsiveCheck = 2;
 		}
-		if (d.status !== "Inactief") {
-			document.querySelector('.open-button').classList.add("open-button--hidden");
-		}
 
+		document.querySelector('.open-button').classList.add("open-button--hidden");
 
 		var circleIndex = d.index; //Index of clicked circle
 		var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
