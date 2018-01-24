@@ -196,7 +196,8 @@ d3.tsv("data/data.tsv", function(error, data) {
         if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
 
             tooltip.style("visibility", "hidden");
-            d3.select(".overview-header").remove();
+            d3.select(".overview-header").remove(); // remove overview header
+            d3.select(".legend").remove(); // remove legend
 
             d3.selectAll(".bubble")
                 .on('click', function() {
@@ -288,6 +289,7 @@ d3.tsv("data/data.tsv", function(error, data) {
                     responsiveCheck = 2;
 
                     createOverviewHeader(); //creates header on overview page
+                    createOverviewLegend(); // creates legend on overview page
 
                     //Removes the function on scroll
                     document.querySelector('body').onscroll = function() {};
