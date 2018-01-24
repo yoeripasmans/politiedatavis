@@ -12,6 +12,7 @@ var colorRemoved = "#ffcc34";
 var colorInactive = "#e2e2e2";
 var responsiveCheck;
 var circleClickedCheck = false;
+var isRunning = false;
 var circleSize = d3.scaleLinear().domain([0, 12]).range([8, 36]); //Scales between two number ranges
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2550, 2850, 3150, 3450, 3750, 4050, 4350, 4650, 4950, 5100]).range([0, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
@@ -27,7 +28,15 @@ var svg = d3.select("body").append("div").attr('class', 'svg-container')
 var simulation = d3.forceSimulation()
 	.force("r", d3.forceRadial(10).strength(0.005)) //This force makes sure every circle is in a radius
 	.force("collide", d3.forceCollide(function(d) {
-		return circleSize(d.totaleSchendingen) + 2; //Ensures the circles don't go on top of each other, this force is different for each circle
+		if (window.innerWidth < 500) {
+			if (d.status == "Inactief") {
+				return circleSize(-2) + 2;
+			} else {
+				return circleSize(d.totaleSchendingen) + 2;
+			}
+		} else {
+			return circleSize(d.totaleSchendingen) + 2;
+		}
 	}));
 
 // Prep the tooltip bits, initial display is hidden
@@ -50,71 +59,79 @@ var pixelGrowth = {
 
 d3.tsv("data/data.tsv", function(error, data) {
 
-    data = d3.nest()
-        .key(function(d) {
-            return d.videoID; //Adds the dataset into objects in arrays
-        })
-        .entries(data)
-        .map(function(d) {
-            return {
-                fragmenten: d.values //Change the name from 'values' to 'fragmenten'
-            };
-        });
+	data = d3.nest()
+		.key(function(d) {
+			return d.videoID; //Adds the dataset into objects in arrays
+		})
+		.entries(data)
+		.map(function(d) {
+			return {
+				fragmenten: d.values //Change the name from 'values' to 'fragmenten'
+			};
+		});
 
-    data.forEach(function(d) { //Adds a 'totaleSchendingen' property to the video object
-        d.totaleSchendingen = 0;
-        d.totaleEvents = 0;
+	data.forEach(function(d) { //Adds a 'totaleSchendingen' property to the video object
+		d.totaleSchendingen = 0;
+		d.totaleEvents = 0;
 
-        for (var i = 0; i < d.fragmenten.length; i++) {
-            d.status = d.fragmenten[i].status;
-            d.titel = d.fragmenten[i].titel;
-            d.totaleSchendingen += Number(d.fragmenten[i].totaleSchendingen);
-            d.totaleEvents += Number(d.fragmenten[i].totaleEvents);
-        }
-    });
+		for (var i = 0; i < d.fragmenten.length; i++) {
+			d.status = d.fragmenten[i].status;
+			d.titel = d.fragmenten[i].titel;
+			d.totaleSchendingen += Number(d.fragmenten[i].totaleSchendingen);
+			d.totaleEvents += Number(d.fragmenten[i].totaleEvents);
+		}
+	});
 
-    var circles = svg.selectAll(".bubble")
-        .data(data)
-        .enter().append("circle")
-        .attr("class", "bubble")
-        .attr("r", function(d) {
-            return circleSize(d.totaleSchendingen);
-        })
-        .attr("fill", function(d) {
-            if (d.status == "Normaal") {
-                return colorNormal;
-            } else if (d.status == "Aangepast") {
-                return colorEdited;
-            } else if (d.status == "Verwijderd") {
-                return colorRemoved;
-            } else if (d.status == "Inactief") {
-                return colorInactive;
-            }
-        })
-        .attr("cursor", function(d) {
-            if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
-                return "pointer";
-            } else if (d.status == "Inactief") {
-                return "default";
-            }
-        })
-        .on("click", function(d) {
-            circleClickEvent(this, d);
-        });
+	var circles = svg.selectAll(".bubble")
+		.data(data)
+		.enter().append("circle")
+		.attr("class", "bubble")
+		.attr("r", function(d) {
+			if (window.innerWidth < 500) {
+				if (d.status == "Inactief") {
+					return circleSize(-2);
+				} else {
+					return circleSize(d.totaleSchendingen);
+				}
+			} else {
+				return circleSize(d.totaleSchendingen);
+			}
+		})
+		.attr("fill", function(d) {
+			if (d.status == "Normaal") {
+				return colorNormal;
+			} else if (d.status == "Aangepast") {
+				return colorEdited;
+			} else if (d.status == "Verwijderd") {
+				return colorRemoved;
+			} else if (d.status == "Inactief") {
+				return colorInactive;
+			}
+		})
+		.attr("cursor", function(d) {
+			if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+				return "pointer";
+			} else if (d.status == "Inactief") {
+				return "default";
+			}
+		})
+		.on("click", function(d) {
+			circleClickEvent(this, d);
+		});
 
-    //Run a simulation on every circle (node)
-    simulation.nodes(data)
-        .on('tick', movingIn) //Run movingIn on every "tick" of the clock
-        .on('end', function() {});
+	//Run a simulation on every circle (node)
+	simulation.nodes(data)
+		.on('tick', movingIn) //Run movingIn on every "tick" of the clock
+		.on('end', function() {});
 
-    onResize();
-
-    createOverviewHeader();
+	onResize();
+	createIntro();
+	createOverviewHeader();
     createOverviewLegend();
 
-    /* __________ FUNCTIONS __________ */
+	/* __________ FUNCTIONS __________ */
 
-    function createOverviewHeader () {
+	function createOverviewHeader () {
 
       var overviewHeaderDiv = document.createElement("div");
       overviewHeaderDiv.classList.add("overview-header");
@@ -169,327 +186,365 @@ d3.tsv("data/data.tsv", function(error, data) {
         document.body.insertBefore(overviewLegendDiv, selectSvg.nextSibling);
         }
 
-    function movingIn() {
-        circles
-            .attr("cx", function(d) {
-                return d.x;
-            })
+	function movingIn() {
+		circles
+			.attr("cx", function(d) {
+				return d.x;
+			})
 
-            .attr("cy", function(d) {
-                return d.y;
-            });
-    }
+			.attr("cy", function(d) {
+				return d.y;
+			});
+	}
 
-    function circleClickEvent(_this, d) {
+	function circleClickEvent(_this, d) {
 
-        circleClickedCheck = true;
+		circleClickedCheck = true;
 
-        if (window.innerWidth < 500 && circleClickedCheck == true) {
-            responsiveCheck = 5;
-        } else {
-            responsiveCheck = 2;
-        }
+		if (window.innerWidth < 500 && circleClickedCheck == true) {
+			responsiveCheck = 5;
+		} else {
+			responsiveCheck = 2;
+		}
 
-        var circleIndex = d.index; //Index of clicked circle
-        var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
+		document.querySelector('.open-button').classList.add("open-button--hidden");
 
-        if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
-			document.querySelector('.open-button').classList.add("open-button--hidden");
-            tooltip.style("visibility", "hidden");
-            d3.select(".overview-header").remove(); // remove overview header
+		var circleIndex = d.index; //Index of clicked circle
+		var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
+
+		if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+
+			tooltip.style("visibility", "hidden");
+			d3.select(".overview-header").remove(); // remove overview header
             d3.select(".legend").remove(); // remove legend
 
-            d3.selectAll(".bubble")
-                .on('click', function() {
+			d3.selectAll(".bubble")
+				.on('click', function() {
 
-                })
-                .on('mouseover', function() {
+				})
+				.on('mouseover', function() {
 
-                })
-                .on('mouseout', function() {
+				})
+				.on('mouseout', function() {
 
-                })
-                .on('mousemove', function() {
+				})
+				.on('mousemove', function() {
 
-                })
-                .attr("cursor", "default")
-                .transition()
-                .duration(300)
-                .attr("fill", "transparent");
+				})
+				.attr("cursor", "default")
+				.transition()
+				.duration(300)
+				.attr("fill", "transparent");
 
-            //Change the size of the clicked circle
-            d3.select(_this)
-                .attr("fill", function(d) {
-                    if (d.status == "Normaal") {
-                        return colorNormal;
-                    } else if (d.status == "Aangepast") {
-                        return colorEdited;
-                    } else if (d.status == "Verwijderd") {
-                        return colorRemoved;
-                    } else if (d.status == "Inactief") {
-                        return colorInactive;
-                    }
-                })
-                .transition()
-                .duration(1000)
-                .ease(d3.easeCubicOut)
-                .attr("r", function(d) {
-                    return circleSize(0);
-                });
+			//Change the size of the clicked circle
+			d3.select(_this)
+				.attr("fill", function(d) {
+					if (d.status == "Normaal") {
+						return colorNormal;
+					} else if (d.status == "Aangepast") {
+						return colorEdited;
+					} else if (d.status == "Verwijderd") {
+						return colorRemoved;
+					} else if (d.status == "Inactief") {
+						return colorInactive;
+					}
+				})
+				.transition()
+				.duration(1000)
+				.ease(d3.easeCubicOut)
+				.attr("r", function(d) {
+					return circleSize(0);
+				});
 
-            //Place the clicked circle in the middle and hide the rest
-            simulation
-                .force("r", d3.forceRadial(function(d) {
-                    if (d.index == circleIndex) {
-                        return 0;
-                    } else {
-                        return 400;
-                    }
-                }))
-                .alpha(0.4)
-                .alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
-                .restart();
+			//Place the clicked circle in the middle and hide the rest
+			simulation
+				.force("r", d3.forceRadial(function(d) {
+					if (d.index == circleIndex) {
+						return 0;
+					} else {
+						return 400;
+					}
+				}))
+				.alpha(0.4)
+				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+				.restart();
 
-            createVideoTitle(_this, d);
+			createVideoTitle(_this, d);
 
-            //Insert timeline
-            d3.select(".svg-container").insert('div', 'svg')
-                .data(data)
-                .attr('class', 'line')
-                .transition()
-                .delay(850)
-                .duration(1000)
-                .style("height", function(d) {
-                    return (circleTotaleEvents * 300) + 300 + "px";
-                });
+			//Insert timeline
+			d3.select(".svg-container").insert('div', 'svg')
+				.data(data)
+				.attr('class', 'line')
+				.transition()
+				.delay(850)
+				.duration(1000)
+				.style("height", function(d) {
+					return (circleTotaleEvents * 300) + 300 + "px";
+				});
 
-            createEvent(circleTotaleEvents, d);
+			createEvent(circleTotaleEvents, d);
 
-            var schendingenTotaal = [];
-            for (var i = 0; i <= d.totaleEvents; i++) {
-                if (i == 0) {
-                    schendingenTotaal[i] = 0;
-                } else if (i > 0) {
-                    var categorie = document.querySelector(".event-" + (i - 1)).getAttribute("categorie");
-                    schendingenTotaal[i] = schendingenTotaal[i - 1] + pixelGrowth[categorie];
-                }
-            }
+			var schendingenTotaal = [];
+			for (var i = 0; i <= d.totaleEvents; i++) {
+				if (i == 0) {
+					schendingenTotaal[i] = 0;
+				} else if (i > 0) {
+					var categorie = document.querySelector(".event-" + (i - 1)).getAttribute("categorie");
+					schendingenTotaal[i] = schendingenTotaal[i - 1] + pixelGrowth[categorie];
+				}
+			}
 
-            //Trigger the scroll function so the circle moves back and forth
-            document.querySelector('body').onscroll = function() {
-                scroll(_this, d, schendingenTotaal);
-            };
+			//Trigger the scroll function so the circle moves back and forth
+			document.querySelector('body').onscroll = function() {
+				scroll(_this, d, schendingenTotaal);
+			};
 
-            //Insert backbutton
-            d3.select(".svg-container").insert('button', 'svg')
-                .attr('class', 'back-button')
-                .on('click', function(d) {
+			//Insert backbutton
+			d3.select(".svg-container").insert('button', 'svg')
+				.attr('class', 'back-button')
+				.on('click', function(d) {
 
-                    circleClickedCheck = false;
-                    responsiveCheck = 2;
+					circleClickedCheck = false;
+					responsiveCheck = 2;
 
-                    createOverviewHeader(); //creates header on overview page
+					createOverviewHeader(); //creates header on overview page
                     createOverviewLegend(); // creates legend on overview page
 
-                    //Removes the function on scroll
-                    document.querySelector('body').onscroll = function() {};
+					document.querySelector('.open-button').classList.remove("open-button--hidden");
 
-                    if (window.innerWidth < 500) {
-                        d3.selectAll(".bubble")
-                            .on('mouseover', function() {
+					//Removes the function on scroll
+					document.querySelector('body').onscroll = function() {};
 
-                            })
-                            .on('mouseout', function() {
+					if (window.innerWidth < 500) {
+						d3.selectAll(".bubble")
+							.on('mouseover', function() {
 
-                            })
-                            .on('mousemove', function() {
+							})
+							.on('mouseout', function() {
 
-                            });
-                    } else {
-                        d3.selectAll(".bubble")
-                            .on("mouseover", function(d) {
-                                if (d.status !== "Inactief") {
-                                    tooltip.style("visibility", "visible");
-                                    tooltip.text(d.titel);
-                                }
-                            })
-                            .on("mousemove", function(d) {
-                                if (d.status !== "Inactief") {
-                                    return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
-                                }
-                            })
-                            .on("mouseout", function(d) {
-                                if (d.status !== "Inactief") {
-                                    tooltip.style("visibility", "hidden");
-                                }
-                            });
-                    }
+							})
+							.on('mousemove', function() {
 
-                    d3.selectAll(".bubble")
-                        .on("click", function(d) {
-                            circleClickEvent(this, d);
-                        })
-                        .attr("cursor", function(d) {
-                            if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
-                                return "pointer";
-                            } else if (d.status == "Inactief") {
-                                return "default";
-                            }
-                        })
-                        .transition()
-                        .duration(1000)
-                        .ease(d3.easeCubicOut)
-                        .attr("fill", function(d) {
-                            if (d.status == "Normaal") {
-                                return colorNormal;
-                            } else if (d.status == "Aangepast") {
-                                return colorEdited;
-                            } else if (d.status == "Verwijderd") {
-                                return colorRemoved;
-                            } else if (d.status == "Inactief") {
-                                return colorInactive;
-                            }
-                        })
-                        .attr("r", function(d) {
-                            return circleSize(d.totaleSchendingen);
-                        });
+							});
+					} else {
+						d3.selectAll(".bubble")
+							.on("mouseover", function(d) {
+								if (d.status !== "Inactief") {
+									tooltip.style("visibility", "visible");
+									tooltip.text(d.titel);
+								}
+							})
+							.on("mousemove", function(d) {
+								if (d.status !== "Inactief") {
+									return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px");
+								}
+							})
+							.on("mouseout", function(d) {
+								if (d.status !== "Inactief") {
+									tooltip.style("visibility", "hidden");
+								}
+							});
+					}
 
-                    d3.select(".line").remove(); //Remove timeline
-                    d3.select(".back-button").remove(); //Remove backbutton
-                    d3.select(".header").remove(); // remove header
+					d3.selectAll(".bubble")
+						.on("click", function(d) {
+							circleClickEvent(this, d);
+						})
+						.attr("cursor", function(d) {
+							if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+								return "pointer";
+							} else if (d.status == "Inactief") {
+								return "default";
+							}
+						})
+						.transition()
+						.duration(1000)
+						.ease(d3.easeCubicOut)
+						.attr("fill", function(d) {
+							if (d.status == "Normaal") {
+								return colorNormal;
+							} else if (d.status == "Aangepast") {
+								return colorEdited;
+							} else if (d.status == "Verwijderd") {
+								return colorRemoved;
+							} else if (d.status == "Inactief") {
+								return colorInactive;
+							}
+						})
+						.attr("r", function(d) {
+							if (window.innerWidth < 500) {
+								if (d.status == "Inactief") {
+									return circleSize(-2);
+								} else {
+									return circleSize(d.totaleSchendingen);
+								}
+							} else {
+								return circleSize(d.totaleSchendingen);
+							}
+						});
+
+					d3.select(".line").remove(); //Remove timeline
+					d3.select(".back-button").remove(); //Remove backbutton
+					d3.select(".header").remove(); // remove header
+
+					simulation
+						.force("r", d3.forceRadial(function(d) {
+							return 0;
+						}))
+						.force("collide", d3.forceCollide(function(d) {
+							if (window.innerWidth < 500) {
+								if (d.status == "Inactief") {
+									return circleSize(-2) + 2;
+								} else {
+									return circleSize(d.totaleSchendingen) + 2;
+								}
+							} else {
+								return circleSize(d.totaleSchendingen) + 2;
+							}
+						}))
+						.alpha(0.15)
+						.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+						.restart();
+
+					d3.select("g")
+						.transition()
+						.duration(1000)
+						.ease(d3.easeCubicOut)
+						.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+
+				});
+
+			//Position the timeline accordingly
+			d3.select("g")
+				.transition()
+				.duration(1000)
+				.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+
+			if (responsiveCheck == 5) {
+				d3.select(".svg-container")
+					.style("width", "40%");
+			}
+
+		} else {
+
+			shakeAnimation(_this);
+		}
+	} // End circleClickEvent
+
+	function shakeAnimation(_this) {
 
 
-                    simulation
-                        .force("r", d3.forceRadial(function(d) {
-                            return 0;
-                        }))
-                        .alpha(0.15)
-                        .alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
-                        .restart();
+		if (isRunning == false) {
+			return animationLoop(_this);
+		}
 
-                    d3.select("g")
-                        .transition()
-                        .duration(1000)
-                        .ease(d3.easeCubicOut)
-                        .attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+		function animationLoop(_this) {
 
-                });
+			//Shake animation
+			var horizontalPosition = Number(_this.getAttribute("cx")),
+				shakeDuration = 80,
+				shakeDeviation = 4,
+				shakeEasing = d3.easeCubicOut;
 
-            //Position the timeline accordingly
-            d3.select("g")
-                .transition()
-                .duration(1000)
-                .attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+			isRunning = true;
 
-            if (responsiveCheck == 5) {
-                d3.select(".svg-container")
-                    .style("width", "40%");
-            }
+			d3.select(_this)
+				.transition()
+				.duration(shakeDuration)
+				.ease(shakeEasing)
+				.attr("cx", function(d) {
+					return horizontalPosition + shakeDeviation;
+				})
+				.transition()
+				.duration(shakeDuration)
+				.ease(shakeEasing)
+				.attr("cx", function(d) {
+					return horizontalPosition - shakeDeviation;
+				})
+				.transition()
+				.duration(shakeDuration)
+				.ease(shakeEasing)
+				.attr("cx", function(d) {
+					return horizontalPosition + shakeDeviation;
+				})
+				.transition()
+				.duration(shakeDuration)
+				.ease(shakeEasing)
+				.attr("cx", function(d) {
+					return horizontalPosition - shakeDeviation;
+				})
+				.transition()
+				.duration(shakeDuration)
+				.ease(shakeEasing)
+				.attr("cx", function(d) {
+					return horizontalPosition + shakeDeviation;
+				})
+				.transition()
+				.duration(shakeDuration)
+				.ease(shakeEasing)
+				.attr("cx", function(d) {
+					return horizontalPosition;
+				});
 
-        } else {
-            console.log("else");
-            shakeAnimation(_this);
-        }
-    } // End circleClickEvent
+			setTimeout(runningFalse, 500);
 
-    function shakeAnimation(_this) {
+			function runningFalse() {
+				isRunning = false;
+			}
+		}
+	}
 
-        //Shake animation
-        var horizontalPosition = Number(_this.getAttribute("cx")),
-            shakeDuration = 80,
-            shakeDeviation = 4,
-            shakeEasing = d3.easeCubicOut;
+	function scroll(_this, d, schendingenTotaal) {
 
-        d3.select(_this)
-            .transition()
-            .duration(shakeDuration)
-            .ease(shakeEasing)
-            .attr("cx", function(d) {
-                return horizontalPosition + shakeDeviation;
-            })
-            .transition()
-            .duration(shakeDuration)
-            .ease(shakeEasing)
-            .attr("cx", function(d) {
-                return horizontalPosition - shakeDeviation;
-            })
-            .transition()
-            .duration(shakeDuration)
-            .ease(shakeEasing)
-            .attr("cx", function(d) {
-                return horizontalPosition + shakeDeviation;
-            })
-            .transition()
-            .duration(shakeDuration)
-            .ease(shakeEasing)
-            .attr("cx", function(d) {
-                return horizontalPosition - shakeDeviation;
-            })
-            .transition()
-            .duration(shakeDuration)
-            .ease(shakeEasing)
-            .attr("cx", function(d) {
-                return horizontalPosition + shakeDeviation;
-            })
-            .transition()
-            .duration(shakeDuration)
-            .ease(shakeEasing)
-            .attr("cx", function(d) {
-                return horizontalPosition;
-            });
-    }
+		if (window.pageYOffset >= 0 && window.pageYOffset <= 5100) {
+			var circleWiggle;
+			circleWiggle = (window.innerWidth / responsiveCheck) + circleTimelinePosition(window.pageYOffset);
+			d3.select("g")
+				.attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
+		}
 
-    function scroll(_this, d, schendingenTotaal) {
+		d3.select(_this)
+			.transition()
+			.duration(200)
+			.ease(d3.easeCubicOut)
+			.attr("r", function() {
 
-        if (window.pageYOffset >= 0 && window.pageYOffset <= 5100) {
-            var circleWiggle;
-            circleWiggle = (window.innerWidth / responsiveCheck) + circleTimelinePosition(window.pageYOffset);
-            d3.select("g")
-                .attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
-        }
+				if (window.pageYOffset < 300) {
+					return circleSize(0);
+				}
+				for (var i = 0; i < d.totaleEvents; i++) {
+					if (window.pageYOffset >= i * 300 && window.pageYOffset < i * 300 + 300) {
+						return circleSize(schendingenTotaal[i]);
+					}
+				}
+				if (window.pageYOffset >= d.totaleEvents * 300) {
+					return circleSize(schendingenTotaal[d.totaleEvents]);
+				}
+			});
 
-        d3.select(_this)
-            .transition()
-            .duration(200)
-            .ease(d3.easeCubicOut)
-            .attr("r", function() {
+		var popup = document.querySelectorAll('.popup');
 
-                if (window.pageYOffset < 300) {
-                    return circleSize(0);
-                }
-                for (var i = 0; i < d.totaleEvents; i++) {
-                    if (window.pageYOffset >= i * 300 && window.pageYOffset < i * 300 + 300) {
-                        return circleSize(schendingenTotaal[i]);
-                    }
-                }
-                if (window.pageYOffset >= d.totaleEvents * 300) {
-                    return circleSize(schendingenTotaal[d.totaleEvents]);
-                }
-            });
+		if (window.pageYOffset > 10) {
+			document.querySelector('.popup--explanation').classList.add("popup--hidden");
+		} else {
+			document.querySelector('.popup--explanation').classList.remove("popup--hidden");
+		}
 
-        var popup = document.querySelectorAll('.popup');
+		for (var i = 1; i <= popup.length; i++) {
 
-        if (window.pageYOffset > 10) {
-            document.querySelector('.popup--explanation').classList.add("popup--hidden");
-        } else {
-            document.querySelector('.popup--explanation').classList.remove("popup--hidden");
-        }
+			if (window.pageYOffset >= i * 300) {
+				popup[i - 1].classList.remove("popup--hidden");
+			} else if (window.pageYOffset < i * 300) {
+				popup[i - 1].classList.add("popup--hidden");
+			}
+		}
 
-        for (var i = 1; i <= popup.length; i++) {
-
-            if (window.pageYOffset >= i * 300) {
-                popup[i - 1].classList.remove("popup--hidden");
-            } else if (window.pageYOffset < i * 300) {
-                popup[i - 1].classList.add("popup--hidden");
-            }
-        }
-
-        if (window.pageYOffset >= popup.length * 300 + 290) {
-            document.querySelector('.popup--end').classList.remove("popup--hidden");
-        } else if (window.pageYOffset < popup.length * 300 + 290) {
-            document.querySelector('.popup--end').classList.add("popup--hidden");
-        }
-    }
+		if (window.pageYOffset >= popup.length * 300 + 290) {
+			document.querySelector('.popup--end').classList.remove("popup--hidden");
+		} else if (window.pageYOffset < popup.length * 300 + 290) {
+			document.querySelector('.popup--end').classList.add("popup--hidden");
+		}
+	}
 });
 
 function createVideoTitle(_this, d) {
@@ -672,8 +727,6 @@ function createEvent(circleTotaleEvents, d) {
 
 } //End createEvent function
 
-
-
 function createIntro() {
 	var currentSlideID = 0;
 	var animatePos = 0;
@@ -825,8 +878,6 @@ function createIntro() {
 
 }
 
-createIntro();
-
 function onResize() {
 
 	if (window.innerWidth < 500) {
@@ -861,6 +912,35 @@ function onResize() {
 				}
 			});
 	}
+
+	d3.selectAll(".bubble")
+		.attr("r", function(d) {
+			if (window.innerWidth < 500) {
+				if (d.status == "Inactief") {
+					return circleSize(-2);
+				} else {
+					return circleSize(d.totaleSchendingen);
+				}
+			} else {
+				return circleSize(d.totaleSchendingen);
+			}
+		});
+
+	simulation
+		.force("collide", d3.forceCollide(function(d) {
+			if (window.innerWidth < 500) {
+				if (d.status == "Inactief") {
+					return circleSize(-2) + 2;
+				} else {
+					return circleSize(d.totaleSchendingen) + 2;
+				}
+			} else {
+				return circleSize(d.totaleSchendingen) + 2;
+			}
+		}))
+		.alpha(0.04)
+		.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+		.restart();
 
 	if (window.innerWidth < 500 && circleClickedCheck == true) {
 		responsiveCheck = 5;
