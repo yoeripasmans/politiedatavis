@@ -75,15 +75,17 @@ svg {
 
 		&__item{
 
-			display: inline-block;
+		display: flex;
+		height: 2em;
+
 
 			&::before {
 				content: "";
 				width: 20px;
 				height: 20px;
 				background-color: blue;
-				position: absolute;
-				left: -30px;
+				display: inline-block;
+				margin-right: 0.618em;
 				border-radius: 50px;
 			}
 		}
