@@ -497,7 +497,7 @@ function createEvent(circleTotaleEvents, d) {
 	circleExplanation.classList.add("circle", "circle--hidden", "circle--explanation");
 
 	var popupExplanation = document.createElement("div"); //Create a container for the events description
-	popupExplanation.classList.add("popup--explanation");
+	popupExplanation.classList.add("popup--explanation", "popup--hidden");
 
 	var descriptionExplanation = document.createElement("p");
 	descriptionExplanation.innerHTML = "Scroll door de tijdlijn om het verloop van de video te bekijken.";
@@ -625,6 +625,8 @@ function createEvent(circleTotaleEvents, d) {
 		for (i = 0; i < events.length; i++) {
 			events[i].classList.toggle("circle--hidden");
 		}
+
+		document.querySelector(".popup--explanation").classList.remove("popup--hidden");
 	}, 1000);
 
 } //End createEvent function
