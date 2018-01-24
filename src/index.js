@@ -12,6 +12,7 @@ var colorRemoved = "#ffcc34";
 var colorInactive = "#e2e2e2";
 var responsiveCheck;
 var circleClickedCheck = false;
+var isRunning = false;
 var circleSize = d3.scaleLinear().domain([0, 12]).range([8, 36]); //Scales between two number ranges
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2550, 2850, 3150, 3450, 3750, 4050, 4350, 4650, 4950, 5100]).range([0, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
@@ -27,7 +28,15 @@ var svg = d3.select("body").append("div").attr('class', 'svg-container')
 var simulation = d3.forceSimulation()
 	.force("r", d3.forceRadial(10).strength(0.005)) //This force makes sure every circle is in a radius
 	.force("collide", d3.forceCollide(function(d) {
-		return circleSize(d.totaleSchendingen) + 2; //Ensures the circles don't go on top of each other, this force is different for each circle
+		if (window.innerWidth < 500) {
+			if (d.status == "Inactief") {
+				return circleSize(-2) + 2;
+			} else {
+				return circleSize(d.totaleSchendingen) + 2;
+			}
+		} else {
+			return circleSize(d.totaleSchendingen) + 2;
+		}
 	}));
 
 // Prep the tooltip bits, initial display is hidden
@@ -78,7 +87,15 @@ d3.tsv("data/data.tsv", function(error, data) {
 		.enter().append("circle")
 		.attr("class", "bubble")
 		.attr("r", function(d) {
-			return circleSize(d.totaleSchendingen);
+			if (window.innerWidth < 500) {
+				if (d.status == "Inactief") {
+					return circleSize(-2);
+				} else {
+					return circleSize(d.totaleSchendingen);
+				}
+			} else {
+				return circleSize(d.totaleSchendingen);
+			}
 		})
 		.attr("fill", function(d) {
 			if (d.status == "Normaal") {
@@ -108,6 +125,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 		.on('end', function() {});
 
 	onResize();
+	createIntro();
 
 	/* __________ FUNCTIONS __________ */
 
@@ -292,7 +310,15 @@ d3.tsv("data/data.tsv", function(error, data) {
 							}
 						})
 						.attr("r", function(d) {
-							return circleSize(d.totaleSchendingen);
+							if (window.innerWidth < 500) {
+								if (d.status == "Inactief") {
+									return circleSize(-2);
+								} else {
+									return circleSize(d.totaleSchendingen);
+								}
+							} else {
+								return circleSize(d.totaleSchendingen);
+							}
 						});
 
 					d3.select(".line").remove(); //Remove timeline
@@ -302,6 +328,17 @@ d3.tsv("data/data.tsv", function(error, data) {
 					simulation
 						.force("r", d3.forceRadial(function(d) {
 							return 0;
+						}))
+						.force("collide", d3.forceCollide(function(d) {
+							if (window.innerWidth < 500) {
+								if (d.status == "Inactief") {
+									return circleSize(-2) + 2;
+								} else {
+									return circleSize(d.totaleSchendingen) + 2;
+								}
+							} else {
+								return circleSize(d.totaleSchendingen) + 2;
+							}
 						}))
 						.alpha(0.15)
 						.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
@@ -331,8 +368,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 			shakeAnimation(_this);
 		}
 	} // End circleClickEvent
-
-	var isRunning = false;
 
 	function shakeAnimation(_this) {
 
@@ -630,8 +665,6 @@ function createEvent(circleTotaleEvents, d) {
 
 } //End createEvent function
 
-
-
 function createIntro() {
 	var currentSlideID = 0;
 	var animatePos = 0;
@@ -780,8 +813,6 @@ function createIntro() {
 
 }
 
-createIntro();
-
 function onResize() {
 
 	if (window.innerWidth < 500) {
@@ -816,6 +847,35 @@ function onResize() {
 				}
 			});
 	}
+
+	d3.selectAll(".bubble")
+		.attr("r", function(d) {
+			if (window.innerWidth < 500) {
+				if (d.status == "Inactief") {
+					return circleSize(-2);
+				} else {
+					return circleSize(d.totaleSchendingen);
+				}
+			} else {
+				return circleSize(d.totaleSchendingen);
+			}
+		});
+
+	simulation
+		.force("collide", d3.forceCollide(function(d) {
+			if (window.innerWidth < 500) {
+				if (d.status == "Inactief") {
+					return circleSize(-2) + 2;
+				} else {
+					return circleSize(d.totaleSchendingen) + 2;
+				}
+			} else {
+				return circleSize(d.totaleSchendingen) + 2;
+			}
+		}))
+		.alpha(0.04)
+		.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+		.restart();
 
 	if (window.innerWidth < 500 && circleClickedCheck == true) {
 		responsiveCheck = 5;
