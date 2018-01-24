@@ -230,6 +230,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 
         var selectSvg = document.querySelector(".svg-container");
         document.body.insertBefore(overviewLegendDiv, selectSvg);
+
+		overviewLegendState();
     }
 
 	function movingIn() {
@@ -246,6 +248,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 	function circleClickEvent(_this, d) {
 
 		circleClickedCheck = true;
+		legendaCheck = false;
 
 		if (window.innerWidth < 500 && circleClickedCheck == true) {
 			responsiveCheck = 5;
@@ -263,6 +266,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			tooltip.style("display", "none");
 			d3.select(".overview-header").remove(); // remove overview header
             d3.select(".legend").remove(); // remove legend
+			d3.select(".legend-button").remove(); // remove legend
 
 			d3.selectAll(".bubble")
 				.on('click', function() {
@@ -997,7 +1001,63 @@ function onResize() {
 		responsiveCheck = 2;
 	}
 
+	if (responsiveCheck == 5) {
+
+		d3.select(".svg-container")
+			.style("width", "40%");
+
+	} else {
+		d3.select(".svg-container")
+			.style("width", "100%");
+	}
+
+	if (circleClickedCheck == true) {
+		d3.select(".line")
+			.style("margin", function(d) {
+				return window.innerHeight / 2 + "px" + " auto";
+			});
+	}
+
+	overviewLegendState();
+
+	d3.select("svg")
+		.attr("width", window.innerWidth);
+
+	d3.select("g")
+		.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
+
+	var events = document.querySelectorAll(".event-container");
+	if (events.length > 0) {
+		document.querySelector(".event-container--end").style.top = (events.length * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
+
+	}
+
+	for (var i = 0; i < events.length; i++) {
+		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;";
+	}
+}
+
+function closeLegend() {
+	//Show button
+	document.querySelector(".legend-button").classList.remove("legend-button--hidden");
+
+	//Hide legend
+	document.querySelector(".legend").classList.add("legend--hidden");
+
+	//remove overlay
+	document.querySelector(".overlay").remove();
+
+	// remove close button
+	document.querySelector(".legend-close-button").remove();
+
+	legendaClickedCheck = false;
+}
+
+function overviewLegendState() {
+
 	if (window.innerWidth < 650 && circleClickedCheck == false && legendaCheck == false) {
+
+		console.log("kleinder dan 650");
 
 		document.querySelector(".legend").classList.add("legend--overlay", "legend--hidden");
 
@@ -1032,13 +1092,15 @@ function onResize() {
 
 	} else if (window.innerWidth >= 650 && legendaCheck == true){
 
+		console.log("groter dan 650");
+
 		document.querySelector(".legend").classList.remove("legend--overlay", "legend--hidden");
 		document.querySelector(".legend-button").remove();
 
 		if (legendaClickedCheck == true) {
 			// //remove overlay
 			document.querySelector(".overlay").remove();
-	        //
+			//
 			// // remove close button
 			document.querySelector(".legend-close-button").remove();
 
@@ -1047,53 +1109,4 @@ function onResize() {
 
 		legendaCheck = false;
 	}
-
-	if (responsiveCheck == 5) {
-
-		d3.select(".svg-container")
-			.style("width", "40%");
-
-	} else {
-		d3.select(".svg-container")
-			.style("width", "100%");
-	}
-
-	if (circleClickedCheck == true) {
-		d3.select(".line")
-			.style("margin", function(d) {
-				return window.innerHeight / 2 + "px" + " auto";
-			});
-	}
-
-	d3.select("svg")
-		.attr("width", window.innerWidth);
-
-	d3.select("g")
-		.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
-
-	var events = document.querySelectorAll(".event-container");
-	if (events.length > 0) {
-		document.querySelector(".event-container--end").style.top = (events.length * 300 + 300) + (window.innerHeight / 2 - 20) + 'px';
-
-	}
-
-	for (var i = 0; i < events.length; i++) {
-		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;";
-	}
-}
-
-function closeLegend() {
-	//Show button
-	document.querySelector(".legend-button").classList.remove("legend-button--hidden");
-
-	//Hide legend
-	document.querySelector(".legend").classList.add("legend--hidden");
-
-	//remove overlay
-	document.querySelector(".overlay").remove();
-
-	// remove close button
-	document.querySelector(".legend-close-button").remove();
-
-	legendaClickedCheck = false;
 }
