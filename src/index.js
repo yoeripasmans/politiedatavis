@@ -283,6 +283,9 @@ d3.tsv("data/data.tsv", function(error, data) {
 			d3.select(".svg-container").insert('div', 'svg')
 				.data(data)
 				.attr('class', 'line')
+				.style("margin", function(d) {
+					return window.innerHeight / 2 + "px" + " auto";
+				})
 				.transition()
 				.delay(850)
 				.duration(1000)
@@ -969,6 +972,13 @@ function onResize() {
 	} else {
 		d3.select(".svg-container")
 			.style("width", "100%");
+	}
+
+	if (circleClickedCheck == true) {
+		d3.select(".line")
+			.style("margin", function(d) {
+				return window.innerHeight / 2 + "px" + " auto";
+			});
 	}
 
 	d3.select("svg")
