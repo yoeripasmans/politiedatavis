@@ -159,12 +159,15 @@ svg {
 					@extend %legend-before;
 					width: 8px;
 					height: 8px;
-					border: 3px solid black;
+					border: 2px solid $text-color-lightgrey;
+					margin-right: 14px;
+					margin-bottom: 2px;
 				}
 			}
 			&-5::before {
 			@extend %legend-before;
-			border: 3px solid black;
+			border: 2px solid $text-color-lightgrey;
+			margin-bottom: -4px;
 			}
 		}
 
