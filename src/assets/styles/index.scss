@@ -1,5 +1,4 @@
 /* test */
-
 /* __________ PARTIALS __________ */
 @import "partials/reset";
 @import "modules/colors";
@@ -40,6 +39,56 @@ svg {
 	width: 100%;
 }
 /* __________ OVERVIEW __________ */
+.overview-header {
+	position: absolute;
+	top: 4em;
+	left: 4em;
+
+	&__title {
+		@extend %heading-text-style;
+	}
+
+	&__p-1 {
+		@extend %paragraph-text-style;
+		font-size: 1.414em;
+		margin-top: 1.618em;
+		width: 30em;
+	}
+
+	&__p-2 {
+		@extend %paragraph-text-style;
+		font-size: 1em;
+		margin-top: 1.618em;
+		width: 30em;
+	}
+}
+
+.legend {
+	position: absolute;
+	left: 4em;
+	bottom: 5em;
+
+	&__items-container {
+		width: 50em;
+		height: 2em;
+	}
+
+	&__item {
+		display: flex;
+		height: 2em;
+
+		&::before {
+			content: "";
+			width: 20px;
+			height: 20px;
+			background-color: blue;
+			display: inline-block;
+			margin-right: 0.618em;
+			border-radius: 50px;
+		}
+	}
+}
+
 .tool-tip {
 	@extend %paragraph-text-style;
 	padding: 18px;
