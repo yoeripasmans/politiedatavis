@@ -1,3 +1,5 @@
+/* test */
+
 /* __________ PARTIALS __________ */
 @import "partials/reset";
 @import "modules/colors";
@@ -38,6 +40,97 @@ svg {
 	width: 100%;
 }
 /* __________ OVERVIEW __________ */
+
+.overview-header {
+	position: absolute;
+	top: 4em;
+	left: 4em;
+
+	&__title {
+		@extend %heading-text-style;
+	}
+
+	&__p-1 {
+		@extend %paragraph-text-style;
+		font-size: 1.414em;
+		margin-top: 1.618em;
+		width: 30em;
+	}
+
+	&__p-2 {
+		@extend %paragraph-text-style;
+		font-size: 1em;
+		margin-top: 1.618em;
+		width: 30em;
+	}
+}
+
+%legend-before {
+	content: "";
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	margin-right: 0.618em;
+	border-radius: 50px;
+	position: relative;
+	top: 3px;
+}
+
+.legend {
+	position: absolute;
+	left: 4em;
+	bottom: 5em;
+
+	&__title {
+		font-family: "Relative Medium";
+		font-size: 1.618em;
+	}
+
+	&__items-container {
+		margin-top: 1em;
+		float: left;
+		@include columns(100px, 3);
+
+	}
+
+		&__item {
+			@extend %paragraph-text-style;
+			line-height: 2em;
+
+			&-0:before {
+			@extend %legend-before;
+			background: $circle-color-normal;
+			}
+			&-1::before {
+			@extend %legend-before;
+			background: $circle-color-edited;
+			}
+			&-2::before {
+			@extend %legend-before;
+			background: $circle-color-removed;
+			}
+			&-3::before {
+			@extend %legend-before;
+			background: $circle-color-inactive;
+			}
+			&-4 {
+			margin-left: 6px;
+
+				&::before {
+					@extend %legend-before;
+					width: 8px;
+					height: 8px;
+					border: 3px solid black;
+				}
+			}
+			&-5::before {
+			@extend %legend-before;
+			border: 3px solid black;
+			}
+		}
+
+}
+
 .tool-tip {
 	@extend %paragraph-text-style;
 	padding: 18px;
