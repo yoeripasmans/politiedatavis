@@ -63,31 +63,67 @@ svg {
 	}
 }
 
+%legend-before {
+	content: "";
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	margin-right: 0.618em;
+	border-radius: 50px;
+	position: relative;
+	top: 3px;
+}
+
 .legend {
 	position: absolute;
 	left: 4em;
 	bottom: 5em;
 
-	&__items-container {
-		width: 50em;
-		height: 2em;
-		display: flex;
-		background: green;
-		flex-wrap: wrap;
+	&__title {
+		font-family: "Relative Medium";
+		font-size: 1.618em;
 	}
 
-		&__item{
+	&__items-container {
+		margin-top: 1em;
+		float: left;
+		@include columns(100px, 3);
 
-		background: red;
+	}
 
-			&::before {
-				content: "";
-				width: 20px;
-				height: 20px;
-				background-color: blue;
-				display: inline-block;
-				margin-right: 0.618em;
-				border-radius: 50px;
+		&__item {
+			@extend %paragraph-text-style;
+			line-height: 2em;
+
+			&-0:before {
+			@extend %legend-before;
+			background: $circle-color-normal;
+			}
+			&-1::before {
+			@extend %legend-before;
+			background: $circle-color-edited;
+			}
+			&-2::before {
+			@extend %legend-before;
+			background: $circle-color-removed;
+			}
+			&-3::before {
+			@extend %legend-before;
+			background: $circle-color-inactive;
+			}
+			&-4 {
+			margin-left: 6px;
+
+				&::before {
+					@extend %legend-before;
+					width: 8px;
+					height: 8px;
+					border: 3px solid black;
+				}
+			}
+			&-5::before {
+			@extend %legend-before;
+			border: 3px solid black;
 			}
 		}
 
