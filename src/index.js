@@ -786,7 +786,7 @@ function createIntro() {
 
 
 	var images = ["uitleg_3", "uitleg_2", "uitleg_1"];
-	var text = ["Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken.", "Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken.", "Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om meer informatie over de video te bekijken."];
+	var text = ["Elke cirkel straat voor één video. Je kunt op de gekleurde cirkels klikken om de tijdlijn van een video te bekijken voor meer informatie.", "Als je door de tijdlijn heen scrollt krijg je de verschillende privacyschendingen te zien. Hierdoor zal de cirkel ook groeien.", "Vervolgens kan je een screenshot bekijken om te zien hoe de schending plaatsvond. Uiteraard zijn deze dit keer wel onherkenbaar gemaakt."];
 
 	var slidesLength = images.length;
 	var sliderWidth = slidesLength * containerWidth;
@@ -1057,8 +1057,6 @@ function overviewLegendState() {
 
 	if (window.innerWidth < 650 && circleClickedCheck == false && legendaCheck == false) {
 
-		console.log("kleinder dan 650");
-
 		document.querySelector(".legend").classList.add("legend--overlay", "legend--hidden");
 
 		var legendButton = document.createElement("button");
@@ -1091,8 +1089,6 @@ function overviewLegendState() {
 		legendaCheck = true;
 
 	} else if (window.innerWidth >= 650 && legendaCheck == true){
-
-		console.log("groter dan 650");
 
 		document.querySelector(".legend").classList.remove("legend--overlay", "legend--hidden");
 		document.querySelector(".legend-button").remove();

@@ -22,6 +22,12 @@
 body {
 	margin: 0;
 	padding: 0;
+
+	@media (max-height: 570px) {
+		.overview-header__p-1 {
+			display: none;
+		}
+	}
 }
 
 svg {
