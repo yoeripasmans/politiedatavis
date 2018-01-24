@@ -66,7 +66,7 @@ svg {
 		}
 
 		&__p-1 {
-			font-size: 1.2em;
+			font-size: 1em;
 		}
 	}
 
@@ -93,6 +93,21 @@ svg {
 	position: absolute;
 	left: 2em;
 	bottom: 2em;
+
+	&--overlay {
+		z-index: 999999;
+		background-color: white;
+		border: 1px solid $border-color;
+		box-shadow: 0 4px 20px 0 rgba(76,76,76,0.30);
+		@include border-radius(5px);
+		right: 2em;
+		padding: 2em;
+	}
+
+	&--hidden {
+		opacity: 0;
+		z-index: -1;
+	}
 
 	&__title {
 		font-family: "Relative Medium";
@@ -149,6 +164,14 @@ svg {
 
 }
 
+.overlay {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.8);
+	position: fixed;
+	transition: 0.2s;
+}
+
 .tool-tip {
 	@extend %paragraph-text-style;
 	padding: 18px;
@@ -172,6 +195,17 @@ svg {
 		border-bottom: solid 1px $border-color;
 		border-bottom-left-radius: 5px;
 		background-color: white;
+	}
+}
+
+.legend-button {
+	@extend %button;
+	position: absolute;
+	left: 2em;
+	bottom: 2em;
+
+	&--hidden {
+		display: none;
 	}
 }
 /* __________ TIMELINE __________ */
@@ -208,6 +242,28 @@ svg {
 	@media (max-width: 600px) {
 		top: 2em;
 		right: 2em;
+	}
+}
+
+.legend-close-button {
+	border: 1px solid $orange-border;
+	background-color: $orange;
+	background-image: url("../images/sluiten.svg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 2em;
+	width: 40px;
+	height: 40px;
+	@include border-radius(50%);
+	position: absolute;
+	right: 3em;
+	top: 3em;
+	cursor: pointer;
+	z-index: 999;
+	transition: opacity 1s;
+
+	&:hover {
+		box-shadow: 0 6px 10px -5px $orange-shadow;
 	}
 }
 
@@ -543,6 +599,11 @@ svg {
 
 	&--hidden {
 		display: none;
+	}
+
+	@media (max-width: 650px) {
+		top: auto;
+		bottom: 2em;
 	}
 }
 

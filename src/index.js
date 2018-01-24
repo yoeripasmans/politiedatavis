@@ -13,6 +13,8 @@ var colorInactive = "#e2e2e2";
 var responsiveCheck;
 var circleClickedCheck = false;
 var isRunning = false;
+var legendaCheck = false;
+var legendaClickedCheck = false;
 var circleSize = d3.scaleLinear().domain([0, 12]).range([8, 36]); //Scales between two number ranges
 var circleTimelineDeviation = 12;
 var circleTimelinePosition = d3.scaleLinear().domain([0, 150, 450, 750, 1050, 1350, 1650, 1950, 2250, 2550, 2850, 3150, 3450, 3750, 4050, 4350, 4650, 4950, 5100]).range([0, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, circleTimelineDeviation, -circleTimelineDeviation, 0]); //Scales between multiple number ranges
@@ -132,10 +134,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 		.on('tick', movingIn) //Run movingIn on every "tick" of the clock
 		.on('end', function() {});
 
-	onResize();
 	createIntro();
 	createOverviewHeader();
     createOverviewLegend();
+	onResize();
 
 	/* __________ FUNCTIONS __________ */
 
@@ -995,6 +997,57 @@ function onResize() {
 		responsiveCheck = 2;
 	}
 
+	if (window.innerWidth < 650 && circleClickedCheck == false && legendaCheck == false) {
+
+		document.querySelector(".legend").classList.add("legend--overlay", "legend--hidden");
+
+		var legendButton = document.createElement("button");
+		legendButton.classList.add("legend-button");
+		legendButton.textContent = "Legenda";
+		document.querySelector("body").appendChild(legendButton);
+
+		d3.select(".legend-button")
+			.on("click", function() {
+
+				legendaClickedCheck = true;
+				//Hide button
+				document.querySelector(".legend-button").classList.add("legend-button--hidden");
+
+				//Show legend
+				document.querySelector(".legend").classList.remove("legend--hidden");
+
+				//Add overlay
+				var overlayLegend = document.createElement("div");
+				overlayLegend.classList.add("overlay");
+				document.querySelector("body").appendChild(overlayLegend);
+
+				//Add close button
+				var closeButton = document.createElement("button");
+				document.querySelector('.legend').appendChild(closeButton);
+				closeButton.classList.add("legend-close-button");
+				closeButton.addEventListener('click', closeLegend);
+			});
+
+		legendaCheck = true;
+
+	} else if (window.innerWidth >= 650 && legendaCheck == true){
+
+		document.querySelector(".legend").classList.remove("legend--overlay", "legend--hidden");
+		document.querySelector(".legend-button").remove();
+
+		if (legendaClickedCheck == true) {
+			// //remove overlay
+			document.querySelector(".overlay").remove();
+	        //
+			// // remove close button
+			document.querySelector(".legend-close-button").remove();
+
+			legendaClickedCheck = false;
+		}
+
+		legendaCheck = false;
+	}
+
 	if (responsiveCheck == 5) {
 
 		d3.select(".svg-container")
@@ -1027,4 +1080,20 @@ function onResize() {
 	for (var i = 0; i < events.length; i++) {
 		events[i].style.cssText = "top: " + ((i * 300 + 300) + (window.innerHeight / 2 - 20)) + "px; left:" + (window.innerWidth / responsiveCheck - 20) + "px;";
 	}
+}
+
+function closeLegend() {
+	//Show button
+	document.querySelector(".legend-button").classList.remove("legend-button--hidden");
+
+	//Hide legend
+	document.querySelector(".legend").classList.add("legend--hidden");
+
+	//remove overlay
+	document.querySelector(".overlay").remove();
+
+	// remove close button
+	document.querySelector(".legend-close-button").remove();
+
+	legendaClickedCheck = false;
 }
