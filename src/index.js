@@ -830,7 +830,6 @@ function createIntro() {
 
 	var openButton = document.createElement("button");
 	document.querySelector('body').appendChild(openButton);
-	openButton.textContent = "Uitleg";
 	openButton.classList.add("open-button");
 	openButton.addEventListener('click', openSlider);
 
