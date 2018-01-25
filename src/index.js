@@ -443,7 +443,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					simulation
 						.force("r", d3.forceRadial(function(d) {
 							return 0;
-						}))
+						}).strength(0.005))
 						.force("collide", d3.forceCollide(function(d) {
 							if (window.innerWidth < 500) {
 								if (d.status == "Inactief") {
