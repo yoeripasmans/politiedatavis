@@ -39,9 +39,15 @@ var simulation = d3.forceSimulation()
 		} else {
 			return circleSize(d.totaleSchendingen) + 2;
 		}
+<<<<<<< HEAD
 	}));
 	// .alpha(0.02)
 	// .alphaDecay(0.01);
+=======
+	}))
+	.alpha(0.02)
+	.alphaDecay(0.01);
+>>>>>>> laurens-develop
 
 // Prep the tooltip bits, initial display is hidden
 //Append tool-tip to conainter
@@ -264,8 +270,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 		if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
 
 			tooltip.style("display", "none");
+			d3.select(".tool-tip__title").remove();
+			d3.select(".tool-tip__text").remove();
 			d3.select(".overview-header").remove(); // remove overview header
-            d3.select(".legend").remove(); // remove legend
+      d3.select(".legend").remove(); // remove legend
 			d3.select(".legend-button").remove(); // remove legend
 
 			d3.selectAll(".bubble")
@@ -384,7 +392,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 							.on("mouseover", function(d) {
 								if (d.status !== "Inactief") {
 									tooltip.style("display", "inline-block");
-									tooltip.text(d.titel);
+									tooltip.append("h3").attr("class", "tool-tip__title").text("Video");
+									tooltip.append("p").attr("class", "tool-tip__text").text(d.titel);
 								}
 							})
 							.on("mousemove", function(d) {
@@ -395,6 +404,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 							.on("mouseout", function(d) {
 								if (d.status !== "Inactief") {
 									tooltip.style("display", "none");
+									d3.select(".tool-tip__title").remove();
+									d3.select(".tool-tip__text").remove();
 								}
 							});
 					}
@@ -455,7 +466,11 @@ d3.tsv("data/data.tsv", function(error, data) {
 								return circleSize(d.totaleSchendingen) + 2;
 							}
 						}))
+<<<<<<< HEAD
 						.alpha(0.2)
+=======
+						.alpha(0.15)
+>>>>>>> laurens-develop
 						.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 						.restart();
 
@@ -951,7 +966,8 @@ function onResize() {
 			.on("mouseover", function(d) {
 				if (d.status !== "Inactief") {
 					tooltip.style("display", "inline-block");
-					tooltip.text(d.titel);
+					tooltip.append("h3").attr("class", "tool-tip__title").text("Video");
+					tooltip.append("p").attr("class", "tool-tip__text").text(d.titel);
 				}
 			})
 			.on("mousemove", function(d) {
@@ -962,6 +978,8 @@ function onResize() {
 			.on("mouseout", function(d) {
 				if (d.status !== "Inactief") {
 					tooltip.style("display", "none");
+					d3.select(".tool-tip__text").remove();
+					d3.select(".tool-tip__title").remove();
 				}
 			});
 	}

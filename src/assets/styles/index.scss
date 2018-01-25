@@ -192,6 +192,12 @@ svg {
 	display: none;
 	max-width: 200px;
 	//Adds an arrow to the description box
+
+	&__title {
+		font-family: "Relative Bold";
+		font-size: 1.1em;
+	}
+
 	&::before {
 		left: -8px;
 		top: 16px;
