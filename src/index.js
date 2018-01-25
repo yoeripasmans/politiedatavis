@@ -40,8 +40,8 @@ var simulation = d3.forceSimulation()
 			return circleSize(d.totaleSchendingen) + 2;
 		}
 	}))
-	.alpha(0.02)
-	.alphaDecay(0.01);
+	.alpha(0.02);
+	// .alphaDecay(0.01);
 
 // Prep the tooltip bits, initial display is hidden
 //Append tool-tip to conainter
@@ -316,7 +316,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					}
 				}))
 				.alpha(0.4)
-				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+				// .alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 				.restart();
 
 			createVideoTitle(_this, d);
@@ -455,8 +455,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 								return circleSize(d.totaleSchendingen) + 2;
 							}
 						}))
-						.alpha(0.15)
-						.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+						.alpha(0.2)
+						// .alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 						.restart();
 
 					d3.select("g")
@@ -992,7 +992,7 @@ function onResize() {
 			}
 		}))
 		.alpha(0.02)
-		.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+		// .alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 		.restart();
 
 	if (window.innerWidth < 500 && circleClickedCheck == true) {
