@@ -40,8 +40,8 @@ var simulation = d3.forceSimulation()
 			return circleSize(d.totaleSchendingen) + 2;
 		}
 	}))
-	.alpha(0.02);
-	// .alphaDecay(0.01);
+	.alpha(0.02)
+	.alphaDecay(0.01);
 
 // Prep the tooltip bits, initial display is hidden
 //Append tool-tip to conainter
@@ -264,8 +264,10 @@ d3.tsv("data/data.tsv", function(error, data) {
 		if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
 
 			tooltip.style("display", "none");
+			d3.select(".tool-tip__title").remove();
+			d3.select(".tool-tip__text").remove();
 			d3.select(".overview-header").remove(); // remove overview header
-            d3.select(".legend").remove(); // remove legend
+      d3.select(".legend").remove(); // remove legend
 			d3.select(".legend-button").remove(); // remove legend
 
 			d3.selectAll(".bubble")
@@ -316,7 +318,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					}
 				}))
 				.alpha(0.4)
-				// .alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+				.alphaDecay(0.01) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 				.restart();
 
 			createVideoTitle(_this, d);
@@ -384,7 +386,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 							.on("mouseover", function(d) {
 								if (d.status !== "Inactief") {
 									tooltip.style("display", "inline-block");
-									tooltip.text(d.titel);
+									tooltip.append("h3").attr("class", "tool-tip__title").text("Video");
+									tooltip.append("p").attr("class", "tool-tip__text").text(d.titel);
 								}
 							})
 							.on("mousemove", function(d) {
@@ -395,6 +398,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 							.on("mouseout", function(d) {
 								if (d.status !== "Inactief") {
 									tooltip.style("display", "none");
+									d3.select(".tool-tip__title").remove();
+									d3.select(".tool-tip__text").remove();
 								}
 							});
 					}
@@ -455,9 +460,8 @@ d3.tsv("data/data.tsv", function(error, data) {
 								return circleSize(d.totaleSchendingen) + 2;
 							}
 						}))
-						.alpha(0.2)
-						.strength(0.5)
-						// .alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+						.alpha(0.15)
+						.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 						.restart();
 
 					d3.select("g")
@@ -952,7 +956,8 @@ function onResize() {
 			.on("mouseover", function(d) {
 				if (d.status !== "Inactief") {
 					tooltip.style("display", "inline-block");
-					tooltip.text(d.titel);
+					tooltip.append("h3").attr("class", "tool-tip__title").text("Video");
+					tooltip.append("p").attr("class", "tool-tip__text").text(d.titel);
 				}
 			})
 			.on("mousemove", function(d) {
@@ -963,6 +968,8 @@ function onResize() {
 			.on("mouseout", function(d) {
 				if (d.status !== "Inactief") {
 					tooltip.style("display", "none");
+					d3.select(".tool-tip__text").remove();
+					d3.select(".tool-tip__title").remove();
 				}
 			});
 	}
@@ -993,7 +1000,7 @@ function onResize() {
 			}
 		}))
 		.alpha(0.02)
-		// .alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
+		.alphaDecay(0.015) //Makes sure the alpha doesn't decay too quickly so the clicked circle gets to the middle
 		.restart();
 
 	if (window.innerWidth < 500 && circleClickedCheck == true) {
