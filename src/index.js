@@ -941,8 +941,6 @@ function createIntro() {
 
 function onResize() {
 
-	console.log("hoi");
-
 	if (window.innerWidth < 500) {
 
 		d3.selectAll(".bubble")
