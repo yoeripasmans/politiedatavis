@@ -257,12 +257,14 @@ d3.tsv("data/data.tsv", function(error, data) {
 			responsiveCheck = 2;
 		}
 
-		document.querySelector('.open-button').classList.add("open-button--hidden");
+
 
 		var circleIndex = d.index; //Index of clicked circle
 		var circleTotaleEvents = d.totaleEvents; //Save the totaleEvents to another varible for later use
 
 		if (d.status == "Normaal" || d.status == "Aangepast" || d.status == "Verwijderd") {
+
+			document.querySelector('.open-button').classList.add("open-button--hidden");
 
 			tooltip.style("display", "none");
 			d3.select(".tool-tip__title").remove();

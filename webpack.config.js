@@ -55,12 +55,13 @@ module.exports = {
 			},
 		]
 	},
-	devtool: 'inline-source-map',
+	devtool: 'none',
 	plugins: [
 		new ExtractTextPlugin({
 			filename: 'bundle.css',
 			allChunks: true,
 		}),
+
 
 		new CopyWebpackPlugin([{
 				from: 'src/assets/images/frames',

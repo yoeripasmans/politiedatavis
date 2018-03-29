@@ -15,36 +15,25 @@
 	border-radius: $radius;
 }
 @mixin columns($min-width, $column-count) {
--webkit-columns: $min-width $column-count; /* Chrome, Safari, Opera */
--moz-columns: $min-width $column-count; /* Firefox */
-columns: $min-width $column-count;
+	-webkit-columns: $min-width $column-count;
+	/* Chrome, Safari, Opera */
+	-moz-columns: $min-width $column-count;
+	/* Firefox */
+	columns: $min-width $column-count;
 }
-
 @font-face {
 	font-family: "Relative Bold";
-	src: url("../fonts/Relative-Bold-export/Relative-Bold.woff2") format("woff2"),
-		 url("../fonts/Relative-Bold-export/Relative-Bold.woff") format("woff"),
-		 url("../fonts/Relative-Bold-export/Relative-Bold.ttf") format("truetype"),
-		 url("../fonts/Relative-Bold-export/Relative-Bold.otf") format("opentype");
+	src: url("../fonts/Relative-Bold-export/Relative-Bold.woff2") format("woff2"), url("../fonts/Relative-Bold-export/Relative-Bold.woff") format("woff"),;
 }
 @font-face {
 	font-family: "Relative Book";
-	src: url("../fonts/Relative-Book-export/Relative-Book.woff2") format("woff2"),
-		 url("../fonts/Relative-Book-export/Relative-Book.woff") format("woff"),
-		 url("../fonts/Relative-Book-export/Relative-Book.ttf") format("truetype"),
-		 url("../fonts/Relative-Book-export/Relative-Book.otf") format("opentype");
+	src: url("../fonts/Relative-Book-export/Relative-Book.woff2") format("woff2"), url("../fonts/Relative-Book-export/Relative-Book.woff") format("woff"),;
 }
 @font-face {
 	font-family: "Relative Medium";
-	src: url("../fonts/Relative-Medium-export/Relative-Medium.woff2") format("woff2"),
-		 url("../fonts/Relative-Medium-export/Relative-Medium.woff") format("woff"),
-		 url("../fonts/Relative-Medium-export/Relative-Medium.ttf") format("truetype"),
-		 url("../fonts/Relative-Medium-export/Relative-Medium.otf") format("opentype");
+	src: url("../fonts/Relative-Medium-export/Relative-Medium.woff2") format("woff2"), url("../fonts/Relative-Medium-export/Relative-Medium.woff") format("woff"),;
 }
 @font-face {
 	font-family: "Tissa Pro Regular";
-	src: url("../fonts/TissaProRegular-export/TissaProRegular.woff2") format("woff2"),
-		 url("../fonts/TissaProRegular-export/TissaProRegular.woff") format("woff"),
-		 url("../fonts/TissaProRegular-export/TissaProRegular.ttf") format("truetype"),
-		 url("../fonts/TissaProRegular-export/TissaProRegular.otf") format("opentype");
+	src: url("../fonts/TissaProRegular-export/TissaProRegular.woff2") format("woff2"), url("../fonts/TissaProRegular-export/TissaProRegular.woff") format("woff"),;
 }
