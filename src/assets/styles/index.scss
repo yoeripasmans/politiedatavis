@@ -44,6 +44,8 @@ svg {
 	display: inline-block;
 	position: absolute;
 	width: 100%;
+	overflow: scroll;
+    /* -webkit-overflow-scrolling: touch; */
 }
 /* __________ OVERVIEW __________ */
 

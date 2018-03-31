@@ -270,7 +270,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			d3.select(".tool-tip__title").remove();
 			d3.select(".tool-tip__text").remove();
 			d3.select(".overview-header").remove(); // remove overview header
-      d3.select(".legend").remove(); // remove legend
+      		d3.select(".legend").remove(); // remove legend
 			d3.select(".legend-button").remove(); // remove legend
 
 			d3.selectAll(".bubble")
@@ -487,7 +487,6 @@ d3.tsv("data/data.tsv", function(error, data) {
 			}
 
 		} else {
-
 			shakeAnimation(_this);
 		}
 	} // End circleClickEvent
