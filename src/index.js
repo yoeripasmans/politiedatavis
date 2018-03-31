@@ -326,8 +326,16 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 			createVideoTitle(_this, d);
 
-			//Insert timeline
+			//Insert timeline scroll container
 			d3.select(".svg-container").insert('div', 'svg')
+				.data(data)
+				.attr('class', 'lineContainer')
+				.style("margin", function(d) {
+					// return window.innerHeight / 2 + "px" + " auto";
+				});
+
+			//Insert timeline
+			d3.select(".lineContainer").insert('div', '.lineContainer')
 				.data(data)
 				.attr('class', 'line')
 				.style("margin", function(d) {

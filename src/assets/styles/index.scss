@@ -44,8 +44,7 @@ svg {
 	display: inline-block;
 	position: absolute;
 	width: 100%;
-	overflow: scroll;
-    /* -webkit-overflow-scrolling: text-outline: ;h; */
+	height: 100%;
 }
 /* __________ OVERVIEW __________ */
 
@@ -226,6 +225,14 @@ svg {
 	}
 }
 /* __________ TIMELINE __________ */
+.lineContainer {
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	background: grey;
+	position: absolute;
+}
+
 .line {
 	width: 40px;
 	height: 0;
