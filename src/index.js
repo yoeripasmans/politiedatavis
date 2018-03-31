@@ -331,7 +331,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.data(data)
 				.attr('class', 'line')
 				.style("margin", function(d) {
-					return window.innerHeight / 2 + "px" + " auto";
+					// return window.innerHeight / 2 + "px" + " auto";
 				})
 				.transition()
 				.delay(850)
@@ -1049,7 +1049,7 @@ function onResize() {
 	if (circleClickedCheck == true) {
 		d3.select(".line")
 			.style("margin", function(d) {
-				return window.innerHeight / 2 + "px" + " auto";
+				// return window.innerHeight / 2 + "px" + " auto";
 			});
 	}
 

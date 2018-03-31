@@ -45,7 +45,7 @@ svg {
 	position: absolute;
 	width: 100%;
 	overflow: scroll;
-    /* -webkit-overflow-scrolling: touch; */
+    /* -webkit-overflow-scrolling: text-outline: ;h; */
 }
 /* __________ OVERVIEW __________ */
 
@@ -233,6 +233,7 @@ svg {
 	background-size: auto 600px;
 	background-position: center top;
 	background-repeat: repeat-y;
+	margin: 50vh auto;
 }
 
 .back-button {
