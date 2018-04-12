@@ -326,21 +326,23 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 			createVideoTitle(_this, d);
 
-			// //Insert timeline scroll container
-			// d3.select(".svg-container").insert('div', 'svg')
-			// 	.data(data)
-			// 	.attr('class', 'lineContainer')
-			// 	.style("margin", function(d) {
-			// 		// return window.innerHeight / 2 + "px" + " auto";
-			// 	});
-
 			//Insert timeline
-			d3.select(".svg-container").insert('div', 'svg')
+			d3.select(".svg-container").insert('div', '.tool-tip')
 				.data(data)
 				.attr('class', 'line')
-				.style("margin", function(d) {
-					// return window.innerHeight / 2 + "px" + " auto";
-				})
+				.style("height", function(d) {
+					return (circleTotaleEvents * 300) + 300 + "px";
+				});
+				// .transition()
+				// .delay(850)
+				// .duration(1000)
+				// .style("height", function(d) {
+				// 	return (circleTotaleEvents * 300) + 300 + "px";
+				// });
+
+			//Insert dotted line
+			d3.select(".line").insert('div')
+				.attr('class', 'dotted-line')
 				.transition()
 				.delay(850)
 				.duration(1000)
@@ -361,7 +363,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 			}
 
 			//Trigger the scroll function so the circle moves back and forth
-			document.querySelector('body').onscroll = function() {
+			document.querySelector('.svg-container').onscroll = function() {
 				scroll(_this, d, schendingenTotaal);
 			};
 
@@ -379,7 +381,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 					document.querySelector('.open-button').classList.remove("open-button--hidden");
 
 					//Removes the function on scroll
-					document.querySelector('body').onscroll = function() {};
+					document.querySelector('.svg-container').onscroll = function() {};
 
 					if (window.innerWidth < 500) {
 						d3.selectAll(".bubble")
@@ -490,7 +492,7 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
 
 			if (responsiveCheck == 5) {
-				d3.select(".svg-container")
+				d3.select(".line")
 					.style("width", "40%");
 			}
 
@@ -564,9 +566,9 @@ d3.tsv("data/data.tsv", function(error, data) {
 
 	function scroll(_this, d, schendingenTotaal) {
 
-		if (window.pageYOffset >= 0 && window.pageYOffset <= 5100) {
+		if (document.querySelector('.svg-container').scrollTop >= 0 && document.querySelector('.svg-container').scrollTop <= 5100) {
 			var circleWiggle;
-			circleWiggle = (window.innerWidth / responsiveCheck) + circleTimelinePosition(window.pageYOffset);
+			circleWiggle = (window.innerWidth / responsiveCheck) + circleTimelinePosition(document.querySelector('.svg-container').scrollTop);
 			d3.select("g")
 				.attr("transform", "translate(" + circleWiggle + "," + height / 2 + ")"); //Wiggle the g element back and forth
 		}
@@ -577,39 +579,41 @@ d3.tsv("data/data.tsv", function(error, data) {
 			.ease(d3.easeCubicOut)
 			.attr("r", function() {
 
-				if (window.pageYOffset < 300) {
+				if (document.querySelector('.svg-container').scrollTop < 300) {
 					return circleSize(0);
 				}
 				for (var i = 0; i < d.totaleEvents; i++) {
-					if (window.pageYOffset >= i * 300 && window.pageYOffset < i * 300 + 300) {
+					if (document.querySelector('.svg-container').scrollTop >= i * 300 && document.querySelector('.svg-container').scrollTop < i * 300 + 300) {
 						return circleSize(schendingenTotaal[i]);
 					}
 				}
-				if (window.pageYOffset >= d.totaleEvents * 300) {
+				if (document.querySelector('.svg-container').scrollTop >= d.totaleEvents * 300) {
 					return circleSize(schendingenTotaal[d.totaleEvents]);
 				}
 			});
 
 		var popup = document.querySelectorAll('.popup');
 
-		if (window.pageYOffset > 10) {
+		if (document.querySelector('.svg-container').scrollTop > 10) {
 			document.querySelector('.popup--explanation').classList.add("popup--hidden");
+			document.querySelector('.header').classList.add("header--hidden");
 		} else {
 			document.querySelector('.popup--explanation').classList.remove("popup--hidden");
+			document.querySelector('.header').classList.remove("header--hidden");
 		}
 
 		for (var i = 1; i <= popup.length; i++) {
 
-			if (window.pageYOffset >= i * 300) {
+			if (document.querySelector('.svg-container').scrollTop >= i * 300) {
 				popup[i - 1].classList.remove("popup--hidden");
-			} else if (window.pageYOffset < i * 300) {
+			} else if (document.querySelector('.svg-container').scrollTop < i * 300) {
 				popup[i - 1].classList.add("popup--hidden");
 			}
 		}
 
-		if (window.pageYOffset >= popup.length * 300 + 290) {
+		if (document.querySelector('.svg-container').scrollTop >= popup.length * 300 + 290) {
 			document.querySelector('.popup--end').classList.remove("popup--hidden");
-		} else if (window.pageYOffset < popup.length * 300 + 290) {
+		} else if (document.querySelector('.svg-container').scrollTop < popup.length * 300 + 290) {
 			document.querySelector('.popup--end').classList.add("popup--hidden");
 		}
 	}
@@ -1046,7 +1050,7 @@ function onResize() {
 
 	if (responsiveCheck == 5) {
 
-		d3.select(".svg-container")
+		d3.select(".line")
 			.style("width", "40%");
 
 	} else {
