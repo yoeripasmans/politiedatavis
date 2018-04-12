@@ -277,7 +277,7 @@ svg {
 	right: 5em;
 	top: 5em;
 	cursor: pointer;
-	z-index: 999;
+	z-index: 9999999;
 	transition: 1s;
 
 	&:hover {
@@ -405,14 +405,14 @@ svg {
 		@extend .event-container;
 	}
 	@media screen and (max-width: 499px) {
-		width: 200%;
+		/* width: 200%; */
 
 		&--explanation {
-			width: 200%;
+			/* width: 200%; */
 		}
 
 		&--end {
-			width: 200%;
+			/* width: 200%; */
 		}
 	}
 }

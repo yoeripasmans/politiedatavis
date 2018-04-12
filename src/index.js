@@ -492,8 +492,19 @@ d3.tsv("data/data.tsv", function(error, data) {
 				.attr("transform", "translate(" + window.innerWidth / responsiveCheck + "," + height / 2 + ")"); //Place the <g> element in the middle
 
 			if (responsiveCheck == 5) {
-				d3.select(".line")
-					.style("width", "40%");
+				d3.select(".dotted-line")
+					.style("width", "40%")
+					.style("left", "0");
+
+				d3.select(".event-container--explanation")
+					.style("left", function(d) {
+						return (window.innerWidth / responsiveCheck - 20) + "px";
+					});
+
+				d3.select(".event-container--end")
+					.style("left", function(d) {
+						return (window.innerWidth / responsiveCheck - 20) + "px";
+					});
 			}
 
 		} else {
@@ -1050,12 +1061,36 @@ function onResize() {
 
 	if (responsiveCheck == 5) {
 
-		d3.select(".line")
-			.style("width", "40%");
+		// d3.select(".event-containers")
+		// 	.style("left", "20%");
+
+		d3.select(".dotted-line")
+			.style("width", "40%")
+			.style("left", "0");
+
+		d3.select(".event-container--explanation")
+			.style("left", function(d) {
+				return (window.innerWidth / responsiveCheck - 20) + "px";
+			});
+
+		d3.select(".event-container--end")
+			.style("left", function(d) {
+				return (window.innerWidth / responsiveCheck - 20) + "px";
+			});
 
 	} else {
-		d3.select(".svg-container")
-			.style("width", "100%");
+		// d3.select(".line")
+		// 	.style("width", "100%");
+
+		d3.select(".dotted-line")
+			.style("width", "40px")
+			.style("left", "calc(50% - 20px)");
+
+		d3.select(".event-container--explanation")
+			.style("left", "calc(50% - 20px)");
+
+		d3.select(".event-container--end")
+			.style("left", "calc(50% - 20px)");
 	}
 
 	if (circleClickedCheck == true) {
