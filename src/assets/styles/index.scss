@@ -80,6 +80,18 @@ svg {
 		}
 	}
 
+	@media (max-height: 700px) {
+		padding: 2em;
+
+		&__title {
+			font-size: 2em;
+		}
+
+		&__p-1 {
+			font-size: 1em;
+		}
+	}
+
 	@media (max-width: 400px) {
 
 		&__title {
