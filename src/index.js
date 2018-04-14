@@ -881,7 +881,7 @@ function createIntro() {
 		var introImg = document.createElement("div");
 		contentContainer.appendChild(introImg);
 		introImg.classList.add("box-content__img");
-		introImg.style.backgroundImage = "url('assets/images/uitleg/" + images[i] + ".gif')";
+		// introImg.style.backgroundImage = "url('assets/images/uitleg/" + images[i] + ".gif')";
 
 		var introDesc = document.createElement("p");
 		contentContainer.appendChild(introDesc);
@@ -899,6 +899,12 @@ function createIntro() {
 		containerWidth = document.querySelector('.box').offsetWidth;
 		sliderNavIcons();
 		initPos();
+
+		var onboardingImg = document.querySelectorAll(".box-content__img");
+
+		for (var i = 0; i < onboardingImg.length; i++) {
+			onboardingImg[i].style.backgroundImage = "url('assets/images/uitleg/" + images[i] + ".gif')";
+		}
 	}
 
 	function closeSlider() {

@@ -399,10 +399,12 @@ svg {
 	&--explanation {
 		@extend .event-container;
 		top: 50vh;
+		z-index: -999;
 	}
 
 	&--end {
 		@extend .event-container;
+		z-index: -999;
 	}
 	@media screen and (max-width: 499px) {
 		/* width: 200%; */
@@ -640,7 +642,7 @@ svg {
 
 	&--open {
 		opacity: 1;
-		z-index: 9999;
+		z-index: 10000;
 	}
 }
 
