@@ -29,6 +29,7 @@ var svg = d3.select("body").append("div").attr('class', 'svg-container')
 	.append("g");
 
 var simulation = d3.forceSimulation()
+<<<<<<< HEAD
 	.force("r", d3.forceRadial(10)) //This force makes sure every circle is in a radius
 	.force("collide", d3.forceCollide(function(d) {
 		if (window.innerWidth < 500) {
@@ -61,6 +62,13 @@ var pixelGrowth = {
 };
 
 /* __________ LOADING DATA __________ */
+=======
+    .force("x", yearsTogether) // Puts all the circles in the horizontal center
+    .force("y", d3.forceY(height / 2).strength(0.05)) // Puts all the circles in the vertical center
+    .force("collide", d3.forceCollide(function(d) {
+        return circleSize(d.Grootte + 0.000001); // Ensures the circles don't go on top of each other, this force depends on the value and is different for each circle
+    }));
+>>>>>>> parent of 62d8efa... Collision size
 
 d3.tsv("data/data.tsv", function(error, data) {
 
