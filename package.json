@@ -32,7 +32,7 @@
         "style-loader": "^0.19.1",
         "webpack": "^3.10.0",
         "webpack-dev-server": "^2.9.7",
-        "copy-webpack-plugin": "^4.0.1"
+        "copy-webpack-plugin": "^4.6.0"
     },
     "dependencies": {
         "d3": "^4.10.0"
